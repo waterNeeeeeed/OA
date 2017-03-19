@@ -18,13 +18,14 @@
 </head>
 
 <body>
-<!--
-<header class="navbar navbar-default navbar-fixed-top navbar-inverse">
+<div>
+<header class="navbar navbar-fixed-top">
   <div class="container">
    <h1>江岳科技</h1>
   </div>
 </header>
--->
+</div>
+<hr />
 <!--
 <s:property value="tip"/>
 <s:form action="login">
@@ -39,10 +40,10 @@
   <div class="jumbotron">
     <h2>你好，欢迎使用OA</h2>
     <p>迅速提高办公效率</p>
-  <!-- <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a></p> -->
+    <p><a class="btn btn-primary btn-lg" href="#" role="button">了解更多</a></p>
   </div>
   </div>
-  <div class="col-md-2">
+  <div class="col-md-2 well">
   	<s:form action="login">
   		<div class="form-group">
     		<label for="exampleInputUsername">Username</label>
@@ -61,9 +62,8 @@
  	 	<!-- <button type="submit" class="btn btn-default">Submit</button> -->
         <s:submit key="log" type="submit" class="btn btn-primary"/>
 	</s:form>
- </div> 
-</div>
-
+  </div>
+ </div>
 </div>
 </body>
 </html>
