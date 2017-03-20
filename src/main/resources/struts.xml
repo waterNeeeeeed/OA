@@ -10,7 +10,7 @@
             <result>/WEB-INF/login.jsp</result>
         </action>
         <action name="login" class="com.runfeng.struts.LoginAction">
-            <result name="success">/WEB-INF/welcome.jsp</result>
+            <result name="success">/WEB-INF/office/salaryManage.jsp</result>
             <result name="error">/WEB-INF/error.jsp</result>
         </action>
     </package>
