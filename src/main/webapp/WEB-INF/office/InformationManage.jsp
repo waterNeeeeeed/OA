@@ -94,6 +94,7 @@
                     </tr>
                     </thead>
                     <tbody>
+                    <!--
                     <tr>
                         <td>001</td>
                         <td>巩涛</td>
@@ -106,6 +107,7 @@
                             <button>保存</button>
                         </td>
                     </tr>
+                    -->
                     </tbody>
                 </table>
                 <ul class="pagination">
@@ -127,29 +129,26 @@
 
     ];
     var employees = [
-    {eid:001, name:"巩涛", sex:"男", apartment:"技术研发部", position:"班长", identification :"370783198708256132", hiredate:"2013-08"},
-    {eid:002, name:"张百城", sex:"男", apartment:"车间", position:"操作工", identification :"370783199408256132", hiredate:"2015-08"}];
+    {eid:"001", name:"巩涛", sex:"男", apartment:"经理办", position:"班长", identification :"370783198708256132", hiredate:"2013-08"},
+    {eid:"002", name:"张百城", sex:"男", apartment:"车间", position:"操作工", identification :"370783199408256132", hiredate:"2015-08"}];
     function createTable() {
         var table = document.getElementById("information");
-
-        for (var i=0; i<2; i++){
-            var tr = table.insertRow(i+1);
-            var td = tr.insertCell(0);
-            td.innerHTML = employees[i].eid;
-            var td = tr.insertCell(1);
-            td.innerHTML = employees[i].name;
-            var td = tr.insertCell(2);
-            td.innerHTML = employees[i].sex;
-            var td = tr.insertCell(3);
-            td.innerHTML = employees[i].apartment;
-            var td = tr.insertCell(4);
-            td.innerHTML = employees[i].position;
-            var td = tr.insertCell(5);
-            td.innerHTML = employees[i].identification;
-            var td = tr.insertCell(6);
-            td.innerHTML = employees[i].hiredate;
+        var old_length = table.rows.length;
+        for (var i=old_length-1; i>0; i--){
+            table.deleteRow(i);
         }
-    };
+        for (var i=0; i<employees.length; i++){
+            var tr = table.insertRow(i+1);
+            var ncell = 0;
+            for (var b in employees[i]){
+                var td = tr.insertCell(ncell);
+                td.innerHTML = employees[i][b];
+                ncell++;
+            }
+            var td = tr.insertCell(ncell);
+            td.innerHTML = "<button id=\"button" + (i+1) +"\" class=\"btn btn-success\">修改</button>";
+        }
+    }
 </script>
 </body>
 
