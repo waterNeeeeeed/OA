@@ -7,9 +7,6 @@
 </head>
 
 <body>
-	${applicationScope.counter}<br />
-	${sessionScope.user}, 您已登录！<br />
-	${requestScope.tip}<br/>
-	${cookie.user.value}
+	Hello
 </body>
 </html>

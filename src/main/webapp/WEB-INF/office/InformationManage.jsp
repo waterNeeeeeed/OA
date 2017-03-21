@@ -15,6 +15,7 @@
     <script type="text/javascript" src="bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
     <link rel="stylesheet" type="text/css" href="css/InfoSalaManage.css"/>
 
+
 </head>
 
 <body>
@@ -65,7 +66,7 @@
     </div>
     <div class="row">
             <div class="col-md-2 leftside-bar btn-group-vertical" role="group" aria-label="...">
-                <button type="button" class="btn btn-primary btn-lg btn-block">总览</button>
+                <button id="AllDepartment" type="button" class="btn btn-primary btn-lg btn-block" onclick="createTable();">总览</button>
                 <button type="button" class="btn btn-primary">经理办</button>
                 <button type="button" class="btn btn-primary">财务部</button>
                 <button type="button" class="btn btn-primary">设备工程部</button>
@@ -77,7 +78,7 @@
         <div class="col-md-10">
             <div class="table-responsive">
                 <div>你好，${sessionScope.user}</div>
-                <table class="table table-bordered">
+                <table id="information" class="table table-bordered">
                     <caption>基本信息</caption>
                     <thead>
                     <tr>
@@ -121,8 +122,35 @@
 
     </div>
 </div>
-<stript type="text/javascript">
+<script type="text/javascript">
+    var informationTableHead =[
 
-</stript>
+    ];
+    var employees = [
+    {eid:001, name:"巩涛", sex:"男", apartment:"技术研发部", position:"班长", identification :"370783198708256132", hiredate:"2013-08"},
+    {eid:002, name:"张百城", sex:"男", apartment:"车间", position:"操作工", identification :"370783199408256132", hiredate:"2015-08"}];
+    function createTable() {
+        var table = document.getElementById("information");
+
+        for (var i=0; i<2; i++){
+            var tr = table.insertRow(i+1);
+            var td = tr.insertCell(0);
+            td.innerHTML = employees[i].eid;
+            var td = tr.insertCell(1);
+            td.innerHTML = employees[i].name;
+            var td = tr.insertCell(2);
+            td.innerHTML = employees[i].sex;
+            var td = tr.insertCell(3);
+            td.innerHTML = employees[i].apartment;
+            var td = tr.insertCell(4);
+            td.innerHTML = employees[i].position;
+            var td = tr.insertCell(5);
+            td.innerHTML = employees[i].identification;
+            var td = tr.insertCell(6);
+            td.innerHTML = employees[i].hiredate;
+        }
+    };
+</script>
 </body>
+
 </html>

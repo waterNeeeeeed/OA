@@ -35,8 +35,8 @@
  <div class="row">
   <div class="col-md-offset-2 col-md-6">
     <div>
-        <p style="font-size: 66px">你好</p>
-        <p style="font-size: 16px">欢迎使用OA办公系统,它可以帮你提高办公效率</p>
+        <p style="color: #2b669a;font-size: 66px">你好</p>
+        <p style="color: #2b669a;font-size: 16px">欢迎使用OA办公系统,它可以帮你提高办公效率</p>
     </div>
   </div>
   <div class="col-md-3 col-md-offset-1 well">
