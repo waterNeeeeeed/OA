@@ -7,7 +7,7 @@
     <constant name="struts.devMode" value="true"/>
     <package name="gt" namespace="/" extends="struts-default">
         <action name="loginF">
-            <result>/WEB-INF/login.jsp</result>
+            <result>/WEB-INF/Login.jsp</result>
         </action>
         <action name="login" class="com.runfeng.struts.LoginAction">
             <result name="success">/WEB-INF/office/Welcome.jsp</result>
