@@ -22,7 +22,11 @@
         <nav class="navbar navbar-default navbar-fixed-top">
             <div class="container">
                 <h1 style="color: #080808;font-weight: bold">
-                    江岳科技<b style="font-size: 16px;font-weight: normal">OA办公系统</b></h1>
+                    江岳科技
+                    <!--
+                    <b style="font-size: 16px;font-weight: normal">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;OA办公系统</b>
+                    -->
+                </h1>
             </div>
         </nav>
     </div>
@@ -31,8 +35,8 @@
  <div class="row">
   <div class="col-md-offset-2 col-md-6">
     <div>
-        <h2>你好</h2>
-        <p>欢迎使用OA办公系统,它可以帮你迅速提高办公效率</p>
+        <p style="font-size: 66px">你好</p>
+        <p style="font-size: 16px">欢迎使用OA办公系统,它可以帮你提高办公效率</p>
     </div>
   </div>
   <div class="col-md-3 col-md-offset-1 well">
