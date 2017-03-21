@@ -7,7 +7,7 @@
 	<meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>江岳OA办公系统</title>
+    <title>员工信息管理</title>
     <!-- 最新的 Bootstrap 核心 JavaScript 文件-->
     <script type="text/javascript" src="bootstrap-3.3.7-dist/js/jquery-3.2.0.min.js"></script>
     <link rel="stylesheet" type="text/css" href="bootstrap-3.3.7-dist/css/bootstrap.min.css"/>
@@ -66,12 +66,54 @@
                 <button type="button" class="btn btn-primary">临时用工</button>
             </div>
         <div class="col-md-10">
-            <div class="jumbotron" style="height: 360px">
-                <h1>你好，${sessionScope.user}</h1>
+            <div class="table-responsive">
+
+                <table class="table table-bordered">
+                    <caption>基本信息</caption>
+                    <thead>
+                    <tr>
+                        <th>EID</th>
+                        <th>姓名</th>
+                        <th>性别</th>
+                        <th>部门</th>
+                        <th>职务</th>
+                        <th>身份证号</th>
+                        <th>入职时间</th>
+                        <th>操作</th>
+
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>001</td>
+                        <td>巩涛</td>
+                        <td>男</td>
+                        <td>技术研发部</td>
+                        <td>班长</td>
+                        <td>370783198708256132</td>
+                        <td>2013/08</td>
+                        <td><button>修改</button>
+                            <button>保存</button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <ul class="pagination">
+                    <li><a href="#">&laquo;</a></li>
+                    <li><a href="#">1</a></li>
+                    <li><a href="#">2</a></li>
+                    <li><a href="#">3</a></li>
+                    <li><a href="#">4</a></li>
+                    <li><a href="#">5</a></li>
+                    <li><a href="#">&raquo;</a></li>
+                </ul>
             </div>
         </div>
 
     </div>
 </div>
+<stript type="text/javascript">
+
+</stript>
 </body>
 </html>

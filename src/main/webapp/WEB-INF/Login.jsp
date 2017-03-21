@@ -43,7 +43,7 @@
   	<s:form action="login">
   		<div class="form-group">
     		<label for="exampleInputUsername">用户名</label>
-    		<input type="text" class="form-control" id="exampleInputEmail1" placeholder="用户名" name="user">
+    		<input type="text" class="form-control" id="exampleInputUsername" placeholder="用户名" name="user">
   		</div>
   		<div class="form-group">
     		<label for="exampleInputPassword1">密码</label>

@@ -28,12 +28,16 @@
                 <div>
                     <ul class="nav navbar-nav">
                         <li>
-                            <a href="#" class="dropdown-toggle">
+                            <a href="InformationManageAction.action">
                                 员工信息管理
                             </a>
                         </li>
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <a href="SalaryManageAction.action">
+                                薪资管理
+                            </a>
+                            <!--
+                            <a href="SalaryManageAction.action" class="dropdown-toggle" data-toggle="dropdown">
                                 薪资管理<b class="caret"></b>
                             </a>
                             <ul class="dropdown-menu">
@@ -43,6 +47,7 @@
                                 <li><a href="#">公积金</a></li>
                                 <li><a href="#">所得税</a></li>
                             </ul>
+                            -->
                         </li>
                     </ul>
                 </div>
@@ -116,5 +121,8 @@
 
     </div>
 </div>
+<stript type="text/javascript">
+
+</stript>
 </body>
 </html>
