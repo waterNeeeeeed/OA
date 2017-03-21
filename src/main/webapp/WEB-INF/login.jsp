@@ -14,29 +14,15 @@
     <link rel="stylesheet" type="text/css" href="bootstrap-3.3.7-dist/css/bootstrap.min.css"/>
     <link rel="stylesheet" type="text/css" href="bootstrap-3.3.7-dist/css/bootstrap.css"/>
     <script type="text/javascript" src="bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
-    <style type="text/css">
-        body{
-            padding-top: 160px;
-            background-color: #99CCFF;
-        }
-        .footer{
-            position: absolute;
-            bottom: 0;
-            width: 100%;
-            height: 60px;
-            background-color: #f5f5f5;
-        }
-        .text-muted {
-            color: #777;
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="css/login.css"/>
 </head>
 
 <body>
     <div>
         <nav class="navbar navbar-default navbar-fixed-top">
             <div class="container">
-                <h1 style="color:#77e7ff;">江岳科技</h1>
+                <h1 style="color: #080808;font-weight: bold">
+                    江岳科技<b style="font-size: 16px;font-weight: normal">OA办公系统</b></h1>
             </div>
         </nav>
     </div>

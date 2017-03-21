@@ -13,53 +13,8 @@
     <link rel="stylesheet" type="text/css" href="bootstrap-3.3.7-dist/css/bootstrap.min.css"/>
     <link rel="stylesheet" type="text/css" href="bootstrap-3.3.7-dist/css/bootstrap.css"/>
     <script type="text/javascript" src="bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
-    <style type="text/css">
+    <link rel="stylesheet" type="text/css" href="css/InfoSalaManage.css"/>
 
-        .footer{
-            position: absolute;
-            bottom: 0;
-            width: 100%;
-            height: 60px;
-            background-color: #f5f5f5;
-        }
-        .text-muted {
-            color: #777;
-        }
-        .sidebar {
-            position: fixed;
-            top: 51px;
-            bottom: 0;
-            left: 0;
-            z-index: 1000;
-            display: block;
-            padding: 20px;
-            overflow-x: hidden;
-            overflow-y: auto;
-            background-color: #f5f5f5;
-            border-right: 1px solid #eee;
-        }
-        .nav {
-            padding-left: 0;
-            margin-bottom: 0;
-            list-style: none;
-        }
-        .nav-sidebar {
-            margin-right: -21px;
-            margin-bottom: 20px;
-            margin-left: -20px;
-        }
-        .btn-group-vertical {
-            position: relative;
-            display: inline;
-            vertical-align: middle;
-        }
-        .leftside-bar{
-            position: relative;
-            min-height: 1px;
-            padding-right: 1px;
-            padding-left: 1px;
-        }
-    </style>
 </head>
 
 <body>
@@ -72,6 +27,11 @@
                 </div>
                 <div>
                     <ul class="nav navbar-nav">
+                        <li>
+                            <a href="#" class="dropdown-toggle">
+                                员工信息管理
+                            </a>
+                        </li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 薪资管理<b class="caret"></b>
@@ -82,25 +42,6 @@
                                 <li><a href="#">社保</a></li>
                                 <li><a href="#">公积金</a></li>
                                 <li><a href="#">所得税</a></li>
-                            </ul>
-                        </li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle">
-                                员工信息管理
-                            </a>
-                        </li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                Java <b class="caret"></b>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li><a href="#">jmeter</a></li>
-                                <li><a href="#">EJB</a></li>
-                                <li><a href="#">Jasper Report</a></li>
-                                <li class="divider"></li>
-                                <li><a href="#">分离的链接</a></li>
-                                <li class="divider"></li>
-                                <li><a href="#">另一个分离的链接</a></li>
                             </ul>
                         </li>
                     </ul>
