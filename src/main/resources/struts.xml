@@ -13,9 +13,14 @@
             <result name="success">/WEB-INF/office/Welcome.jsp</result>
             <result name="error">/WEB-INF/error.jsp</result>
         </action>
-        <action name="*Action" class="com.runfeng.struts.ManageAction"
-            method="{1}">
-            <result name="{1}">/WEB-INF/office/{1}.jsp</result>
+        <action name="*ManageAction" class="com.runfeng.struts.ManageAction"
+            method="{1}Manage">
+            <result name="{1}Manage">/WEB-INF/office/{1}Manage.jsp</result>
+            <result name="error">/WEB-INF/error.jsp</result>
+        </action>
+        <action name="ExitAction" class="com.runfeng.struts.ManageAction"
+                method="ExitAction">
+            <result name="ExitAction">/WEB-INF/Login.jsp</result>
             <result name="error">/WEB-INF/error.jsp</result>
         </action>
     </package>

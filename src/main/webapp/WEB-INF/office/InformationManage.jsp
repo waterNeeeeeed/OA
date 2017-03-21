@@ -51,6 +51,15 @@
                         </li>
                     </ul>
                 </div>
+                <div align="right">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="ExitAction.action">
+                                退出
+                            </a>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </nav>
     </div>
@@ -67,7 +76,7 @@
             </div>
         <div class="col-md-10">
             <div class="table-responsive">
-
+                <div>你好，${sessionScope.user}</div>
                 <table class="table table-bordered">
                     <caption>基本信息</caption>
                     <thead>

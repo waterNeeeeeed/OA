@@ -51,6 +51,15 @@
                         </li>
                     </ul>
                 </div>
+                <div align="right">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="ExitAction.action">
+                                退出
+                            </a>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </nav>
     </div>

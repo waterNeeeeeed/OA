@@ -51,6 +51,15 @@
                         </li>
                     </ul>
                 </div>
+                <div align="right">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="ExitAction.action">
+                                退出
+                            </a>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </nav>
     </div>
@@ -67,12 +76,12 @@
             </div>
         <div class="col-md-10">
             <div class="table-responsive">
-
+                <div>你好，${sessionScope.user}</div>
                 <table class="table table-bordered">
                     <caption>工资组成</caption>
                     <thead>
                     <tr>
-                        <th>ID</th>
+                        <th>EID</th>
                         <th>姓名</th>
                         <th>部门</th>
                         <th>日期</th>
@@ -82,7 +91,8 @@
                         <th>浮动工资</th>
                         <th>节日</th>
                         <th>假日</th>
-                        <th>夜班</th>
+                        <th>夜班费</th>
+                        <th>保健、补助</th>
                         <th>合计</th>
                         <th>操作</th>
                     </tr>
@@ -100,6 +110,7 @@
                         <td>1000</td>
                         <td>1000</td>
                         <td>1000</td>
+                        <td>200</td>
                         <td>60000</td>
                         <td><button>修改</button>
                             <button>保存</button>
