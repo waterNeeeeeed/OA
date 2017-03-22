@@ -79,11 +79,13 @@
                 <button type="button" class="btn btn-primary">临时用工</button>
             </div>
         <div class="col-md-10">
-            <div>你好，${sessionScope.user}</div>
+            <div style="text-align: right">你好，${sessionScope.user}</div>
             <div class="table-responsive">
 
+
                 <table id="salaryTable" class="table table-bordered">
-                    <caption>工资组成</caption>
+                    <!-- <caption>工资组成</caption> -->
+                    <input type="month" style="text-align: center;margin: 6px"></input>
                     <thead>
                     <tr>
                         <th>EID</th>
@@ -121,7 +123,29 @@
                             <button type="button" class="btn btn-primary btn-sm"
                                     data-toggle="modal" data-target="#exampleModal"
                                     data-whatever="@getbootstrap"
-                                    onclick="createEmployeeInfoForm()">
+                                    onclick="createEmployeeInfoForm(this)" value="1">
+                                修改</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>002</td>
+                        <td>张百城</td>
+                        <td>车间</td>
+                        <td>2017/02</td>
+                        <td>20000</td>
+                        <td>20000</td>
+                        <td>20000</td>
+                        <td>20000</td>
+                        <td>1000</td>
+                        <td>1000</td>
+                        <td>1000</td>
+                        <td>200</td>
+                        <td>60000</td>
+                        <td>
+                            <button type="button" class="btn btn-primary btn-sm"
+                                    data-toggle="modal" data-target="#exampleModal"
+                                    data-whatever="@getbootstrap"
+                                    onclick="createEmployeeInfoForm(this)" value="2">
                                 修改</button>
                         </td>
                     </tr>
@@ -150,14 +174,14 @@
 
                         <div class="modal-body">
                             <form id="EmployeeInfoForm">
-                                <div id="EmployeeInfoFormContent" class="form-group">
+                                <div id="EmployeeInfoFormDiv" class="form-group">
                                 </div>
                             </form>
                         </div>
 
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-primary">Send message</button>
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <button id="saveModificationBtn" onclick="saveModification()" type="button" class="btn btn-primary" data-dismiss="modal">保存</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
                         </div>
 
                     </div>
@@ -181,6 +205,12 @@
             salary:"20000", basicSalary:"5000", checkSalary:"5000", floatingSalary:"5000",
             festivalSalary:"200", holidaySalary:"200", nightSalary:"200", subsidySalary:"200",
             totalSalary:"20000"
+        },
+        {
+            eid:"002", name:"张百成", department:"车间", date:"2017-02",
+            salary:"20000", basicSalary:"5000", checkSalary:"5000", floatingSalary:"5000",
+            festivalSalary:"200", holidaySalary:"200", nightSalary:"200", subsidySalary:"200",
+            totalSalary:"20000"
         }
     ];
     function createTable() {
@@ -200,11 +230,19 @@
             }
             var td = tr.insertCell(ncell);
 
-            td.innerHTML = "<button id=\"button" + (i+1) +"\" class=\"btn btn-success\">修改</button>";
+            td.innerHTML = "<button data-toggle=\"modal\" data-target=\"#exampleModal\" data-whatever=\"@getbootstrap\" onclick=\"createEmployeeInfoForm(this)\" value=\"" + (i+1) + "\" class=\"btn btn-success btn-sm\">修改</button>";
         }
     }
-    function createEmployeeInfoForm() {
-        var formContent = document.getElementById("EmployeeInfoFormContent");
+    function createEmployeeInfoForm(target) {
+        var rowsIndex = target.value;
+        var table = document.getElementById("salaryTable");
+        var formContent = document.getElementById("EmployeeInfoFormDiv");
+        var saveBtn = document.getElementById("saveModificationBtn");
+        saveBtn.value = rowsIndex;
+        //先清空旧有元素
+        formContent.innerHTML = "";
+
+        var cellsIndex = 0;
         for (var a in informationTableHead){
             var label = document.createElement("label");
             label.setAttribute("for", informationTableHead[a]);
@@ -214,9 +252,25 @@
             input.setAttribute("type", "text");
             input.setAttribute("class", "form-control");
             input.setAttribute("id", informationTableHead[a]);
-            input.setAttribute("value", "");
+            input.setAttribute("value", table.rows[rowsIndex].cells[cellsIndex].innerHTML);
             formContent.appendChild(label);
             formContent.appendChild(input);
+            cellsIndex++;
+        }
+
+
+    }
+    //保存修改
+    function saveModification() {
+        var table = document.getElementById("salaryTable");
+        var formContent = document.getElementById("EmployeeInfoFormDiv");
+        var saveBtn = document.getElementById("saveModificationBtn");
+        var content = formContent.getElementsByTagName("input");
+        var rowsIndex = saveBtn.value;
+        var n = 0;
+        for (var a in content){
+            table.rows[rowsIndex].cells[n].innerHTML = content[n].value;
+            n++;
         }
     }
 </script>
