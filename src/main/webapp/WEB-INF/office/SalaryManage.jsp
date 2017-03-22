@@ -19,35 +19,37 @@
 
 <body>
 <div class="container">
+    <!-- 导航条 -->
     <div class="row">
         <nav class="navbar navbar-inverse" role="navigation">
             <div class="container-fluid">
                 <div class="navbar-header">
-                    <li><a class="navbar-brand" href="#"><font color="#ebfaff">OA</font></a></li>
+                    <li><a class="navbar-brand" href="OA.action"><font color="#ebfaff">OA</font></a></li>
                 </div>
                 <div>
                     <ul class="nav navbar-nav manage-nav-font">
-                        <li>
-                            <a href="InformationManageAction.action">
-                                员工信息管理
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                员工信息管理<b class="caret"></b>
                             </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="InformationManageAction.action">基本信息</a> </li>
+                            </ul>
                         </li>
                         <li class="dropdown">
-                            <a href="SalaryManageAction.action">
-                                薪资管理
-                            </a>
-                            <!--
-                            <a href="SalaryManageAction.action" class="dropdown-toggle" data-toggle="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 薪资管理<b class="caret"></b>
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a href="#">工资组成</a></li>
+                                <li><a href="SalaryManageAction.action">工资组成</a></li>
                                 <li class="divider"></li>
                                 <li><a href="#">社保</a></li>
                                 <li><a href="#">公积金</a></li>
                                 <li><a href="#">所得税</a></li>
+                                <li class="divider"></li>
+                                <li><a href="#">请假</a></li>
                             </ul>
-                            -->
+
                         </li>
                     </ul>
                 </div>
@@ -63,9 +65,11 @@
             </div>
         </nav>
     </div>
+
     <div class="row">
             <div class="col-md-2 leftside-bar btn-group-vertical" role="group" aria-label="...">
-                <button type="button" class="btn btn-primary btn-lg btn-block">总览</button>
+                <button id="salaryAll" type="button"
+                        class="btn btn-primary btn-lg btn-block" onclick="createTable()">总览</button>
                 <button type="button" class="btn btn-primary">经理办</button>
                 <button type="button" class="btn btn-primary">财务部</button>
                 <button type="button" class="btn btn-primary">设备工程部</button>
@@ -175,9 +179,27 @@
             eid:"001", name:"巩涛", department:"经理办", date:"2017-02",
             salary:"20000", basicSalary:"5000", checkSalary:"5000", floatingSalary:"5000",
             festivalSalary:"200", holidaySalary:"200", nightSalary:"200", subsidySalary:"200",
-            totalSalary:"20000", operation:"操作"
+            totalSalary:"20000"
         }
     ];
+    function createTable() {
+        var table = document.getElementById("salaryTable");
+        var old_length = table.rows.length;
+        for (var i=old_length-1; i>0; i--){
+            table.deleteRow(i);
+        }
+        for (var i=0; i<employees.length; i++){
+            var tr = table.insertRow(i+1);
+            var ncell = 0;
+            for (var b in employees[i]){
+                var td = tr.insertCell(ncell);
+                td.innerHTML = employees[i][b];
+                ncell++;
+            }
+            var td = tr.insertCell(ncell);
+            td.innerHTML = "<button id=\"button" + (i+1) +"\" class=\"btn btn-success\">修改</button>";
+        }
+    }
 /*
  <th>EID</th>
  <th>姓名</th>

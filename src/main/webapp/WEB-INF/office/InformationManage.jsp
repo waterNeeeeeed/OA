@@ -20,35 +20,37 @@
 
 <body>
 <div class="container">
+    <!-- 导航条 -->
     <div class="row">
         <nav class="navbar navbar-inverse" role="navigation">
             <div class="container-fluid">
                 <div class="navbar-header">
-                    <li><a class="navbar-brand" href="#"><font color="#ebfaff">OA</font></a></li>
+                    <li><a class="navbar-brand" href="OA.action"><font color="#ebfaff">OA</font></a></li>
                 </div>
                 <div>
                     <ul class="nav navbar-nav manage-nav-font">
-                        <li>
-                            <a href="InformationManageAction.action">
-                                员工信息管理
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                员工信息管理<b class="caret"></b>
                             </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="InformationManageAction.action">基本信息</a> </li>
+                            </ul>
                         </li>
                         <li class="dropdown">
-                            <a href="SalaryManageAction.action">
-                                薪资管理
-                            </a>
-                            <!--
-                            <a href="SalaryManageAction.action" class="dropdown-toggle" data-toggle="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 薪资管理<b class="caret"></b>
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a href="#">工资组成</a></li>
+                                <li><a href="SalaryManageAction.action">工资组成</a></li>
                                 <li class="divider"></li>
                                 <li><a href="#">社保</a></li>
                                 <li><a href="#">公积金</a></li>
                                 <li><a href="#">所得税</a></li>
+                                <li class="divider"></li>
+                                <li><a href="#">请假</a></li>
                             </ul>
-                            -->
+
                         </li>
                     </ul>
                 </div>
@@ -64,6 +66,7 @@
             </div>
         </nav>
     </div>
+
     <div class="row">
             <div class="col-md-2 leftside-bar btn-group-vertical" role="group" aria-label="...">
                 <button id="AllDepartment" type="button" class="btn btn-primary btn-lg btn-block" onclick="createTable();">总览</button>

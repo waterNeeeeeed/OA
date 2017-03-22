@@ -9,7 +9,9 @@
         <action name="">
             <result>/WEB-INF/Login.jsp</result>
         </action>
-
+        <action name="OA">
+            <result>/WEB-INF/office/Welcome.jsp</result>
+        </action>
         <action name="login" class="com.runfeng.struts.LoginAction">
             <result name="success">/WEB-INF/office/Welcome.jsp</result>
             <result name="error">/WEB-INF/error.jsp</result>
