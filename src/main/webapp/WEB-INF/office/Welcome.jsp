@@ -67,18 +67,6 @@
     </div>
 
     <div class="row">
-        <!--
-            <div class="col-md-2 leftside-bar btn-group-vertical" role="group" aria-label="...">
-                <button type="button" class="btn btn-primary btn-lg btn-block">总览</button>
-                <button type="button" class="btn btn-primary">经理办</button>
-                <button type="button" class="btn btn-primary">财务部</button>
-                <button type="button" class="btn btn-primary">设备工程部</button>
-                <button type="button" class="btn btn-primary">公用工程部</button>
-                <button type="button" class="btn btn-primary">生产部</button>
-                <button type="button" class="btn btn-primary">车间</button>
-                <button type="button" class="btn btn-primary">临时用工</button>
-            </div>
-            -->
         <div class="col-md-12">
             <div class="jumbotron" style="height: 360px">
                 <h1>你好，${sessionScope.user}</h1>

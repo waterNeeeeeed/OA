@@ -118,7 +118,11 @@
                         <td>200</td>
                         <td>60000</td>
                         <td>
-                            <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap">修改</button>
+                            <button type="button" class="btn btn-primary btn-sm"
+                                    data-toggle="modal" data-target="#exampleModal"
+                                    data-whatever="@getbootstrap"
+                                    onclick="createEmployeeInfoForm()">
+                                修改</button>
                         </td>
                     </tr>
                     </tbody>
@@ -134,35 +138,32 @@
                 </ul>
             </div>
 
-
-
-            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
-                <div class="modal-dialog" role="document">
+            <!-- 用于修改信息 -->
+            <div class="modal" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+                <div class="modal-dialog modal-sm" role="document">
                     <div class="modal-content">
+
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                             <h4 class="modal-title" id="exampleModalLabel">New message</h4>
                         </div>
+
                         <div class="modal-body">
-                            <form id="EmInfo">
-                                <div class="form-group">
-                                    <label for="recipient-name" class="control-label">Recipient:</label>
-                                    <input type="text" class="form-control" id="recipient-name">
-                                </div>
-                                <div class="form-group">
-                                    <label for="message-text" class="control-label">Message:</label>
-                                    <textarea class="form-control" id="message-text"></textarea>
+                            <form id="EmployeeInfoForm">
+                                <div id="EmployeeInfoFormContent" class="form-group">
                                 </div>
                             </form>
                         </div>
-                        <div class="modal-footer">
 
+                        <div class="modal-footer">
                             <button type="button" class="btn btn-primary">Send message</button>
                             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                         </div>
+
                     </div>
                 </div>
             </div>
+
         </div>
 
     </div>
@@ -172,7 +173,7 @@
         eid:"EID", name:"姓名", department:"部门", date:"日期",
         salary:"应发工资", basicSalary:"基本工资", checkSalary:"考核工资", floatingSalary:"浮动工资",
         festivalSalary:"节日", holidaySalary:"假日", nightSalary:"夜班费", subsidySalary:"保健、补助",
-        totalSalary:"合计", operation:"操作"
+        totalSalary:"合计"
     };
     var employees = [
         {
@@ -185,6 +186,7 @@
     function createTable() {
         var table = document.getElementById("salaryTable");
         var old_length = table.rows.length;
+        //删除旧的表格
         for (var i=old_length-1; i>0; i--){
             table.deleteRow(i);
         }
@@ -197,25 +199,26 @@
                 ncell++;
             }
             var td = tr.insertCell(ncell);
+
             td.innerHTML = "<button id=\"button" + (i+1) +"\" class=\"btn btn-success\">修改</button>";
         }
     }
-/*
- <th>EID</th>
- <th>姓名</th>
- <th>部门</th>
- <th>日期</th>
- <th>应发工资</th>
- <th>基本工资</th>
- <th>考核工资</th>
- <th>浮动工资</th>
- <th>节日</th>
- <th>假日</th>
- <th>夜班费</th>
- <th>保健、补助</th>
- <th>合计</th>
- <th>操作</th>
- */
+    function createEmployeeInfoForm() {
+        var formContent = document.getElementById("EmployeeInfoFormContent");
+        for (var a in informationTableHead){
+            var label = document.createElement("label");
+            label.setAttribute("for", informationTableHead[a]);
+            label.setAttribute("class", "control-label");
+            label.innerHTML = informationTableHead[a];
+            var input = document.createElement("input");
+            input.setAttribute("type", "text");
+            input.setAttribute("class", "form-control");
+            input.setAttribute("id", informationTableHead[a]);
+            input.setAttribute("value", "");
+            formContent.appendChild(label);
+            formContent.appendChild(input);
+        }
+    }
 </script>
 </body>
 </html>
