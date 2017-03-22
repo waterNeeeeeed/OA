@@ -26,7 +26,7 @@
                     <li><a class="navbar-brand" href="#"><font color="#ebfaff">OA</font></a></li>
                 </div>
                 <div>
-                    <ul class="nav navbar-nav">
+                    <ul class="nav navbar-nav manage-nav-font">
                         <li>
                             <a href="InformationManageAction.action">
                                 员工信息管理
@@ -75,9 +75,10 @@
                 <button type="button" class="btn btn-primary">临时用工</button>
             </div>
         <div class="col-md-10">
+            <div>你好，${sessionScope.user}</div>
             <div class="table-responsive">
-                <div>你好，${sessionScope.user}</div>
-                <table class="table table-bordered">
+
+                <table id="salaryTable" class="table table-bordered">
                     <caption>工资组成</caption>
                     <thead>
                     <tr>
@@ -112,8 +113,8 @@
                         <td>1000</td>
                         <td>200</td>
                         <td>60000</td>
-                        <td><button>修改</button>
-                            <button>保存</button>
+                        <td>
+                            <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap">修改</button>
                         </td>
                     </tr>
                     </tbody>
@@ -128,12 +129,71 @@
                     <li><a href="#">&raquo;</a></li>
                 </ul>
             </div>
+
+
+
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="exampleModalLabel">New message</h4>
+                        </div>
+                        <div class="modal-body">
+                            <form id="EmInfo">
+                                <div class="form-group">
+                                    <label for="recipient-name" class="control-label">Recipient:</label>
+                                    <input type="text" class="form-control" id="recipient-name">
+                                </div>
+                                <div class="form-group">
+                                    <label for="message-text" class="control-label">Message:</label>
+                                    <textarea class="form-control" id="message-text"></textarea>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+
+                            <button type="button" class="btn btn-primary">Send message</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
     </div>
 </div>
-<stript type="text/javascript">
-
-</stript>
+<script type="text/javascript">
+    var informationTableHead ={
+        eid:"EID", name:"姓名", department:"部门", date:"日期",
+        salary:"应发工资", basicSalary:"基本工资", checkSalary:"考核工资", floatingSalary:"浮动工资",
+        festivalSalary:"节日", holidaySalary:"假日", nightSalary:"夜班费", subsidySalary:"保健、补助",
+        totalSalary:"合计", operation:"操作"
+    };
+    var employees = [
+        {
+            eid:"001", name:"巩涛", department:"经理办", date:"2017-02",
+            salary:"20000", basicSalary:"5000", checkSalary:"5000", floatingSalary:"5000",
+            festivalSalary:"200", holidaySalary:"200", nightSalary:"200", subsidySalary:"200",
+            totalSalary:"20000", operation:"操作"
+        }
+    ];
+/*
+ <th>EID</th>
+ <th>姓名</th>
+ <th>部门</th>
+ <th>日期</th>
+ <th>应发工资</th>
+ <th>基本工资</th>
+ <th>考核工资</th>
+ <th>浮动工资</th>
+ <th>节日</th>
+ <th>假日</th>
+ <th>夜班费</th>
+ <th>保健、补助</th>
+ <th>合计</th>
+ <th>操作</th>
+ */
+</script>
 </body>
 </html>

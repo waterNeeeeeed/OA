@@ -26,7 +26,7 @@
                     <li><a class="navbar-brand" href="#"><font color="#ebfaff">OA</font></a></li>
                 </div>
                 <div>
-                    <ul class="nav navbar-nav">
+                    <ul class="nav navbar-nav manage-nav-font">
                         <li>
                             <a href="InformationManageAction.action">
                                 员工信息管理
@@ -63,7 +63,9 @@
             </div>
         </nav>
     </div>
+
     <div class="row">
+        <!--
             <div class="col-md-2 leftside-bar btn-group-vertical" role="group" aria-label="...">
                 <button type="button" class="btn btn-primary btn-lg btn-block">总览</button>
                 <button type="button" class="btn btn-primary">经理办</button>
@@ -74,7 +76,8 @@
                 <button type="button" class="btn btn-primary">车间</button>
                 <button type="button" class="btn btn-primary">临时用工</button>
             </div>
-        <div class="col-md-10">
+            -->
+        <div class="col-md-12">
             <div class="jumbotron" style="height: 360px">
                 <h1>你好，${sessionScope.user}</h1>
             </div>

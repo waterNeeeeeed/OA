@@ -27,7 +27,7 @@
                     <li><a class="navbar-brand" href="#"><font color="#ebfaff">OA</font></a></li>
                 </div>
                 <div>
-                    <ul class="nav navbar-nav">
+                    <ul class="nav navbar-nav manage-nav-font">
                         <li>
                             <a href="InformationManageAction.action">
                                 员工信息管理
@@ -78,7 +78,7 @@
         <div class="col-md-10">
             <div class="table-responsive">
                 <div>你好，${sessionScope.user}</div>
-                <table id="information" class="table table-bordered">
+                <table id="infoTable" class="table table-bordered">
                     <caption>基本信息</caption>
                     <thead>
                     <tr>
@@ -129,10 +129,10 @@
 
     ];
     var employees = [
-    {eid:"001", name:"巩涛", sex:"男", apartment:"经理办", position:"班长", identification :"370783198708256132", hiredate:"2013-08"},
-    {eid:"002", name:"张百城", sex:"男", apartment:"车间", position:"操作工", identification :"370783199408256132", hiredate:"2015-08"}];
+    {eid:"001", name:"巩涛", sex:"男", department:"经理办", position:"班长", identification :"370783198708256132", hiredate:"2013-08"},
+    {eid:"002", name:"张百城", sex:"男", department:"车间", position:"操作工", identification :"370783199408256132", hiredate:"2015-08"}];
     function createTable() {
-        var table = document.getElementById("information");
+        var table = document.getElementById("infoTable");
         var old_length = table.rows.length;
         for (var i=old_length-1; i>0; i--){
             table.deleteRow(i);
