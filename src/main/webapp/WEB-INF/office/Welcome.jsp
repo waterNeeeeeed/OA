@@ -51,23 +51,16 @@
                             </ul>
 
                         </li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                用户管理<b class="caret"></b>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li><a href="UserManageAction.action">所有管理员</a></li>
-                                <li class="divider"></li>
-                                <li><a href="#">当前在线管理员</a></li>
-                                <li><a href="#">当前在线用户</a></li>
-                            </ul>
-                        </li>
+
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 工作流管理<b class="caret"></b>
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a href="UserManageAction.action">所有工作流</a></li>
+                                <li><a href="#">用车流程</a></li>
+                                <li><a href="#">报销流程</a></li>
+                                <li><a href="#">请假流程</a></li>
+
                             </ul>
                         </li>
                         <li class="dropdown">
@@ -75,7 +68,9 @@
                                 仓储管理<b class="caret"></b>
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a href="UserManageAction.action">所有仓库</a></li>
+                                <li><a href="#">所有仓库</a></li>
+                                <li><a href="#">A仓库</a></li>
+                                <li><a href="#">B仓库</a></li>
                             </ul>
                         </li>
                         <li class="dropdown">
@@ -83,7 +78,35 @@
                                 生产计划管理<b class="caret"></b>
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a href="UserManageAction.action">所有计划</a></li>
+                                <li><a href="#">所有计划</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                后勤管理<b class="caret"></b>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">后勤仓库</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                采购管理<b class="caret"></b>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">所有计划</a></li>
+                            </ul>
+                        </li>
+
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                用户管理<b class="caret"></b>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">所有管理员</a></li>
+                                <li class="divider"></li>
+                                <li><a href="#">当前在线管理员</a></li>
+                                <li><a href="#">当前在线用户</a></li>
                             </ul>
                         </li>
                     </ul>

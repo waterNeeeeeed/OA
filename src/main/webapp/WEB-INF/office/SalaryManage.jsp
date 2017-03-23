@@ -51,23 +51,16 @@
                             </ul>
 
                         </li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                用户管理<b class="caret"></b>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li><a href="UserManageAction.action">所有管理员</a></li>
-                                <li class="divider"></li>
-                                <li><a href="#">当前在线管理员</a></li>
-                                <li><a href="#">当前在线用户</a></li>
-                            </ul>
-                        </li>
+
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 工作流管理<b class="caret"></b>
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a href="UserManageAction.action">所有工作流</a></li>
+                                <li><a href="#">用车流程</a></li>
+                                <li><a href="#">报销流程</a></li>
+                                <li><a href="#">请假流程</a></li>
+
                             </ul>
                         </li>
                         <li class="dropdown">
@@ -75,7 +68,9 @@
                                 仓储管理<b class="caret"></b>
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a href="UserManageAction.action">所有仓库</a></li>
+                                <li><a href="#">所有仓库</a></li>
+                                <li><a href="#">A仓库</a></li>
+                                <li><a href="#">B仓库</a></li>
                             </ul>
                         </li>
                         <li class="dropdown">
@@ -83,7 +78,35 @@
                                 生产计划管理<b class="caret"></b>
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a href="UserManageAction.action">所有计划</a></li>
+                                <li><a href="#">所有计划</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                后勤管理<b class="caret"></b>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">后勤仓库</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                采购管理<b class="caret"></b>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">所有计划</a></li>
+                            </ul>
+                        </li>
+
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                用户管理<b class="caret"></b>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">所有管理员</a></li>
+                                <li class="divider"></li>
+                                <li><a href="#">当前在线管理员</a></li>
+                                <li><a href="#">当前在线用户</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -154,7 +177,7 @@
                 </ul>
             </div>
 
-            <!-- 用于修改信息 -->
+            <!-- 用于修改信息的模态对话框 -->
             <div class="modal" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
                 <div class="modal-dialog modal-sm" role="document">
                     <div class="modal-content">
@@ -219,9 +242,22 @@
         var table = document.getElementById("salaryTable");
         var old_length = table.rows.length;
         //删除旧的表格
-        for (var i=old_length-1; i>0; i--){
+        for (var i=old_length-1; i>=0; i--){
             table.deleteRow(i);
         }
+        //设置表头
+        var nhead = 0;
+        var ncell = 0;
+        var th = table.insertRow(nhead);
+        for (var a in informationTableHead){
+            var td = th.insertCell(ncell);
+            td.innerHTML = informationTableHead[a];
+            ncell++;
+        }
+        var td = th.insertCell(ncell);
+        td.innerHTML = "操作";
+        th.setAttribute("style", "font-weight:bold");
+        //设置表内容
         for (var i=0; i<employees.length; i++){
             var tr = table.insertRow(i+1);
             var ncell = 0;
@@ -230,8 +266,8 @@
                 td.innerHTML = employees[i][b];
                 ncell++;
             }
+            //最后增加操作项
             var td = tr.insertCell(ncell);
-
             td.innerHTML = "<button data-toggle=\"modal\" data-target=\"#exampleModal\" data-whatever=\"@getbootstrap\" onclick=\"createEmployeeInfoForm(this)\" value=\"" + (i+1) + "\" class=\"btn btn-success btn-sm\">修改</button>";
         }
     }
@@ -247,6 +283,7 @@
         var cellsIndex = 0;
         for (var a in informationTableHead){
             var label = document.createElement("label");
+
             label.setAttribute("for", informationTableHead[a]);
             label.setAttribute("class", "control-label");
             label.innerHTML = informationTableHead[a];
@@ -255,6 +292,9 @@
             input.setAttribute("class", "form-control");
             input.setAttribute("id", informationTableHead[a]);
             input.setAttribute("value", table.rows[rowsIndex].cells[cellsIndex].innerHTML);
+            if (informationTableHead[a] == "EID" || informationTableHead[a] == "eid"){
+                input.setAttribute("disabled", "disabled");
+            }
             formContent.appendChild(label);
             formContent.appendChild(input);
             cellsIndex++;

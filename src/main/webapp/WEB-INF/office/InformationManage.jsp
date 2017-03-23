@@ -52,23 +52,16 @@
                             </ul>
 
                         </li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                用户管理<b class="caret"></b>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li><a href="UserManageAction.action">所有管理员</a></li>
-                                <li class="divider"></li>
-                                <li><a href="#">当前在线管理员</a></li>
-                                <li><a href="#">当前在线用户</a></li>
-                            </ul>
-                        </li>
+
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 工作流管理<b class="caret"></b>
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a href="UserManageAction.action">所有工作流</a></li>
+                                <li><a href="#">用车流程</a></li>
+                                <li><a href="#">报销流程</a></li>
+                                <li><a href="#">请假流程</a></li>
+
                             </ul>
                         </li>
                         <li class="dropdown">
@@ -76,7 +69,9 @@
                                 仓储管理<b class="caret"></b>
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a href="UserManageAction.action">所有仓库</a></li>
+                                <li><a href="#">所有仓库</a></li>
+                                <li><a href="#">A仓库</a></li>
+                                <li><a href="#">B仓库</a></li>
                             </ul>
                         </li>
                         <li class="dropdown">
@@ -84,7 +79,35 @@
                                 生产计划管理<b class="caret"></b>
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a href="UserManageAction.action">所有计划</a></li>
+                                <li><a href="#">所有计划</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                后勤管理<b class="caret"></b>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">后勤仓库</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                采购管理<b class="caret"></b>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">所有计划</a></li>
+                            </ul>
+                        </li>
+
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                用户管理<b class="caret"></b>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">所有管理员</a></li>
+                                <li class="divider"></li>
+                                <li><a href="#">当前在线管理员</a></li>
+                                <li><a href="#">当前在线用户</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -115,7 +138,7 @@
             </div>
         <div class="col-md-10">
             <div class="table-responsive">
-                <div>你好，${sessionScope.user}</div>
+                <div style="text-align: right">你好，${sessionScope.user}</div>
                 <table id="infoTable" class="table table-bordered">
                     <caption>基本信息</caption>
                     <thead>
@@ -158,23 +181,64 @@
                     <li><a href="#">&raquo;</a></li>
                 </ul>
             </div>
+
+            <!-- 用于修改信息的模态对话框 -->
+            <div class="modal" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+                <div class="modal-dialog modal-sm" role="document">
+                    <div class="modal-content">
+
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="exampleModalLabel">New message</h4>
+                        </div>
+
+                        <div class="modal-body">
+                            <form id="EmployeeInfoForm">
+                                <div id="EmployeeInfoFormDiv" class="form-group">
+                                </div>
+                            </form>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button id="saveModificationBtn" onclick="saveModification()" type="button" class="btn btn-primary" data-dismiss="modal">保存</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
         </div>
 
     </div>
 </div>
 <script type="text/javascript">
-    var informationTableHead =[
-
-    ];
+    var informationTableHead ={
+        eid:"EID", name:"姓名", sex:"性别", department:"部门", position:"职务", identification :"身份证号", hiredate:"入职日期"
+    };
     var employees = [
     {eid:"001", name:"巩涛", sex:"男", department:"经理办", position:"班长", identification :"370783198708256132", hiredate:"2013-08"},
     {eid:"002", name:"张百城", sex:"男", department:"车间", position:"操作工", identification :"370783199408256132", hiredate:"2015-08"}];
     function createTable() {
         var table = document.getElementById("infoTable");
         var old_length = table.rows.length;
-        for (var i=old_length-1; i>0; i--){
+        //删除旧的表格
+        for (var i=old_length-1; i>=0; i--){
             table.deleteRow(i);
         }
+        //设置表头
+        var nhead = 0;
+        var ncell = 0;
+        var th = table.insertRow(nhead);
+        for (var a in informationTableHead){
+            var td = th.insertCell(ncell);
+            td.innerHTML = informationTableHead[a];
+            ncell++;
+        }
+        var td = th.insertCell(ncell);
+        td.innerHTML = "操作";
+        th.setAttribute("style", "font-weight:bold");
+        //设置表内容
         for (var i=0; i<employees.length; i++){
             var tr = table.insertRow(i+1);
             var ncell = 0;
@@ -183,8 +247,56 @@
                 td.innerHTML = employees[i][b];
                 ncell++;
             }
+            //var td = tr.insertCell(ncell);
+            //td.innerHTML = "<button id=\"button" + (i+1) +"\" class=\"btn btn-success\">修改</button>";
+            //最后增加操作项
             var td = tr.insertCell(ncell);
-            td.innerHTML = "<button id=\"button" + (i+1) +"\" class=\"btn btn-success\">修改</button>";
+            td.innerHTML = "<button data-toggle=\"modal\" data-target=\"#exampleModal\" data-whatever=\"@getbootstrap\" onclick=\"createEmployeeInfoForm(this)\" value=\"" + (i+1) + "\" class=\"btn btn-success btn-sm\">修改</button>";
+
+        }
+    }
+    function createEmployeeInfoForm(target) {
+        var rowsIndex = target.value;
+        var table = document.getElementById("infoTable");
+        var formContent = document.getElementById("EmployeeInfoFormDiv");
+        var saveBtn = document.getElementById("saveModificationBtn");
+        saveBtn.value = rowsIndex;
+        //先清空旧有元素
+        formContent.innerHTML = "";
+
+        var cellsIndex = 0;
+        for (var a in informationTableHead){
+            var label = document.createElement("label");
+
+            label.setAttribute("for", informationTableHead[a]);
+            label.setAttribute("class", "control-label");
+            label.innerHTML = informationTableHead[a];
+            var input = document.createElement("input");
+            input.setAttribute("type", "text");
+            input.setAttribute("class", "form-control");
+            input.setAttribute("id", informationTableHead[a]);
+            input.setAttribute("value", table.rows[rowsIndex].cells[cellsIndex].innerHTML);
+            if (informationTableHead[a] == "EID" || informationTableHead[a] == "eid"){
+                input.setAttribute("disabled", "disabled");
+            }
+            formContent.appendChild(label);
+            formContent.appendChild(input);
+            cellsIndex++;
+        }
+
+
+    }
+    //保存修改
+    function saveModification() {
+        var table = document.getElementById("infoTable");
+        var formContent = document.getElementById("EmployeeInfoFormDiv");
+        var saveBtn = document.getElementById("saveModificationBtn");
+        var content = formContent.getElementsByTagName("input");
+        var rowsIndex = saveBtn.value;
+        var n = 0;
+        for (var a in content){
+            table.rows[rowsIndex].cells[n].innerHTML = content[n].value;
+            n++;
         }
     }
 </script>
