@@ -38,6 +38,8 @@
                                 <li><a href="#">新增员工</a></li>
                                 <li><a href="#">删除员工</a></li>
                                 <li><a href="#">部门调动</a></li>
+                                <li class="divider"></li>
+                                <li><a href="#">档案管理</a></li>
                             </ul>
                         </li>
                         <li class="dropdown">
@@ -131,7 +133,7 @@
     <div class="row">
             <div class="col-md-2 leftside-bar btn-group-vertical" role="group" aria-label="...">
                 <button id="all" type="button"
-                        class="btn btn-primary btn-lg btn-block" onclick="createTable()">总览</button>
+                        class="btn btn-primary btn-lg btn-block" onclick="createTable('salaryTable')">总览</button>
                 <button id="office" type="button" class="btn btn-primary">经理办</button>
                 <button id="fd" type="button" class="btn btn-primary">财务部</button>
                 <button id="eed" type="button" class="btn btn-primary">设备工程部</button>
@@ -212,21 +214,26 @@
     </div>
 </div>
 <script type="text/javascript">
-    var currentDate = new Date();
-    var enquiryDate;
-    if (currentDate.getMonth() < 9){
-        enquiryDate = currentDate.getFullYear() + "-0" + (currentDate.getMonth()+1);
-    }
-    else {
-        enquiryDate = currentDate.getFullYear() + "-" + (currentDate.getMonth()+1);
-    }
-    document.getElementById("enquiryDateInput").value = enquiryDate;
-
     var informationTableHead ={
         eid:"EID", name:"姓名", department:"部门", date:"日期",
         salary:"应发工资", basicSalary:"基本工资", checkSalary:"考核工资", floatingSalary:"浮动工资",
         festivalSalary:"节日", holidaySalary:"假日", nightSalary:"夜班费", subsidySalary:"保健、补助",
         totalSalary:"合计"
+    };
+    var socialsecurityTableHead = {
+        eid:"EID", name:"姓名", basicSS:"缴费基数",
+        endowmentInsuranceCompany:"养老保险(单位)",
+        endowmentInsuranceIndividual:"养老保险(个人)",
+        medicalInsuranceCompany:"医疗保险(单位)",
+        medicalInsuranceIndividual:"医疗保险(个人)",
+        unemploymentInsuranceCompany:"失业保险(单位)",
+        unemploymentInsuranceIndividual:"失业保险(个人)",
+        employmentInjuryInsuranceCompany:"工伤保险(单位)",
+        employmentInjuryInsuranceIndividual:"工伤保险(个人)",
+        maternityInsuranceCompany:"生育保险(单位)",
+        maternityInsuranceIndividual:"生育保险(个人)",
+        totalCompany:"合计(单位)",
+        totalIndividual:"合计(个人)"
     };
     var employees = [
         {
@@ -242,7 +249,35 @@
             totalSalary:"20000"
         }
     ];
-    function createTable() {
+    var employeesSS = [
+        {
+            eid:"001", name:"巩涛", basicSS:"5000",
+            endowmentInsuranceCompany:"5000",
+            endowmentInsuranceIndividual:"5000",
+            medicalInsuranceCompany:"5000",
+            medicalInsuranceIndividual:"5000",
+            unemploymentInsuranceCompany:"5000",
+            unemploymentInsuranceIndividual:"5000",
+            employmentInjuryInsuranceCompany:"5000",
+            employmentInjuryInsuranceIndividual:"5000",
+            maternityInsuranceCompany:"5000",
+            maternityInsuranceIndividual:"5000",
+            totalCompany:"5000",
+            totalIndividual:"5000"
+        }
+    ];
+    var currentDate = new Date();
+    var enquiryDate;
+    if (currentDate.getMonth() < 9){
+        enquiryDate = currentDate.getFullYear() + "-0" + (currentDate.getMonth()+1);
+    }
+    else {
+        enquiryDate = currentDate.getFullYear() + "-" + (currentDate.getMonth()+1);
+    }
+    document.getElementById("enquiryDateInput").value = enquiryDate;
+
+
+    function createTable(tableID) {
         var table = document.getElementById("salaryTable");
         var old_length = table.rows.length;
         //删除旧的表格
@@ -272,14 +307,14 @@
             }
             //最后增加操作项
             var td = tr.insertCell(ncell);
-            td.innerHTML = "<button data-toggle=\"modal\" data-target=\"#exampleModal\" data-whatever=\"@getbootstrap\" onclick=\"createEmployeeInfoForm(this)\" value=\"" + (i+1) + "\" class=\"btn btn-success btn-sm\">修改</button>";
+            td.innerHTML = "<button data-toggle=\"modal\" data-target=\"#exampleModal\" data-whatever=\"@getbootstrap\" onclick=\"createEmployeeInfoForm(this,'salaryTable','EmployeeInfoFormDiv','saveModificationBtn')\" value=\"" + (i+1) + "\" class=\"btn btn-success btn-sm\">修改</button>";
         }
     }
-    function createEmployeeInfoForm(target) {
+    function createEmployeeInfoForm(target, tableId, formId, saveBtnId) {
         var rowsIndex = target.value;
-        var table = document.getElementById("salaryTable");
-        var formContent = document.getElementById("EmployeeInfoFormDiv");
-        var saveBtn = document.getElementById("saveModificationBtn");
+        var table = document.getElementById(tableId);
+        var formContent = document.getElementById(formId);
+        var saveBtn = document.getElementById(saveBtnId);
         saveBtn.value = rowsIndex;
         //先清空旧有元素
         formContent.innerHTML = "";
@@ -296,6 +331,7 @@
             input.setAttribute("class", "form-control");
             input.setAttribute("id", informationTableHead[a]);
             input.setAttribute("value", table.rows[rowsIndex].cells[cellsIndex].innerHTML);
+            //EID不可更改
             if (informationTableHead[a] == "EID" || informationTableHead[a] == "eid"){
                 input.setAttribute("disabled", "disabled");
             }

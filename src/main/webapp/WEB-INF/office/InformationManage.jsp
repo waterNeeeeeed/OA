@@ -39,6 +39,8 @@
                                 <li><a href="#">新增员工</a></li>
                                 <li><a href="#">删除员工</a></li>
                                 <li><a href="#">部门调动</a></li>
+                                <li class="divider"></li>
+                                <li><a href="#">档案管理</a></li>
                             </ul>
                         </li>
                         <li class="dropdown">
