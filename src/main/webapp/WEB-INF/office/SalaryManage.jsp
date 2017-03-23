@@ -51,6 +51,41 @@
                             </ul>
 
                         </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                用户管理<b class="caret"></b>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="UserManageAction.action">所有管理员</a></li>
+                                <li class="divider"></li>
+                                <li><a href="#">当前在线管理员</a></li>
+                                <li><a href="#">当前在线用户</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                工作流管理<b class="caret"></b>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="UserManageAction.action">所有工作流</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                仓储管理<b class="caret"></b>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="UserManageAction.action">所有仓库</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                生产计划管理<b class="caret"></b>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="UserManageAction.action">所有计划</a></li>
+                            </ul>
+                        </li>
                     </ul>
                 </div>
                 <div align="right">
@@ -85,7 +120,7 @@
 
                 <table id="salaryTable" class="table table-bordered">
                     <!-- <caption>工资组成</caption> -->
-                    <input type="month" style="text-align: center;margin: 6px"></input>
+                    <input id="enquiryDateInput" class="form-control" type="month" style="text-align: center"></input>
                     <thead>
                     <tr>
                         <th>EID</th>
@@ -105,50 +140,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td>001</td>
-                        <td>巩涛</td>
-                        <td>技术研发部</td>
-                        <td>2017/02</td>
-                        <td>20000</td>
-                        <td>20000</td>
-                        <td>20000</td>
-                        <td>20000</td>
-                        <td>1000</td>
-                        <td>1000</td>
-                        <td>1000</td>
-                        <td>200</td>
-                        <td>60000</td>
-                        <td>
-                            <button type="button" class="btn btn-primary btn-sm"
-                                    data-toggle="modal" data-target="#exampleModal"
-                                    data-whatever="@getbootstrap"
-                                    onclick="createEmployeeInfoForm(this)" value="1">
-                                修改</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>002</td>
-                        <td>张百城</td>
-                        <td>车间</td>
-                        <td>2017/02</td>
-                        <td>20000</td>
-                        <td>20000</td>
-                        <td>20000</td>
-                        <td>20000</td>
-                        <td>1000</td>
-                        <td>1000</td>
-                        <td>1000</td>
-                        <td>200</td>
-                        <td>60000</td>
-                        <td>
-                            <button type="button" class="btn btn-primary btn-sm"
-                                    data-toggle="modal" data-target="#exampleModal"
-                                    data-whatever="@getbootstrap"
-                                    onclick="createEmployeeInfoForm(this)" value="2">
-                                修改</button>
-                        </td>
-                    </tr>
+
                     </tbody>
                 </table>
                 <ul class="pagination">
@@ -193,6 +185,17 @@
     </div>
 </div>
 <script type="text/javascript">
+    var currentDate = new Date();
+    var enquiryDate;
+    if (currentDate.getMonth() < 9){
+        enquiryDate = currentDate.getFullYear() + "-0" + (currentDate.getMonth()+1);
+    }
+    else {
+        enquiryDate = currentDate.getFullYear() + "-" + (currentDate.getMonth()+1);
+    }
+    document.getElementById("enquiryDateInput").value = enquiryDate;
+    alert(enquiryDate);
+
     var informationTableHead ={
         eid:"EID", name:"姓名", department:"部门", date:"日期",
         salary:"应发工资", basicSalary:"基本工资", checkSalary:"考核工资", floatingSalary:"浮动工资",

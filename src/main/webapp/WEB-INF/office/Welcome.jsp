@@ -51,6 +51,41 @@
                             </ul>
 
                         </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                用户管理<b class="caret"></b>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="UserManageAction.action">所有管理员</a></li>
+                                <li class="divider"></li>
+                                <li><a href="#">当前在线管理员</a></li>
+                                <li><a href="#">当前在线用户</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                工作流管理<b class="caret"></b>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="UserManageAction.action">所有工作流</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                仓储管理<b class="caret"></b>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="UserManageAction.action">所有仓库</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                生产计划管理<b class="caret"></b>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="UserManageAction.action">所有计划</a></li>
+                            </ul>
+                        </li>
                     </ul>
                 </div>
                 <div align="right">
