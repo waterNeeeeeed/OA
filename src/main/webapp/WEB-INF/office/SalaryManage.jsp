@@ -49,7 +49,7 @@
                             <ul class="dropdown-menu">
                                 <li><a href="SalaryManageAction.action">工资组成</a></li>
                                 <li class="divider"></li>
-                                <li><a href="#">社保</a></li>
+                                <li><a onclick="createTable('salaryTable', socialsecurityTableHead, employeesSS, 'socialsecurityTableHead')">社保</a></li>
                                 <li><a href="#">公积金</a></li>
                                 <li><a href="#">所得税</a></li>
                                 <li class="divider"></li>
@@ -133,7 +133,8 @@
     <div class="row">
             <div class="col-md-2 leftside-bar btn-group-vertical" role="group" aria-label="...">
                 <button id="all" type="button"
-                        class="btn btn-primary btn-lg btn-block" onclick="createTable('salaryTable')">总览</button>
+                        class="btn btn-primary btn-lg btn-block"
+                        onclick="createTable('salaryTable', informationTableHead, employees,'informationTableHead')">总览</button>
                 <button id="office" type="button" class="btn btn-primary">经理办</button>
                 <button id="fd" type="button" class="btn btn-primary">财务部</button>
                 <button id="eed" type="button" class="btn btn-primary">设备工程部</button>
@@ -201,7 +202,9 @@
                         </div>
 
                         <div class="modal-footer">
-                            <button id="saveModificationBtn" onclick="saveModification()" type="button" class="btn btn-primary" data-dismiss="modal">保存</button>
+                            <button id="saveModificationBtn"
+                                    onclick="saveModification('salaryTable', 'EmployeeInfoFormDiv', 'saveModificationBtn')"
+                                    type="button" class="btn btn-primary" data-dismiss="modal">保存</button>
                             <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
                         </div>
 
@@ -277,8 +280,8 @@
     document.getElementById("enquiryDateInput").value = enquiryDate;
 
 
-    function createTable(tableID) {
-        var table = document.getElementById("salaryTable");
+    function createTable(tableID, tableHead, tableContent, tableHeadName) {
+        var table = document.getElementById(tableID);
         var old_length = table.rows.length;
         //删除旧的表格
         for (var i=old_length-1; i>=0; i--){
@@ -288,29 +291,29 @@
         var nhead = 0;
         var ncell = 0;
         var th = table.insertRow(nhead);
-        for (var a in informationTableHead){
+        for (var a in tableHead){
             var td = th.insertCell(ncell);
-            td.innerHTML = informationTableHead[a];
+            td.innerHTML = tableHead[a];
             ncell++;
         }
         var td = th.insertCell(ncell);
         td.innerHTML = "操作";
         th.setAttribute("style", "font-weight:bold");
         //设置表内容
-        for (var i=0; i<employees.length; i++){
+        for (var i=0; i<tableContent.length; i++){
             var tr = table.insertRow(i+1);
             var ncell = 0;
-            for (var b in employees[i]){
+            for (var b in tableContent[i]){
                 var td = tr.insertCell(ncell);
-                td.innerHTML = employees[i][b];
+                td.innerHTML = tableContent[i][b];
                 ncell++;
             }
             //最后增加操作项
             var td = tr.insertCell(ncell);
-            td.innerHTML = "<button data-toggle=\"modal\" data-target=\"#exampleModal\" data-whatever=\"@getbootstrap\" onclick=\"createEmployeeInfoForm(this,'salaryTable','EmployeeInfoFormDiv','saveModificationBtn')\" value=\"" + (i+1) + "\" class=\"btn btn-success btn-sm\">修改</button>";
+            td.innerHTML = "<button data-toggle=\"modal\" data-target=\"#exampleModal\" data-whatever=\"@getbootstrap\" onclick=\"createEmployeeInfoForm(this,'salaryTable','EmployeeInfoFormDiv','saveModificationBtn'," +tableHeadName +")\" value=\"" + (i+1) + "\" class=\"btn btn-success btn-sm\">修改</button>";
         }
     }
-    function createEmployeeInfoForm(target, tableId, formId, saveBtnId) {
+    function createEmployeeInfoForm(target, tableId, formId, saveBtnId, tableHead) {
         var rowsIndex = target.value;
         var table = document.getElementById(tableId);
         var formContent = document.getElementById(formId);
@@ -320,19 +323,19 @@
         formContent.innerHTML = "";
 
         var cellsIndex = 0;
-        for (var a in informationTableHead){
+        for (var a in tableHead){
             var label = document.createElement("label");
 
-            label.setAttribute("for", informationTableHead[a]);
+            label.setAttribute("for", tableHead[a]);
             label.setAttribute("class", "control-label");
-            label.innerHTML = informationTableHead[a];
+            label.innerHTML = tableHead[a];
             var input = document.createElement("input");
             input.setAttribute("type", "text");
             input.setAttribute("class", "form-control");
-            input.setAttribute("id", informationTableHead[a]);
+            input.setAttribute("id", tableHead[a]);
             input.setAttribute("value", table.rows[rowsIndex].cells[cellsIndex].innerHTML);
             //EID不可更改
-            if (informationTableHead[a] == "EID" || informationTableHead[a] == "eid"){
+            if (tableHead[a] == "EID" || tableHead[a] == "eid"){
                 input.setAttribute("disabled", "disabled");
             }
             formContent.appendChild(label);
@@ -343,10 +346,10 @@
 
     }
     //保存修改
-    function saveModification() {
-        var table = document.getElementById("salaryTable");
-        var formContent = document.getElementById("EmployeeInfoFormDiv");
-        var saveBtn = document.getElementById("saveModificationBtn");
+    function saveModification(tableId, formId, saveBtnId) {
+        var table = document.getElementById(tableId);
+        var formContent = document.getElementById(formId);
+        var saveBtn = document.getElementById(saveBtnId);
         var content = formContent.getElementsByTagName("input");
         var rowsIndex = saveBtn.value;
         var n = 0;
