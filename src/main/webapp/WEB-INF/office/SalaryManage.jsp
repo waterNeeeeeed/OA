@@ -34,6 +34,10 @@
                             </a>
                             <ul class="dropdown-menu">
                                 <li><a href="InformationManageAction.action">基本信息</a> </li>
+                                <li class="divider"></li>
+                                <li><a href="#">新增员工</a></li>
+                                <li><a href="#">删除员工</a></li>
+                                <li><a href="#">部门调动</a></li>
                             </ul>
                         </li>
                         <li class="dropdown">
@@ -126,15 +130,15 @@
 
     <div class="row">
             <div class="col-md-2 leftside-bar btn-group-vertical" role="group" aria-label="...">
-                <button id="salaryAll" type="button"
+                <button id="all" type="button"
                         class="btn btn-primary btn-lg btn-block" onclick="createTable()">总览</button>
-                <button type="button" class="btn btn-primary">经理办</button>
-                <button type="button" class="btn btn-primary">财务部</button>
-                <button type="button" class="btn btn-primary">设备工程部</button>
-                <button type="button" class="btn btn-primary">公用工程部</button>
-                <button type="button" class="btn btn-primary">生产部</button>
-                <button type="button" class="btn btn-primary">车间</button>
-                <button type="button" class="btn btn-primary">临时用工</button>
+                <button id="office" type="button" class="btn btn-primary">经理办</button>
+                <button id="fd" type="button" class="btn btn-primary">财务部</button>
+                <button id="eed" type="button" class="btn btn-primary">设备工程部</button>
+                <button id="pwd" type="button" class="btn btn-primary">公用工程部</button>
+                <button id="pd" type="button" class="btn btn-primary">生产部</button>
+                <button id="workshop" type="button" class="btn btn-primary">车间</button>
+                <button id="temp" type="button" class="btn btn-primary">临时用工</button>
             </div>
         <div class="col-md-10">
             <div style="text-align: right">你好，${sessionScope.user}</div>
