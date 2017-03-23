@@ -194,7 +194,6 @@
         enquiryDate = currentDate.getFullYear() + "-" + (currentDate.getMonth()+1);
     }
     document.getElementById("enquiryDateInput").value = enquiryDate;
-    alert(enquiryDate);
 
     var informationTableHead ={
         eid:"EID", name:"姓名", department:"部门", date:"日期",
