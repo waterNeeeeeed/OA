@@ -21,7 +21,7 @@
     <div>
         <nav class="navbar navbar-default navbar-fixed-top">
             <div class="container">
-                <h1 style="color: #080808;font-weight: bold">
+                <h1 style="color: #8c8c8c;font-weight: bold">
                     江岳科技
                     <!--
                     <b style="font-size: 16px;font-weight: normal">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;OA办公系统</b>

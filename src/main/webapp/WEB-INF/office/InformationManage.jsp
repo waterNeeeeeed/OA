@@ -136,7 +136,8 @@
             <div class="col-md-2 leftside-bar btn-group-vertical" role="group" aria-label="...">
                 <button id="all" type="button"
                         class="btn btn-primary btn-lg btn-block"
-                        onclick="createTable(document, 'infoTable', informationTableHead, employeesInfo, 'informationTableHead')">总览</button>
+                        onclick="createTable(document, 'infoTable', informationTableHead, employeesInfo, 'informationTableHead')">
+                    <span class="glyphicon glyphicon-home" aria-hidden="true"></span>&nbsp;&nbsp;总览</button>
                 <button id="office" type="button" class="btn btn-primary">经理办</button>
                 <button id="fd" type="button" class="btn btn-primary">财务部</button>
                 <button id="eed" type="button" class="btn btn-primary">设备工程部</button>

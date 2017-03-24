@@ -136,7 +136,8 @@
             <div class="col-md-2 leftside-bar btn-group-vertical" role="group" aria-label="...">
                 <button id="all" type="button"
                         class="btn btn-primary btn-lg btn-block"
-                        onclick="createTable(document, 'salaryTable', salaryTableHead, employeesSalary,'salaryTableHead')">总览</button>
+                        onclick="createTable(document, 'salaryTable', salaryTableHead, employeesSalary,'salaryTableHead')">
+                    <span class="glyphicon glyphicon-home" aria-hidden="true"></span>&nbsp;&nbsp;总览</button>
                 <button id="office" type="button" class="btn btn-primary">经理办</button>
                 <button id="fd" type="button" class="btn btn-primary">财务部</button>
                 <button id="eed" type="button" class="btn btn-primary">设备工程部</button>
@@ -147,19 +148,23 @@
             </div>
         <div class="col-md-10">
             <div style="text-align: right">你好，${sessionScope.user}</div>
-
-            <div style="float:left;">
-                <input id="enquiryDateInput" class="form-control" type="month" style="text-align: center"></input>
-            </div>
-            <div style="float:left;">
-                <select class="form-control">
-                    <option></option>
-                    <option onclick="createTable(document, 'salaryTable', salaryTableHead, employeesSalary,'salaryTableHead')">工资组成</option>
-                    <option onclick="createTable(document, 'salaryTable', socialsecurityTableHead, employeesSS, 'socialsecurityTableHead')">社会保险</option>
-                    <option>公积金</option>
-                    <option>所得税</option>
-                    <option>请假</option>
-                </select>
+            <div>
+                <div class="btn-group" style="float:left;margin: 10px;">
+                    <button id="selectTypeBtn" type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        选择类型<span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a onclick="selectType(this)">工资组成</a></li>
+                        <li><a onclick="selectType(this)">社会保险</a></li>
+                        <li><a href="#">公积金</a></li>
+                        <li><a href="#">所得税</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="#">请假</a></li>
+                    </ul>
+                </div>
+                <div style="float:left;margin: 10px;">
+                    <input id="enquiryDateInput" class="form-control" type="month" style="text-align: center"></input>
+                </div>
             </div>
 
             <div><!-- class="table-responsive" -->
@@ -231,6 +236,18 @@
     }
     document.getElementById("enquiryDateInput").value = enquiryDate;
 
+    function selectType(target){
+        var typeContent = document.getElementById("selectTypeBtn");
+        typeContent.innerHTML = target.innerHTML + "<span class=\"caret\">";
+        if (target.innerHTML == "工资组成")
+        {
+            createTable(document, 'salaryTable', salaryTableHead, employeesSalary,'salaryTableHead');
+        }else if (target.innerHTML == "社会保险")
+        {
+            createTable(document, 'salaryTable', socialsecurityTableHead, employeesSS, 'socialsecurityTableHead');
+        }
+
+    }
 
 </script>
 </body>
