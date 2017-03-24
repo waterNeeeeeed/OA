@@ -1,6 +1,58 @@
 /**
  * Created by lenovo on 2017/3/24.
  */
+var salaryTableHead ={
+    eid:"EID", name:"姓名", department:"部门", date:"日期",
+    salary:"应发工资", basicSalary:"基本工资", checkSalary:"考核工资", floatingSalary:"浮动工资",
+    festivalSalary:"节日", holidaySalary:"假日", nightSalary:"夜班费", subsidySalary:"保健、补助",
+    totalSalary:"合计"
+};
+var socialsecurityTableHead = {
+    eid:"EID", name:"姓名", basicSS:"缴费基数",
+    endowmentInsuranceCompany:"养老保险(单位)",
+    endowmentInsuranceIndividual:"养老保险(个人)",
+    medicalInsuranceCompany:"医疗保险(单位)",
+    medicalInsuranceIndividual:"医疗保险(个人)",
+    unemploymentInsuranceCompany:"失业保险(单位)",
+    unemploymentInsuranceIndividual:"失业保险(个人)",
+    employmentInjuryInsuranceCompany:"工伤保险(单位)",
+    employmentInjuryInsuranceIndividual:"工伤保险(个人)",
+    maternityInsuranceCompany:"生育保险(单位)",
+    maternityInsuranceIndividual:"生育保险(个人)",
+    totalCompany:"合计(单位)",
+    totalIndividual:"合计(个人)"
+};
+var employeesSalary = [
+    {
+        eid:"001", name:"巩涛", department:"经理办", date:"2017-02",
+        salary:"20000", basicSalary:"5000", checkSalary:"5000", floatingSalary:"5000",
+        festivalSalary:"200", holidaySalary:"200", nightSalary:"200", subsidySalary:"200",
+        totalSalary:"20000"
+    },
+    {
+        eid:"002", name:"张百成", department:"车间", date:"2017-02",
+        salary:"20000", basicSalary:"5000", checkSalary:"5000", floatingSalary:"5000",
+        festivalSalary:"200", holidaySalary:"200", nightSalary:"200", subsidySalary:"200",
+        totalSalary:"20000"
+    }
+];
+var employeesSS = [
+    {
+        eid:"001", name:"巩涛", basicSS:"5000",
+        endowmentInsuranceCompany:"5000",
+        endowmentInsuranceIndividual:"5000",
+        medicalInsuranceCompany:"5000",
+        medicalInsuranceIndividual:"5000",
+        unemploymentInsuranceCompany:"5000",
+        unemploymentInsuranceIndividual:"5000",
+        employmentInjuryInsuranceCompany:"5000",
+        employmentInjuryInsuranceIndividual:"5000",
+        maternityInsuranceCompany:"5000",
+        maternityInsuranceIndividual:"5000",
+        totalCompany:"5000",
+        totalIndividual:"5000"
+    }
+];
 var informationTableHead ={
     eid:"EID", name:"姓名", sex:"性别", department:"部门", position:"职务", identification :"身份证号", hiredate:"入职日期"
 };
