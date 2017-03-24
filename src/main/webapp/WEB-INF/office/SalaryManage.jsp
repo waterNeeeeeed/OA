@@ -134,7 +134,7 @@
             <div class="col-md-2 leftside-bar btn-group-vertical" role="group" aria-label="...">
                 <button id="all" type="button"
                         class="btn btn-primary btn-lg btn-block"
-                        onclick="createTable('salaryTable', salaryTableHead, employees,'salaryTableHead')">总览</button>
+                        onclick="createTable('salaryTable', salaryTableHead, employeesSalary,'salaryTableHead')">总览</button>
                 <button id="office" type="button" class="btn btn-primary">经理办</button>
                 <button id="fd" type="button" class="btn btn-primary">财务部</button>
                 <button id="eed" type="button" class="btn btn-primary">设备工程部</button>
@@ -238,7 +238,7 @@
         totalCompany:"合计(单位)",
         totalIndividual:"合计(个人)"
     };
-    var employees = [
+    var employeesSalary = [
         {
             eid:"001", name:"巩涛", department:"经理办", date:"2017-02",
             salary:"20000", basicSalary:"5000", checkSalary:"5000", floatingSalary:"5000",

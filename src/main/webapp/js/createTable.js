@@ -4,7 +4,7 @@
 var informationTableHead ={
     eid:"EID", name:"姓名", sex:"性别", department:"部门", position:"职务", identification :"身份证号", hiredate:"入职日期"
 };
-var employees = [
+var employeesInfo = [
     {eid:"001", name:"巩涛", sex:"男", department:"经理办", position:"班长", identification :"370783198708256132", hiredate:"2013-08"},
     {eid:"002", name:"张百城", sex:"男", department:"车间", position:"操作工", identification :"370783199408256132", hiredate:"2015-08"}];
 
