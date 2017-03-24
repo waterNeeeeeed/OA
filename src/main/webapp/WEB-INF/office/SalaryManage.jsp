@@ -49,9 +49,9 @@
                                 薪资管理<b class="caret"></b>
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a href="SalaryManageAction.action">工资组成</a></li>
+                                <li><a href="SalaryManageAction.action?salaryType=component">工资组成</a></li>
                                 <li class="divider"></li>
-                                <li><a onclick="createTable(document, 'salaryTable', socialsecurityTableHead, employeesSS, 'socialsecurityTableHead')">社保</a></li>
+                                <li><a href="SalaryManageAction.action?salaryType=socialsecurity">社保</a></li>
                                 <li><a href="#">公积金</a></li>
                                 <li><a href="#">所得税</a></li>
                                 <li class="divider"></li>
@@ -147,21 +147,8 @@
                 <button id="temp" type="button" class="btn btn-primary">临时用工</button>
             </div>
         <div class="col-md-10">
-            <div style="text-align: right">你好，${sessionScope.user}</div>
+            <div style="text-align: right">你好，${sessionScope.user}#${sessionScope.salaryType}</div>
             <div>
-                <div class="btn-group" style="float:left;margin: 10px;">
-                    <button id="selectTypeBtn" type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        选择类型<span class="caret"></span>
-                    </button>
-                    <ul class="dropdown-menu">
-                        <li><a onclick="selectType(this)">工资组成</a></li>
-                        <li><a onclick="selectType(this)">社会保险</a></li>
-                        <li><a href="#">公积金</a></li>
-                        <li><a href="#">所得税</a></li>
-                        <li role="separator" class="divider"></li>
-                        <li><a href="#">请假</a></li>
-                    </ul>
-                </div>
                 <div style="float:left;margin: 10px;">
                     <input id="enquiryDateInput" class="form-control" type="month" style="text-align: center"></input>
                 </div>
@@ -236,17 +223,11 @@
     }
     document.getElementById("enquiryDateInput").value = enquiryDate;
 
-    function selectType(target){
-        var typeContent = document.getElementById("selectTypeBtn");
-        typeContent.innerHTML = target.innerHTML + "<span class=\"caret\">";
-        if (target.innerHTML == "工资组成")
-        {
-            createTable(document, 'salaryTable', salaryTableHead, employeesSalary,'salaryTableHead');
-        }else if (target.innerHTML == "社会保险")
-        {
-            createTable(document, 'salaryTable', socialsecurityTableHead, employeesSS, 'socialsecurityTableHead');
-        }
 
+    if ("${sessionScope.salaryType}" == "component"){
+        createTable(document, 'salaryTable', salaryTableHead, employeesSalary,'salaryTableHead');
+    }else if ("${sessionScope.salaryType}" == "socialsecurity") {
+        createTable(document, 'salaryTable', socialsecurityTableHead, employeesSS, 'socialsecurityTableHead');
     }
 
 </script>
