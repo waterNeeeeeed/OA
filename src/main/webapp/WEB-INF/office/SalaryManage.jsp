@@ -134,7 +134,7 @@
             <div class="col-md-2 leftside-bar btn-group-vertical" role="group" aria-label="...">
                 <button id="all" type="button"
                         class="btn btn-primary btn-lg btn-block"
-                        onclick="createTable('salaryTable', informationTableHead, employees,'informationTableHead')">总览</button>
+                        onclick="createTable('salaryTable', salaryTableHead, employees,'salaryTableHead')">总览</button>
                 <button id="office" type="button" class="btn btn-primary">经理办</button>
                 <button id="fd" type="button" class="btn btn-primary">财务部</button>
                 <button id="eed" type="button" class="btn btn-primary">设备工程部</button>
@@ -217,7 +217,7 @@
     </div>
 </div>
 <script type="text/javascript">
-    var informationTableHead ={
+    var salaryTableHead ={
         eid:"EID", name:"姓名", department:"部门", date:"日期",
         salary:"应发工资", basicSalary:"基本工资", checkSalary:"考核工资", floatingSalary:"浮动工资",
         festivalSalary:"节日", holidaySalary:"假日", nightSalary:"夜班费", subsidySalary:"保健、补助",
@@ -310,7 +310,7 @@
             }
             //最后增加操作项
             var td = tr.insertCell(ncell);
-            td.innerHTML = "<button data-toggle=\"modal\" data-target=\"#exampleModal\" data-whatever=\"@getbootstrap\" onclick=\"createEmployeeInfoForm(this,'salaryTable','EmployeeInfoFormDiv','saveModificationBtn'," +tableHeadName +")\" value=\"" + (i+1) + "\" class=\"btn btn-success btn-sm\">修改</button>";
+            td.innerHTML = "<button data-toggle=\"modal\" data-target=\"#exampleModal\" data-whatever=\"@getbootstrap\" onclick=\"createEmployeeInfoForm(this,'" + tableID + "','EmployeeInfoFormDiv','saveModificationBtn'," +tableHeadName +")\" value=\"" + (i+1) + "\" class=\"btn btn-success btn-sm\">修改</button>";
         }
     }
     function createEmployeeInfoForm(target, tableId, formId, saveBtnId, tableHead) {
