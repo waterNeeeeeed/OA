@@ -148,30 +148,32 @@
         <div class="col-md-10">
             <div style="text-align: right">你好，${sessionScope.user}</div>
 
+            <div style="float:left;">
+                <input id="enquiryDateInput" class="form-control" type="month" style="text-align: center"></input>
+            </div>
+            <div style="float:left;">
+                <select class="form-control">
+                    <option></option>
+                    <option onclick="createTable(document, 'salaryTable', salaryTableHead, employeesSalary,'salaryTableHead')">工资组成</option>
+                    <option onclick="createTable(document, 'salaryTable', socialsecurityTableHead, employeesSS, 'socialsecurityTableHead')">社会保险</option>
+                    <option>公积金</option>
+                    <option>所得税</option>
+                    <option>请假</option>
+                </select>
+            </div>
+
             <div><!-- class="table-responsive" -->
                 <table id="salaryTable" class="table table-bordered">
                     <!-- <caption>工资组成</caption> -->
-                    <input id="enquiryDateInput" class="form-control" type="month" style="text-align: center"></input>
+
+
+
                     <thead>
                     <tr>
-                        <th>EID</th>
-                        <th>姓名</th>
-                        <th>部门</th>
-                        <th>日期</th>
-                        <th>应发工资</th>
-                        <th>基本工资</th>
-                        <th>考核工资</th>
-                        <th>浮动工资</th>
-                        <th>节日</th>
-                        <th>假日</th>
-                        <th>夜班费</th>
-                        <th>保健、补助</th>
-                        <th>合计</th>
-                        <th>操作</th>
+                        <th>请选择日期</th>
                     </tr>
                     </thead>
                     <tbody>
-
                     </tbody>
                 </table>
                 <ul class="pagination">
