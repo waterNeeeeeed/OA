@@ -36,6 +36,14 @@ var employeesSalary = [
         totalSalary:"20000"
     }
 ];
+var employeesSalaryOffice =[
+    {
+        eid:"001", name:"巩涛", department:"经理办", date:"2017-02",
+        salary:"20000", basicSalary:"5000", checkSalary:"5000", floatingSalary:"5000",
+        festivalSalary:"200", holidaySalary:"200", nightSalary:"200", subsidySalary:"200",
+        totalSalary:"20000"
+    }
+];
 var employeesSS = [
     {
         eid:"001", name:"巩涛", department:"经理办", date:"2017-02", basicSS:"5000",
@@ -82,13 +90,16 @@ var employeesSSOffice = [{
         totalCompany:"5000",
         totalIndividual:"5000"
     }];
+
 var informationTableHead ={
     eid:"EID", name:"姓名", sex:"性别", department:"部门", position:"职务", identification :"身份证号", hiredate:"入职日期"
 };
 var employeesInfo = [
     {eid:"001", name:"巩涛", sex:"男", department:"经理办", position:"班长", identification :"370783198708256132", hiredate:"2013-08"},
     {eid:"002", name:"张百城", sex:"男", department:"车间", position:"操作工", identification :"370783199408256132", hiredate:"2015-08"}];
-
+var employeesInfoOffice = [
+    {eid:"001", name:"巩涛", sex:"男", department:"经理办", position:"班长", identification :"370783198708256132", hiredate:"2013-08"}
+];
 function createTable(document, tableID, tableHead, tableContent, tableHeadName) {
     var table = document.getElementById(tableID);
     var old_length = table.rows.length;

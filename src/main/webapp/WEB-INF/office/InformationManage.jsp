@@ -136,9 +136,10 @@
             <div class="col-md-2 leftside-bar btn-group-vertical" role="group" aria-label="...">
                 <button id="all" type="button"
                         class="btn btn-primary btn-lg btn-block"
-                        onclick="createTable(document, 'infoTable', informationTableHead, employeesInfo, 'informationTableHead')">
+                        onclick="selectDepartmentToCreateTable('all', '${sessionScope.infoType}');">
                     <span class="glyphicon glyphicon-home" aria-hidden="true"></span>&nbsp;&nbsp;总览</button>
-                <button id="office" type="button" class="btn btn-primary">经理办</button>
+                <button id="office" type="button" class="btn btn-primary"
+                        onclick="selectDepartmentToCreateTable('office', '${sessionScope.infoType}');">经理办</button>
                 <button id="fd" type="button" class="btn btn-primary">财务部</button>
                 <button id="eed" type="button" class="btn btn-primary">设备工程部</button>
                 <button id="pwd" type="button" class="btn btn-primary">公用工程部</button>
@@ -227,6 +228,16 @@
         setCaption(document, "基本信息")
         createTable(document, 'infoTable', informationTableHead, employeesInfo, 'informationTableHead');
     };
+    function selectDepartmentToCreateTable(department, infoType) {
+        //总览按钮
+        if (infoType == "basic"){
+            if (department == "all") {
+                createTable(document, 'infoTable', informationTableHead, employeesInfo, 'informationTableHead');
+            }else if (department == "office"){
+                createTable(document, 'infoTable', informationTableHead, employeesInfoOffice, 'informationTableHead');
+            }
+        }
+    }
 </script>
 </body>
 

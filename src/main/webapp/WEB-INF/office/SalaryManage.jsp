@@ -232,16 +232,18 @@
     }
     function selectDepartmentToCreateTable(department, salaryType) {
         //总览按钮
-        if (department == "all"){
-            if (salaryType == "component"){
+        if (salaryType == "component"){
+            if (department == "all") {
                 createTable(document, 'salaryTable', salaryTableHead, employeesSalary,'salaryTableHead');
-            }else if (salaryType == "socialsecurity")
+            }else if (department == "office"){
+                createTable(document, 'salaryTable', salaryTableHead, employeesSalaryOffice,'salaryTableHead');
+            }
+        }else if (salaryType == "socialsecurity"){
+            if (department == "all"){
                 createTable(document, 'salaryTable', socialsecurityTableHead, employeesSS, 'socialsecurityTableHead');
-        }else if (department == "office"){
-            if (salaryType == "component"){
-                createTable(document, 'salaryTable', salaryTableHead, employeesSalary,'salaryTableHead');
-            }else if (salaryType == "socialsecurity")
+            }else if (department == "office"){
                 createTable(document, 'salaryTable', socialsecurityTableHead, employeesSSOffice, 'socialsecurityTableHead');
+            }
         }
     }
 
