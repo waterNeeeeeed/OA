@@ -8,7 +8,7 @@ var salaryTableHead ={
     totalSalary:"合计"
 };
 var socialsecurityTableHead = {
-    eid:"EID", name:"姓名", basicSS:"缴费基数",
+    eid:"EID", name:"姓名", department:"部门", date:"日期", basicSS:"缴费基数",
     endowmentInsuranceCompany:"养老保险(单位)",
     endowmentInsuranceIndividual:"养老保险(个人)",
     medicalInsuranceCompany:"医疗保险(单位)",
@@ -38,7 +38,21 @@ var employeesSalary = [
 ];
 var employeesSS = [
     {
-        eid:"001", name:"巩涛", basicSS:"5000",
+        eid:"001", name:"巩涛", department:"经理办", date:"2017-02", basicSS:"5000",
+        endowmentInsuranceCompany:"5000",
+        endowmentInsuranceIndividual:"5000",
+        medicalInsuranceCompany:"5000",
+        medicalInsuranceIndividual:"5000",
+        unemploymentInsuranceCompany:"5000",
+        unemploymentInsuranceIndividual:"5000",
+        employmentInjuryInsuranceCompany:"5000",
+        employmentInjuryInsuranceIndividual:"5000",
+        maternityInsuranceCompany:"5000",
+        maternityInsuranceIndividual:"5000",
+        totalCompany:"5000",
+        totalIndividual:"5000"
+    },{
+        eid:"002", name:"张百成", department:"车间", date:"2017-02", basicSS:"5000",
         endowmentInsuranceCompany:"5000",
         endowmentInsuranceIndividual:"5000",
         medicalInsuranceCompany:"5000",
@@ -53,6 +67,21 @@ var employeesSS = [
         totalIndividual:"5000"
     }
 ];
+var employeesSSOffice = [{
+        eid:"001", name:"巩涛", department:"经理办", date:"2017-02", basicSS:"5000",
+        endowmentInsuranceCompany:"5000",
+        endowmentInsuranceIndividual:"5000",
+        medicalInsuranceCompany:"5000",
+        medicalInsuranceIndividual:"5000",
+        unemploymentInsuranceCompany:"5000",
+        unemploymentInsuranceIndividual:"5000",
+        employmentInjuryInsuranceCompany:"5000",
+        employmentInjuryInsuranceIndividual:"5000",
+        maternityInsuranceCompany:"5000",
+        maternityInsuranceIndividual:"5000",
+        totalCompany:"5000",
+        totalIndividual:"5000"
+    }];
 var informationTableHead ={
     eid:"EID", name:"姓名", sex:"性别", department:"部门", position:"职务", identification :"身份证号", hiredate:"入职日期"
 };
@@ -137,4 +166,10 @@ function saveModification(document, tableId, formId, saveBtnId) {
         table.rows[rowsIndex].cells[n].innerHTML = content[n].value;
         n++;
     }
+}
+//设置大标题
+function setCaption(document, text) {
+    var div = document.getElementById("captionTypeDiv");
+    div.setAttribute("style", "text-align:center;font-weight:bold;font-size:26px;");
+    div.innerHTML = text;
 }

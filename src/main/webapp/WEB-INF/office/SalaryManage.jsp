@@ -35,7 +35,7 @@
                                 员工信息管理<b class="caret"></b>
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a href="InformationManageAction.action">基本信息</a> </li>
+                                <li><a href="InformationManageAction.action?infoType=basic">基本信息</a> </li>
                                 <li class="divider"></li>
                                 <li><a href="#">新增员工</a></li>
                                 <li><a href="#">删除员工</a></li>
@@ -136,9 +136,11 @@
             <div class="col-md-2 leftside-bar btn-group-vertical" role="group" aria-label="...">
                 <button id="all" type="button"
                         class="btn btn-primary btn-lg btn-block"
-                        onclick="createTable(document, 'salaryTable', salaryTableHead, employeesSalary,'salaryTableHead')">
+                        onclick="selectDepartmentToCreateTable('all', '${sessionScope.salaryType}')">
                     <span class="glyphicon glyphicon-home" aria-hidden="true"></span>&nbsp;&nbsp;总览</button>
-                <button id="office" type="button" class="btn btn-primary">经理办</button>
+                <button id="office" type="button" class="btn btn-primary"
+                        onclick="selectDepartmentToCreateTable('office', '${sessionScope.salaryType}')">
+                        经理办</button>
                 <button id="fd" type="button" class="btn btn-primary">财务部</button>
                 <button id="eed" type="button" class="btn btn-primary">设备工程部</button>
                 <button id="pwd" type="button" class="btn btn-primary">公用工程部</button>
@@ -147,7 +149,7 @@
                 <button id="temp" type="button" class="btn btn-primary">临时用工</button>
             </div>
         <div class="col-md-10">
-            <div style="text-align: right">你好，${sessionScope.user}#${sessionScope.salaryType}</div>
+            <div id="captionTypeDiv" style="text-align: right"></div>
             <div>
                 <div style="float:left;margin: 10px;">
                     <input id="enquiryDateInput" class="form-control" type="month" style="text-align: center"></input>
@@ -156,10 +158,7 @@
 
             <div><!-- class="table-responsive" -->
                 <table id="salaryTable" class="table table-bordered">
-                    <!-- <caption>工资组成</caption> -->
-
-
-
+                    <caption>你好，${sessionScope.user}#${sessionScope.salaryType}</caption>
                     <thead>
                     <tr>
                         <th>请选择日期</th>
@@ -225,9 +224,25 @@
 
 
     if ("${sessionScope.salaryType}" == "component"){
+        setCaption(document, "工资组成");
         createTable(document, 'salaryTable', salaryTableHead, employeesSalary,'salaryTableHead');
     }else if ("${sessionScope.salaryType}" == "socialsecurity") {
+        setCaption(document, "社会保险");
         createTable(document, 'salaryTable', socialsecurityTableHead, employeesSS, 'socialsecurityTableHead');
+    }
+    function selectDepartmentToCreateTable(department, salaryType) {
+        //总览按钮
+        if (department == "all"){
+            if (salaryType == "component"){
+                createTable(document, 'salaryTable', salaryTableHead, employeesSalary,'salaryTableHead');
+            }else if (salaryType == "socialsecurity")
+                createTable(document, 'salaryTable', socialsecurityTableHead, employeesSS, 'socialsecurityTableHead');
+        }else if (department == "office"){
+            if (salaryType == "component"){
+                createTable(document, 'salaryTable', salaryTableHead, employeesSalary,'salaryTableHead');
+            }else if (salaryType == "socialsecurity")
+                createTable(document, 'salaryTable', socialsecurityTableHead, employeesSSOffice, 'socialsecurityTableHead');
+        }
     }
 
 </script>

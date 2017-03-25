@@ -9,6 +9,15 @@ import org.springframework.context.ApplicationContext;
  */
 public class ManageAction extends ActionSupport {
     private String salaryType;
+    private String infoType;
+
+    public String getInfoType() {
+        return infoType;
+    }
+
+    public void setInfoType(String infoType) {
+        this.infoType = infoType;
+    }
 
     public String getSalaryType() {
         return salaryType;
@@ -26,6 +35,7 @@ public class ManageAction extends ActionSupport {
     }
 
     public String InformationManage(){
+        ActionContext.getContext().getSession().put("infoType", getInfoType());
         return "InformationManage";
     }
 

@@ -33,7 +33,7 @@
                                 员工信息管理<b class="caret"></b>
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a href="InformationManageAction.action">基本信息</a> </li>
+                                <li><a href="InformationManageAction.action?infoType=basic">基本信息</a> </li>
                                 <li class="divider"></li>
                                 <li><a href="#">新增员工</a></li>
                                 <li><a href="#">删除员工</a></li>
@@ -47,9 +47,9 @@
                                 薪资管理<b class="caret"></b>
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a href="SalaryManageAction.action">工资组成</a></li>
+                                <li><a href="SalaryManageAction.action?salaryType=component">工资组成</a></li>
                                 <li class="divider"></li>
-                                <li><a href="#">社保</a></li>
+                                <li><a href="SalaryManageAction.action?salaryType=socialsecurity">社保</a></li>
                                 <li><a href="#">公积金</a></li>
                                 <li><a href="#">所得税</a></li>
                                 <li class="divider"></li>
