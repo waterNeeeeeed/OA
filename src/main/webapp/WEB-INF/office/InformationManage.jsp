@@ -153,33 +153,8 @@
                 <table id="infoTable" class="table table-bordered">
                     <caption>你好，${sessionScope.user}</caption>
                     <thead>
-                    <tr>
-                        <th>EID</th>
-                        <th>姓名</th>
-                        <th>性别</th>
-                        <th>部门</th>
-                        <th>职务</th>
-                        <th>身份证号</th>
-                        <th>入职时间</th>
-                        <th>操作</th>
-
-                    </tr>
                     </thead>
                     <tbody>
-                    <!--
-                    <tr>
-                        <td>001</td>
-                        <td>巩涛</td>
-                        <td>男</td>
-                        <td>技术研发部</td>
-                        <td>班长</td>
-                        <td>370783198708256132</td>
-                        <td>2013/08</td>
-                        <td><button>修改</button>
-                            <button>保存</button>
-                        </td>
-                    </tr>
-                    -->
                     </tbody>
                 </table>
                 <ul class="pagination">
