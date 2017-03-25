@@ -51,11 +51,11 @@
                             <ul class="dropdown-menu">
                                 <li><a href="SalaryManageAction.action?salaryType=component">工资组成</a></li>
                                 <li class="divider"></li>
-                                <li><a href="SalaryManageAction.action?salaryType=socialsecurity">社保</a></li>
+                                <li><a href="SalaryManageAction.action?salaryType=socialsecurity">社会保险</a></li>
                                 <li><a href="#">公积金</a></li>
                                 <li><a href="#">所得税</a></li>
                                 <li class="divider"></li>
-                                <li><a href="#">请假</a></li>
+                                <li><a href="#">考勤管理</a></li>
                             </ul>
 
                         </li>
