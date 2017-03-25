@@ -12,6 +12,8 @@ import java.io.*;
 import java.util.Iterator;
 import java.util.List;
 
+import static org.apache.poi.ss.usermodel.CellType.*;
+
 /**
  * Created by lenovo on 2017/3/25.
  */
@@ -27,27 +29,27 @@ public class excelTest {
                     //System.out.print(cellReference.formatAsString());
                     //System.out.print(row.getRowNum());
                     //System.out.print(cell.getColumnIndex());
-                    String text = formatter.formatCellValue(cell);
-                    System.out.print(text);
+                    /*String text = formatter.formatCellValue(cell);
+                    System.out.print(text);*/
 
                     switch (cell.getCellTypeEnum()) {
-                        case CellType.STRING:
+                        case STRING:
                             System.out.print(cell.getRichStringCellValue().getString());
                             break;
-                        case CellType.NUMERIC:
+                        case NUMERIC:
                             if (DateUtil.isCellDateFormatted(cell)) {
                                 System.out.print(cell.getDateCellValue());
                             } else {
                                 System.out.print(cell.getNumericCellValue());
                             }
                             break;
-                        case CellType.BOOLEAN:
+                        case BOOLEAN:
                             System.out.print(cell.getBooleanCellValue());
                             break;
-                        case CellType.FORMULA:
+                        case FORMULA:
                             System.out.print(cell.getCellFormula());
                             break;
-                        case CellType.BLANK:
+                        case BLANK:
                             System.out.print("");
                             break;
                         default:
