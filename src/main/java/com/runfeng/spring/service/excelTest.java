@@ -1,5 +1,6 @@
 package com.runfeng.spring.service;
 
+import com.runfeng.hibernate.Salary;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.SpreadsheetVersion;
@@ -24,11 +25,82 @@ public class excelTest {
             Workbook wb = WorkbookFactory.create(new File("2017.xls"));
             FormulaEvaluator evaluator = wb.getCreationHelper().createFormulaEvaluator();
             DataFormatter formatter = new DataFormatter();
-            Sheet sheet1 = wb.getSheetAt(0);
+            Sheet sheet1 = wb.getSheetAt(2);
             DecimalFormat    df   = new DecimalFormat("######0.00");
+
+            Salary[] test = new Salary[1000];
+            int n = 0;
             for (Row row : sheet1){
                 for (Cell cell : row){
-                    //CellReference cellReference = new CellReference(row.getRowNum(), cell.getColumnIndex());
+                    CellReference cellReference = new CellReference(row.getRowNum(), cell.getColumnIndex());
+                    if (cellReference.getRow() > 1 && cellReference.getCol() >= 2
+                            && cell.getCellTypeEnum() != BLANK){
+                        if (cellReference.getCol() == 2){
+                            test[n].setName(cell.getRichStringCellValue().getString());
+                            switch (cell.getCellTypeEnum()) {
+                                case STRING:
+                                    System.out.print(cell.getRichStringCellValue().getString());
+                                    break;
+                                case NUMERIC:
+                                    System.out.print(df.format(cell.getNumericCellValue()));
+                                    break;
+                                case BOOLEAN:
+                                    System.out.print(cell.getBooleanCellValue());
+                                    break;
+                                case FORMULA:
+                                    System.out.print(df.format(cell.getNumericCellValue()));
+                                    break;
+                                case BLANK:
+                                    System.out.print("");
+                                    break;
+                                default:
+                                    System.out.print("");
+                            }
+                        }
+                        if (cellReference.getCol() == 15){
+                            //test1[n].setSalary(Double.parseDouble(df.format(cell.getNumericCellValue())));
+                            switch (cell.getCellTypeEnum()) {
+                                case STRING:
+                                    System.out.print(cell.getRichStringCellValue().getString());
+                                    break;
+                                case NUMERIC:
+                                    System.out.print(df.format(cell.getNumericCellValue()));
+                                    break;
+                                case BOOLEAN:
+                                    System.out.print(cell.getBooleanCellValue());
+                                    break;
+                                case FORMULA:
+                                    System.out.print(df.format(cell.getNumericCellValue()));
+                                    break;
+                                case BLANK:
+                                    System.out.print("");
+                                    break;
+                                default:
+                                    System.out.print("");
+                            }
+                        }
+                        n++;
+                        /*
+                        switch (cell.getCellTypeEnum()) {
+                            case STRING:
+                                System.out.print(cell.getRichStringCellValue().getString());
+                                break;
+                            case NUMERIC:
+                                System.out.print(df.format(cell.getNumericCellValue()));
+                                break;
+                            case BOOLEAN:
+                                System.out.print(cell.getBooleanCellValue());
+                                break;
+                            case FORMULA:
+                                System.out.print(df.format(cell.getNumericCellValue()));
+                                break;
+                            case BLANK:
+                                System.out.print("");
+                                break;
+                            default:
+                                System.out.print("");
+                        }*/
+                    }
                     //System.out.print(cellReference.formatAsString());
                     //System.out.print(row.getRowNum());
                     //System.out.print(cell.getColumnIndex());
@@ -53,29 +125,12 @@ public class excelTest {
                             System.out.print("");
                             break;
                     }*/
-                    switch (cell.getCellTypeEnum()) {
-                        case STRING:
-                            System.out.print(cell.getRichStringCellValue().getString());
-                            break;
-                        case NUMERIC:
-                            System.out.print(df.format(cell.getNumericCellValue()));
-                            break;
-                        case BOOLEAN:
-                            System.out.print(cell.getBooleanCellValue());
-                            break;
-                        case FORMULA:
-                            System.out.print(df.format(cell.getNumericCellValue()));
-                            break;
-                        case BLANK:
-                            System.out.print("");
-                            break;
-                        default:
-                            System.out.print("");
-                    }
-                    System.out.print("#");
                 }
                 System.out.println();
             }
+            /*for (Salary a : test1){
+                System.out.println(a.getName() + ":" + a.getSalary());
+            }*/
         } catch (IOException e) {
             e.printStackTrace();
         } catch (InvalidFormatException e) {

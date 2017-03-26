@@ -25,15 +25,15 @@ public class Salary {
     private String name;
     private String department;
     private Date date;
-    private int salary;
-    private int basicSalary;
-    private int checkSalary;
-    private int floatingSalary;
-    private int festivalSalary;
-    private int holidaySalary;
-    private int nightSalary;
-    private int subsidySalary;
-    private int totalSalary;
+    private double salary;
+    private double basicSalary;
+    private double checkSalary;
+    private double floatingSalary;
+    private double festivalSalary;
+    private double holidaySalary;
+    private double nightSalary;
+    private double subsidySalary;
+    private double totalSalary;
 
     public int getId() {
         return id;
@@ -75,75 +75,75 @@ public class Salary {
         this.date = date;
     }
 
-    public int getSalary() {
+    public double getSalary() {
         return salary;
     }
 
-    public void setSalary(int salary) {
+    public void setSalary(double salary) {
         this.salary = salary;
     }
 
-    public int getBasicSalary() {
+    public double getBasicSalary() {
         return basicSalary;
     }
 
-    public void setBasicSalary(int basicSalary) {
+    public void setBasicSalary(double basicSalary) {
         this.basicSalary = basicSalary;
     }
 
-    public int getCheckSalary() {
+    public double getCheckSalary() {
         return checkSalary;
     }
 
-    public void setCheckSalary(int checkSalary) {
+    public void setCheckSalary(double checkSalary) {
         this.checkSalary = checkSalary;
     }
 
-    public int getFloatingSalary() {
+    public double getFloatingSalary() {
         return floatingSalary;
     }
 
-    public void setFloatingSalary(int floatingSalary) {
+    public void setFloatingSalary(double floatingSalary) {
         this.floatingSalary = floatingSalary;
     }
 
-    public int getFestivalSalary() {
+    public double getFestivalSalary() {
         return festivalSalary;
     }
 
-    public void setFestivalSalary(int festivalSalary) {
+    public void setFestivalSalary(double festivalSalary) {
         this.festivalSalary = festivalSalary;
     }
 
-    public int getHolidaySalary() {
+    public double getHolidaySalary() {
         return holidaySalary;
     }
 
-    public void setHolidaySalary(int holidaySalary) {
+    public void setHolidaySalary(double holidaySalary) {
         this.holidaySalary = holidaySalary;
     }
 
-    public int getNightSalary() {
+    public double getNightSalary() {
         return nightSalary;
     }
 
-    public void setNightSalary(int nightSalary) {
+    public void setNightSalary(double nightSalary) {
         this.nightSalary = nightSalary;
     }
 
-    public int getSubsidySalary() {
+    public double getSubsidySalary() {
         return subsidySalary;
     }
 
-    public void setSubsidySalary(int subsidySalary) {
+    public void setSubsidySalary(double subsidySalary) {
         this.subsidySalary = subsidySalary;
     }
 
-    public int getTotalSalary() {
+    public double getTotalSalary() {
         return totalSalary;
     }
 
-    public void setTotalSalary(int totalSalary) {
+    public void setTotalSalary(double totalSalary) {
         this.totalSalary = totalSalary;
     }
 }
