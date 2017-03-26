@@ -17,6 +17,7 @@ import org.hibernate.service.ServiceRegistryBuilder;
 
 import java.io.*;
 import java.text.DecimalFormat;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
@@ -30,7 +31,7 @@ public class excelTest {
             Workbook wb = WorkbookFactory.create(new File("2017.xls"));
             FormulaEvaluator evaluator = wb.getCreationHelper().createFormulaEvaluator();
             DataFormatter formatter = new DataFormatter();
-            Sheet sheet1 = wb.getSheetAt(2);
+            Sheet sheet1 = wb.getSheetAt(0);
             DecimalFormat    df   = new DecimalFormat("######0.00");
 
             Salary[] test = new Salary[1000];
@@ -57,6 +58,21 @@ public class excelTest {
                                 }
                                 if (cellReference.getCol() == 18){
                                     test[n].setFloatingSalary(Double.parseDouble(df.format(cell.getNumericCellValue())));
+                                }
+                                if (cellReference.getCol() == 19){
+                                    test[n].setFestivalSalary(Double.parseDouble(df.format(cell.getNumericCellValue())));
+                                }
+                                if (cellReference.getCol() == 20){
+                                    test[n].setHolidaySalary(Double.parseDouble(df.format(cell.getNumericCellValue())));
+                                }
+                                if (cellReference.getCol() == 21){
+                                    test[n].setNightSalary(Double.parseDouble(df.format(cell.getNumericCellValue())));
+                                }
+                                if (cellReference.getCol() == 22){
+                                    test[n].setSubsidySalary(Double.parseDouble(df.format(cell.getNumericCellValue())));
+                                }
+                                if (cellReference.getCol() == 23){
+                                    test[n].setTotalSalary(Double.parseDouble(df.format(cell.getNumericCellValue())));
                                 }
 
                         /*
@@ -120,6 +136,8 @@ public class excelTest {
             for (int i=0; i<n; i++){
                /* System.out.println(test[i].getName() + ":" + test[i].getSalary()
                         + ":" + test[i].getBasicSalary() + ":" + test[i].getCheckSalary() + ":" + test[i].getFloatingSalary());*/
+               test[i].setEid(i);
+               test[i].setDate(new Date());
                sess.save(test[i]);
 
             }
