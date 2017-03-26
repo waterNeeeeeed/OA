@@ -13,9 +13,7 @@ import org.hibernate.service.ServiceRegistryBuilder;
 public class NewsManager {
     public static void main(String[] args){
         Configuration conf = new Configuration().configure();
-
         ServiceRegistry serviceRegistry = new ServiceRegistryBuilder().applySettings(conf.getProperties()).build();
-
         SessionFactory sf = conf.buildSessionFactory(serviceRegistry);
 
         Session sess = sf.openSession();

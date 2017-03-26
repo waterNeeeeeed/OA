@@ -8,13 +8,18 @@ import org.apache.poi.ss.formula.udf.UDFFinder;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.ss.util.CellReference;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.hibernate.cfg.Configuration;
+import org.hibernate.service.ServiceRegistry;
+import org.hibernate.service.ServiceRegistryBuilder;
 
 import java.io.*;
 import java.text.DecimalFormat;
 import java.util.Iterator;
 import java.util.List;
 
-import static org.apache.poi.ss.usermodel.CellType.*;
 
 /**
  * Created by lenovo on 2017/3/25.
@@ -31,55 +36,29 @@ public class excelTest {
             Salary[] test = new Salary[1000];
             int n = 0;
             for (Row row : sheet1){
-                for (Cell cell : row){
-                    CellReference cellReference = new CellReference(row.getRowNum(), cell.getColumnIndex());
-                    if (cellReference.getRow() > 1 && cellReference.getCol() >= 2
-                            && cell.getCellTypeEnum() != BLANK){
-                        if (cellReference.getCol() == 2){
-                            test[n].setName(cell.getRichStringCellValue().getString());
-                            switch (cell.getCellTypeEnum()) {
-                                case STRING:
-                                    System.out.print(cell.getRichStringCellValue().getString());
-                                    break;
-                                case NUMERIC:
-                                    System.out.print(df.format(cell.getNumericCellValue()));
-                                    break;
-                                case BOOLEAN:
-                                    System.out.print(cell.getBooleanCellValue());
-                                    break;
-                                case FORMULA:
-                                    System.out.print(df.format(cell.getNumericCellValue()));
-                                    break;
-                                case BLANK:
-                                    System.out.print("");
-                                    break;
-                                default:
-                                    System.out.print("");
-                            }
-                        }
-                        if (cellReference.getCol() == 15){
-                            //test1[n].setSalary(Double.parseDouble(df.format(cell.getNumericCellValue())));
-                            switch (cell.getCellTypeEnum()) {
-                                case STRING:
-                                    System.out.print(cell.getRichStringCellValue().getString());
-                                    break;
-                                case NUMERIC:
-                                    System.out.print(df.format(cell.getNumericCellValue()));
-                                    break;
-                                case BOOLEAN:
-                                    System.out.print(cell.getBooleanCellValue());
-                                    break;
-                                case FORMULA:
-                                    System.out.print(df.format(cell.getNumericCellValue()));
-                                    break;
-                                case BLANK:
-                                    System.out.print("");
-                                    break;
-                                default:
-                                    System.out.print("");
-                            }
-                        }
-                        n++;
+                if (row.getCell(2) != null){
+                    if (row.getCell(2).getCellTypeEnum() != CellType.BLANK && row.getRowNum() > 1){
+                        test[n] = new Salary();
+                        for (Cell cell : row){
+                            CellReference cellReference = new CellReference(row.getRowNum(), cell.getColumnIndex());
+                            if (cellReference.getRow() > 1 && cellReference.getCol() >= 2
+                                    && cell.getCellTypeEnum() != CellType.BLANK){
+                                if (cellReference.getCol() == 2){
+                                    test[n].setName(cell.getRichStringCellValue().getString());
+                                }
+                                if (cellReference.getCol() == 15){
+                                    test[n].setSalary(Double.parseDouble(df.format(cell.getNumericCellValue())));
+                                }
+                                if (cellReference.getCol() == 16){
+                                    test[n].setBasicSalary(Double.parseDouble(df.format(cell.getNumericCellValue())));
+                                }
+                                if (cellReference.getCol() == 17){
+                                    test[n].setCheckSalary(Double.parseDouble(df.format(cell.getNumericCellValue())));
+                                }
+                                if (cellReference.getCol() == 18){
+                                    test[n].setFloatingSalary(Double.parseDouble(df.format(cell.getNumericCellValue())));
+                                }
+
                         /*
                         switch (cell.getCellTypeEnum()) {
                             case STRING:
@@ -100,13 +79,13 @@ public class excelTest {
                             default:
                                 System.out.print("");
                         }*/
-                    }
-                    //System.out.print(cellReference.formatAsString());
-                    //System.out.print(row.getRowNum());
-                    //System.out.print(cell.getColumnIndex());
+                            }
+                            //System.out.print(cellReference.formatAsString());
+                            //System.out.print(row.getRowNum());
+                            //System.out.print(cell.getColumnIndex());
                     /*String text = formatter.formatCellValue(cell);
                     System.out.print(text);*/
-                    //cell.getCellTypeEnum()
+                            //cell.getCellTypeEnum()
                     /*switch ( evaluator.evaluateInCell(cell).getCellType()) {
                         case Cell.CELL_TYPE_STRING:
                             System.out.print(cell.getRichStringCellValue().getString());
@@ -125,12 +104,28 @@ public class excelTest {
                             System.out.print("");
                             break;
                     }*/
+                        }
+                        n++;
+                    }
                 }
-                System.out.println();
+
+
             }
-            /*for (Salary a : test1){
-                System.out.println(a.getName() + ":" + a.getSalary());
-            }*/
+            Configuration conf = new Configuration().configure();
+            ServiceRegistry serviceRegistry = new ServiceRegistryBuilder().applySettings(conf.getProperties()).build();
+            SessionFactory sf = conf.buildSessionFactory(serviceRegistry);
+
+            Session sess = sf.openSession();
+            Transaction tx = sess.beginTransaction();
+            for (int i=0; i<n; i++){
+               /* System.out.println(test[i].getName() + ":" + test[i].getSalary()
+                        + ":" + test[i].getBasicSalary() + ":" + test[i].getCheckSalary() + ":" + test[i].getFloatingSalary());*/
+               sess.save(test[i]);
+
+            }
+            tx.commit();
+            sess.close();
+            sf.close();
         } catch (IOException e) {
             e.printStackTrace();
         } catch (InvalidFormatException e) {

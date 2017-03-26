@@ -22,5 +22,6 @@
         <property name="show_sql">true</property>
         <property name="hibernate.format_sql">true</property>
         <mapping class="com.runfeng.hibernate.News"></mapping>
+        <mapping class="com.runfeng.hibernate.Salary"></mapping>
     </session-factory>
 </hibernate-configuration>
