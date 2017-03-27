@@ -26,5 +26,11 @@
             <result name="ExitAction">/WEB-INF/Login.jsp</result>
             <result name="error">/WEB-INF/error.jsp</result>
         </action>
+        <action name="SalaryTableAction" class="com.runfeng.struts.SalaryTableAction"
+                method="execute">
+            <result type="json">
+                <param name="noCache">true</param>
+            </result>
+        </action>
     </package>
 </struts>

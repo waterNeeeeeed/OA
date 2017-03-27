@@ -153,6 +153,10 @@
             <div>
                 <div style="float:left;margin: 10px;">
                     <input id="enquiryDateInput" class="form-control" type="month" style="text-align: center"></input>
+                    <div>
+                        <div><button>test</button></div>
+                        <div id="testDiv"></div>
+                    </div>
                 </div>
             </div>
 
@@ -211,7 +215,38 @@
     </div>
 </div>
 <script type="text/javascript">
+    var xmlrequest;
+    function createXMLHttpRequest() {
+        if (window.XMLHttpRequest){
+            xmlrequest = new XMLHttpRequest();
+        }else if (window.ActiveXObject){
+            try{
+                xmlrequest = new ActiveXObject("Msxml2.XMLHTTP");
+            }catch (e){
+                try{
+                    xmlrequest = new ActiveXObject("Microsoft.XMLHTTP");
+                }catch (e){}
+            }
+        }
+    }
+    function getResult() {
+        createXMLHttpRequest();
+        var uri = "SalaryTableAction.action?department=all&salaryType=component";
+        xmlrequest.open("POST", uri, true);
+        xmlrequest.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xmlrequest.onreadystatechange = processResponse;
+        xmlrequest.send(null);
+    }
+    function processResponse() {
+        if (xmlrequest.readyState == 4){
+            if (xmlrequest.status == 200){
 
+            }
+            else {
+                document.getElementById("testDiv").innerHTML = "error";
+            }
+        }
+    }
     var currentDate = new Date();
     var enquiryDate;
     if (currentDate.getMonth() < 9){
@@ -234,8 +269,10 @@
         //总览按钮
         if (salaryType == "component"){
             if (department == "all") {
+                //componentAllSalaryAction
                 createTable(document, 'salaryTable', salaryTableHead, employeesSalary,'salaryTableHead');
             }else if (department == "office"){
+                //componentOfficeSalaryAction
                 createTable(document, 'salaryTable', salaryTableHead, employeesSalaryOffice,'salaryTableHead');
             }
         }else if (salaryType == "socialsecurity"){
@@ -245,6 +282,9 @@
                 createTable(document, 'salaryTable', socialsecurityTableHead, employeesSSOffice, 'socialsecurityTableHead');
             }
         }
+    }
+    function getData(){
+
     }
 
 </script>
