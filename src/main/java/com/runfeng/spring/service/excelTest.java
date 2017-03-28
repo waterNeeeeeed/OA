@@ -1,10 +1,17 @@
 package com.runfeng.spring.service;
 
+import com.runfeng.hibernate.Salary;
 import com.runfeng.hibernate.SalaryTableRow;
 import com.runfeng.utils.JsonUtil;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.ss.util.CellReference;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.hibernate.cfg.Configuration;
+import org.hibernate.service.ServiceRegistry;
+import org.hibernate.service.ServiceRegistryBuilder;
 
 import java.io.*;
 import java.text.DecimalFormat;
@@ -28,40 +35,40 @@ public class excelTest {
             for (Row row : sheet1){
                 if (row.getCell(2) != null){
                     if (row.getCell(2).getCellTypeEnum() != CellType.BLANK && row.getRowNum() > 1){
-                        test[n] = new SalaryTableRow();
+                        test[n] = new SalaryTableRow(new Salary());
                         for (Cell cell : row){
                             CellReference cellReference = new CellReference(row.getRowNum(), cell.getColumnIndex());
                             if (cellReference.getRow() > 1 && cellReference.getCol() >= 2
                                     && cell.getCellTypeEnum() != CellType.BLANK){
                                 if (cellReference.getCol() == 2){
-                                    test[n].setName(cell.getRichStringCellValue().getString());
+                                    test[n].getSalary().setName(cell.getRichStringCellValue().getString());
                                 }
                                 if (cellReference.getCol() == 15){
-                                    test[n].setSalary(Double.parseDouble(df.format(cell.getNumericCellValue())));
+                                    test[n].getSalary().setSalary(Double.parseDouble(df.format(cell.getNumericCellValue())));
                                 }
                                 if (cellReference.getCol() == 16){
-                                    test[n].setBasicSalary(Double.parseDouble(df.format(cell.getNumericCellValue())));
+                                    test[n].getSalary().setBasicSalary(Double.parseDouble(df.format(cell.getNumericCellValue())));
                                 }
                                 if (cellReference.getCol() == 17){
-                                    test[n].setCheckSalary(Double.parseDouble(df.format(cell.getNumericCellValue())));
+                                    test[n].getSalary().setCheckSalary(Double.parseDouble(df.format(cell.getNumericCellValue())));
                                 }
                                 if (cellReference.getCol() == 18){
-                                    test[n].setFloatingSalary(Double.parseDouble(df.format(cell.getNumericCellValue())));
+                                    test[n].getSalary().setFloatingSalary(Double.parseDouble(df.format(cell.getNumericCellValue())));
                                 }
                                 if (cellReference.getCol() == 19){
-                                    test[n].setFestivalSalary(Double.parseDouble(df.format(cell.getNumericCellValue())));
+                                    test[n].getSalary().setFestivalSalary(Double.parseDouble(df.format(cell.getNumericCellValue())));
                                 }
                                 if (cellReference.getCol() == 20){
-                                    test[n].setHolidaySalary(Double.parseDouble(df.format(cell.getNumericCellValue())));
+                                    test[n].getSalary().setHolidaySalary(Double.parseDouble(df.format(cell.getNumericCellValue())));
                                 }
                                 if (cellReference.getCol() == 21){
-                                    test[n].setNightSalary(Double.parseDouble(df.format(cell.getNumericCellValue())));
+                                    test[n].getSalary().setNightSalary(Double.parseDouble(df.format(cell.getNumericCellValue())));
                                 }
                                 if (cellReference.getCol() == 22){
-                                    test[n].setSubsidySalary(Double.parseDouble(df.format(cell.getNumericCellValue())));
+                                    test[n].getSalary().setSubsidySalary(Double.parseDouble(df.format(cell.getNumericCellValue())));
                                 }
                                 if (cellReference.getCol() == 23){
-                                    test[n].setTotalSalary(Double.parseDouble(df.format(cell.getNumericCellValue())));
+                                    test[n].getSalary().setTotalSalary(Double.parseDouble(df.format(cell.getNumericCellValue())));
                                 }
 
                         /*
@@ -115,24 +122,24 @@ public class excelTest {
                 }
 
 
-            }/*
+            }
             Configuration conf = new Configuration().configure();
             ServiceRegistry serviceRegistry = new ServiceRegistryBuilder().applySettings(conf.getProperties()).build();
             SessionFactory sf = conf.buildSessionFactory(serviceRegistry);
 
             Session sess = sf.openSession();
-            Transaction tx = sess.beginTransaction();*/
+            Transaction tx = sess.beginTransaction();
             for (int i=0; i<n; i++){
                /*System.out.println(test[i].getName() + ":" + test[i].getSalary()
                         + ":" + test[i].getBasicSalary() + ":" + test[i].getCheckSalary() + ":" + test[i].getFloatingSalary());*/
-               test[i].setEid(i);
-               test[i].setDate(new Date());
-               //sess.save(test[i]);
+               test[i].getSalary().setEid(i);
+               test[i].getSalary().setDate(new Date());
+               sess.save(test[i]);
 
             }
-            /*tx.commit();
+            tx.commit();
             sess.close();
-            sf.close();*/
+            sf.close();
             System.out.println(JsonUtil.toJson(test));
             wb.close();
         } catch (IOException e) {

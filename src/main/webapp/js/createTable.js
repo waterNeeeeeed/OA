@@ -127,10 +127,10 @@ function createTable(document, tableID, tableHead, tableContent, tableHeadName) 
             var td = tr.insertCell(ncell);
             td.innerHTML = tableContent[i][b];
             //td.setAttribute("style", "white-space:nowrap");
-            if (b == "date"){
+            /*if (b == "date"){
                 var date = new Date(tableContent[i][b]);
                 td.innerHTML = date.getFullYear()+"-" + date.getMonth();
-            }
+            }*/
 
             ncell++;
         }
