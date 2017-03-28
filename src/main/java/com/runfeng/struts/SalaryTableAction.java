@@ -2,20 +2,17 @@ package com.runfeng.struts;
 
 import com.opensymphony.xwork2.Action;
 import com.opensymphony.xwork2.ActionSupport;
+import com.runfeng.hibernate.SalaryTableRow;
 import com.runfeng.hibernate.Salary;
+import com.runfeng.utils.JsonUtil;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.ss.util.CellReference;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
-import org.hibernate.cfg.Configuration;
-import org.hibernate.service.ServiceRegistry;
-import org.hibernate.service.ServiceRegistryBuilder;
 
 import java.io.File;
 import java.io.IOException;
 import java.text.DecimalFormat;
+import java.util.Arrays;
 import java.util.Date;
 
 /**
@@ -25,16 +22,7 @@ public class SalaryTableAction extends ActionSupport {
     private String department;
     private String salaryType;
     private String test;
-    private Salary[] salary;
 
-
-    public Salary[] getSalary() {
-        return salary;
-    }
-
-    public void setSalary(Salary[] salary) {
-        this.salary = salary;
-    }
 
     public String getTest() {
         return test;
@@ -73,6 +61,7 @@ public class SalaryTableAction extends ActionSupport {
             Sheet sheet1 = wb.getSheetAt(0);
             DecimalFormat df   = new DecimalFormat("######0.00");
 
+            Salary[] salary;
             salary = new Salary[1000];
             int n = 0;
             for (Row row : sheet1){
@@ -113,52 +102,7 @@ public class SalaryTableAction extends ActionSupport {
                                 if (cellReference.getCol() == 23){
                                     salary[n].setTotalSalary(Double.parseDouble(df.format(cell.getNumericCellValue())));
                                 }
-
-                        /*
-                        switch (cell.getCellTypeEnum()) {
-                            case STRING:
-                                System.out.print(cell.getRichStringCellValue().getString());
-                                break;
-                            case NUMERIC:
-                                System.out.print(df.format(cell.getNumericCellValue()));
-                                break;
-                            case BOOLEAN:
-                                System.out.print(cell.getBooleanCellValue());
-                                break;
-                            case FORMULA:
-                                System.out.print(df.format(cell.getNumericCellValue()));
-                                break;
-                            case BLANK:
-                                System.out.print("");
-                                break;
-                            default:
-                                System.out.print("");
-                        }*/
                             }
-                            //System.out.print(cellReference.formatAsString());
-                            //System.out.print(row.getRowNum());
-                            //System.out.print(cell.getColumnIndex());
-                    /*String text = formatter.formatCellValue(cell);
-                    System.out.print(text);*/
-                            //cell.getCellTypeEnum()
-                    /*switch ( evaluator.evaluateInCell(cell).getCellType()) {
-                        case Cell.CELL_TYPE_STRING:
-                            System.out.print(cell.getRichStringCellValue().getString());
-                            break;
-                        case Cell.CELL_TYPE_NUMERIC:
-                            if (DateUtil.isCellDateFormatted(cell)) {
-                                System.out.print(cell.getDateCellValue().toLocaleString());
-                            } else {
-                                System.out.print(cell.getNumericCellValue());
-                            }
-                            break;
-                        case Cell.CELL_TYPE_FORMULA:
-                            System.out.print("error");
-                            break;
-                        case Cell.CELL_TYPE_BLANK:
-                            System.out.print("");
-                            break;
-                    }*/
                         }
                         n++;
                     }
@@ -170,11 +114,14 @@ public class SalaryTableAction extends ActionSupport {
 
             Session sess = sf.openSession();
             Transaction tx = sess.beginTransaction();*/
+            Salary[] salary2;
             for (int i=0; i<n; i++){
                 salary[i].setEid(i);
                 salary[i].setDate(new Date());
                 /*sess.save(test[i]);*/
             }
+            salary2 = Arrays.copyOf(salary, n);
+            test = JsonUtil.toJson(salary2);
             /*tx.commit();
             sess.close();
             sf.close();*/

@@ -1,25 +1,14 @@
 package com.runfeng.spring.service;
 
-import com.runfeng.hibernate.Salary;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import com.runfeng.hibernate.SalaryTableRow;
+import com.runfeng.utils.JsonUtil;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
-import org.apache.poi.ss.SpreadsheetVersion;
-import org.apache.poi.ss.formula.udf.UDFFinder;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.ss.util.CellReference;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
-import org.hibernate.cfg.Configuration;
-import org.hibernate.service.ServiceRegistry;
-import org.hibernate.service.ServiceRegistryBuilder;
 
 import java.io.*;
 import java.text.DecimalFormat;
 import java.util.Date;
-import java.util.Iterator;
-import java.util.List;
 
 
 /**
@@ -34,12 +23,12 @@ public class excelTest {
             Sheet sheet1 = wb.getSheetAt(0);
             DecimalFormat    df   = new DecimalFormat("######0.00");
 
-            Salary[] test = new Salary[1000];
+            SalaryTableRow[] test = new SalaryTableRow[1000];
             int n = 0;
             for (Row row : sheet1){
                 if (row.getCell(2) != null){
                     if (row.getCell(2).getCellTypeEnum() != CellType.BLANK && row.getRowNum() > 1){
-                        test[n] = new Salary();
+                        test[n] = new SalaryTableRow();
                         for (Cell cell : row){
                             CellReference cellReference = new CellReference(row.getRowNum(), cell.getColumnIndex());
                             if (cellReference.getRow() > 1 && cellReference.getCol() >= 2
@@ -126,24 +115,25 @@ public class excelTest {
                 }
 
 
-            }
+            }/*
             Configuration conf = new Configuration().configure();
             ServiceRegistry serviceRegistry = new ServiceRegistryBuilder().applySettings(conf.getProperties()).build();
             SessionFactory sf = conf.buildSessionFactory(serviceRegistry);
 
             Session sess = sf.openSession();
-            Transaction tx = sess.beginTransaction();
+            Transaction tx = sess.beginTransaction();*/
             for (int i=0; i<n; i++){
-               /* System.out.println(test[i].getName() + ":" + test[i].getSalary()
+               /*System.out.println(test[i].getName() + ":" + test[i].getSalary()
                         + ":" + test[i].getBasicSalary() + ":" + test[i].getCheckSalary() + ":" + test[i].getFloatingSalary());*/
                test[i].setEid(i);
                test[i].setDate(new Date());
-               sess.save(test[i]);
+               //sess.save(test[i]);
 
             }
-            tx.commit();
+            /*tx.commit();
             sess.close();
-            sf.close();
+            sf.close();*/
+            System.out.println(JsonUtil.toJson(test));
         } catch (IOException e) {
             e.printStackTrace();
         } catch (InvalidFormatException e) {

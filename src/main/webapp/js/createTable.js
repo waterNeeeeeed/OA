@@ -126,6 +126,11 @@ function createTable(document, tableID, tableHead, tableContent, tableHeadName) 
         for (var b in tableContent[i]){
             var td = tr.insertCell(ncell);
             td.innerHTML = tableContent[i][b];
+            //td.setAttribute("style", "white-space:nowrap");
+            if (b == "date"){
+                td.innerHTML = "date";
+            }
+
             ncell++;
         }
         //最后增加操作项
@@ -155,15 +160,13 @@ function createEmployeeInfoForm(document, target, tableId, formId, saveBtnId, ta
         input.setAttribute("id", tableHead[a]);
         input.setAttribute("value", table.rows[rowsIndex].cells[cellsIndex].innerHTML);
         //EID不可更改
-        if (tableHead[a] == "EID" || tableHead[a] == "eid"){
+        if (tableHead[a] == "EID" || tableHead[a] == "eid" || tableHead[a] == "日期"){
             input.setAttribute("disabled", "disabled");
         }
         formContent.appendChild(label);
         formContent.appendChild(input);
         cellsIndex++;
     }
-
-
 }
 //保存修改
 function saveModification(document, tableId, formId, saveBtnId) {

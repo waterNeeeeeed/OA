@@ -16,6 +16,13 @@
     <link rel="stylesheet" type="text/css" href="css/InfoSalaManage.css"/>
     <script src="js/createTable.js" type="text/javascript">
     </script>
+    <style type="text/css">
+        /*//添加后不自动换行*/
+        td{
+            white-space: nowrap;
+            text-align: center;
+        }
+    </style>
 
 </head>
 
@@ -252,19 +259,16 @@
         }
     }
     $("#testBtn").click(function () {
-        //var uri = "SalaryTableAction.action?department=all&salaryType=component";
         var uri = "SalaryTableAction.action";
         $.post(uri, {department:"all", salaryType:"component"},
             function (data) {
-                for (var b in data){
+                /*for (var b in data){
                     $("#testDiv").append(b + ":" + data[b]+"<br/>");
-                }
-                var start = eval(data["salary"]);
+                }*/
+                var start = eval(data["test"]);
                 employeesSalaryTest = start;
                 setCaption(document, "工资组成");
-                createTable(document, 'salaryTable', salaryTableHead, employeesSalaryTest,'salaryTableHead');
-
-
+                createTable(document, 'salaryTable', salaryTableHead, eval(data["test"]),'salaryTableHead');
 
         },
         "json");
