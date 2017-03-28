@@ -154,7 +154,7 @@
                 <div style="float:left;margin: 10px;">
                     <input id="enquiryDateInput" class="form-control" type="month" style="text-align: center"></input>
                     <div>
-                        <div><button>test</button></div>
+                        <div><button id="testBtn">test</button></div>
                         <div id="testDiv"></div>
                     </div>
                 </div>
@@ -240,6 +240,10 @@
     function processResponse() {
         if (xmlrequest.readyState == 4){
             if (xmlrequest.status == 200){
+                var data = eval(xmlrequest.responseText);
+                if (data != null){
+                    document.getElementById("testDiv").innerHTML = data[0];
+                }
 
             }
             else {
@@ -247,6 +251,24 @@
             }
         }
     }
+    $("#testBtn").click(function () {
+        //var uri = "SalaryTableAction.action?department=all&salaryType=component";
+        var uri = "SalaryTableAction.action";
+        $.post(uri, {department:"all", salaryType:"component"},
+            function (data) {
+                for (var b in data){
+                    $("#testDiv").append(b + ":" + data[b]+"<br/>");
+                }
+                var start = eval(data["salary"]);
+                employeesSalaryTest = start;
+                setCaption(document, "工资组成");
+                createTable(document, 'salaryTable', salaryTableHead, employeesSalaryTest,'salaryTableHead');
+
+
+
+        },
+        "json");
+    });
     var currentDate = new Date();
     var enquiryDate;
     if (currentDate.getMonth() < 9){
