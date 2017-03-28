@@ -122,6 +122,7 @@ public class SalaryTableAction extends ActionSupport {
             }
             salary2 = Arrays.copyOf(salary, n);
             test = JsonUtil.toJson(salary2);
+            wb.close();
             /*tx.commit();
             sess.close();
             sf.close();*/

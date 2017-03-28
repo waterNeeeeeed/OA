@@ -158,16 +158,16 @@
         <div class="col-md-10">
             <div id="captionTypeDiv" style="text-align: right"></div>
             <div>
-                <div style="float:left;margin: 10px;">
+                <div style="margin: 10px;">
                     <input id="enquiryDateInput" class="form-control" type="month" style="text-align: center"></input>
-                    <div>
+                    <%--<div>
                         <div><button id="testBtn">test</button></div>
                         <div id="testDiv"></div>
-                    </div>
+                    </div>--%>
                 </div>
             </div>
 
-            <div><!-- class="table-responsive" -->
+            <div class="table-responsive">
                 <table id="salaryTable" class="table table-bordered">
                     <caption>你好，${sessionScope.user}#${sessionScope.salaryType}</caption>
                     <thead>
@@ -284,9 +284,21 @@
     document.getElementById("enquiryDateInput").value = enquiryDate;
 
 
+    function getSalaryTableAjax(department, salaryType, tableCaption) {
+        var uri = "SalaryTableAction.action";
+        $.post(uri, {department:department, salaryType:salaryType},
+            function (data) {
+                var start = eval(data["test"]);
+                setCaption(document, tableCaption);
+                createTable(document, 'salaryTable', salaryTableHead, eval(data["test"]),'salaryTableHead');
+
+            },
+            "json");
+    }
     if ("${sessionScope.salaryType}" == "component"){
         setCaption(document, "工资组成");
-        createTable(document, 'salaryTable', salaryTableHead, employeesSalary,'salaryTableHead');
+        //createTable(document, 'salaryTable', salaryTableHead, employeesSalary,'salaryTableHead');
+        getSalaryTableAjax("all", "component", "工资组成");
     }else if ("${sessionScope.salaryType}" == "socialsecurity") {
         setCaption(document, "社会保险");
         createTable(document, 'salaryTable', socialsecurityTableHead, employeesSS, 'socialsecurityTableHead');

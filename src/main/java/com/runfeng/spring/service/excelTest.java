@@ -134,6 +134,7 @@ public class excelTest {
             sess.close();
             sf.close();*/
             System.out.println(JsonUtil.toJson(test));
+            wb.close();
         } catch (IOException e) {
             e.printStackTrace();
         } catch (InvalidFormatException e) {

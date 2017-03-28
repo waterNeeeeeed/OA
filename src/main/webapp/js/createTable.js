@@ -9,16 +9,16 @@ var salaryTableHead ={
 };
 var socialsecurityTableHead = {
     eid:"EID", name:"姓名", department:"部门", date:"日期", basicSS:"缴费基数",
-    endowmentInsuranceCompany:"养老保险(单位)",
-    endowmentInsuranceIndividual:"养老保险(个人)",
-    medicalInsuranceCompany:"医疗保险(单位)",
-    medicalInsuranceIndividual:"医疗保险(个人)",
-    unemploymentInsuranceCompany:"失业保险(单位)",
-    unemploymentInsuranceIndividual:"失业保险(个人)",
-    employmentInjuryInsuranceCompany:"工伤保险(单位)",
-    employmentInjuryInsuranceIndividual:"工伤保险(个人)",
-    maternityInsuranceCompany:"生育保险(单位)",
-    maternityInsuranceIndividual:"生育保险(个人)",
+    endowmentInsuranceCompany:"养老(单位)",
+    endowmentInsuranceIndividual:"养老(个人)",
+    medicalInsuranceCompany:"医疗(单位)",
+    medicalInsuranceIndividual:"医疗(个人)",
+    unemploymentInsuranceCompany:"失业(单位)",
+    unemploymentInsuranceIndividual:"失业(个人)",
+    employmentInjuryInsuranceCompany:"工伤(单位)",
+    employmentInjuryInsuranceIndividual:"工伤(个人)",
+    maternityInsuranceCompany:"生育(单位)",
+    maternityInsuranceIndividual:"生育(个人)",
     totalCompany:"合计(单位)",
     totalIndividual:"合计(个人)"
 };
@@ -128,7 +128,8 @@ function createTable(document, tableID, tableHead, tableContent, tableHeadName) 
             td.innerHTML = tableContent[i][b];
             //td.setAttribute("style", "white-space:nowrap");
             if (b == "date"){
-                td.innerHTML = "date";
+                var date = new Date(tableContent[i][b]);
+                td.innerHTML = date.getFullYear()+"-" + date.getMonth();
             }
 
             ncell++;
