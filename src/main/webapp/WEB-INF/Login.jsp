@@ -39,7 +39,7 @@
         <p style="color: #2b669a;font-size: 16px">欢迎使用OA办公系统,它可以帮你提高办公效率</p>
     </div>
   </div>
-  <div class="col-md-3 col-md-offset-1 well">
+  <div class="col-md-3 well">
   	<s:form action="login">
   		<div class="form-group">
     		<label for="exampleInputUsername">用户名</label>

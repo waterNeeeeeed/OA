@@ -160,12 +160,11 @@
             <div>
                 <div style="margin: 10px;">
                     <input id="enquiryDateInput" class="form-control" type="month" style="text-align: center"></input>
-                    <%--<div>
-                        <div><button id="testBtn">test</button></div>
-                        <div id="testDiv"></div>
-                    </div>--%>
+                    <%-- <div><button id="testBtn">test</button></div>--%>
+
                 </div>
             </div>
+            <div id="testDiv"></div>
 
             <div class="table-responsive">
                 <table id="salaryTable" class="table table-bordered">
@@ -222,42 +221,6 @@
     </div>
 </div>
 <script type="text/javascript">
-    var xmlrequest;
-    function createXMLHttpRequest() {
-        if (window.XMLHttpRequest){
-            xmlrequest = new XMLHttpRequest();
-        }else if (window.ActiveXObject){
-            try{
-                xmlrequest = new ActiveXObject("Msxml2.XMLHTTP");
-            }catch (e){
-                try{
-                    xmlrequest = new ActiveXObject("Microsoft.XMLHTTP");
-                }catch (e){}
-            }
-        }
-    }
-    function getResult() {
-        createXMLHttpRequest();
-        var uri = "SalaryTableAction.action?department=all&salaryType=component";
-        xmlrequest.open("POST", uri, true);
-        xmlrequest.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-        xmlrequest.onreadystatechange = processResponse;
-        xmlrequest.send(null);
-    }
-    function processResponse() {
-        if (xmlrequest.readyState == 4){
-            if (xmlrequest.status == 200){
-                var data = eval(xmlrequest.responseText);
-                if (data != null){
-                    document.getElementById("testDiv").innerHTML = data[0];
-                }
-
-            }
-            else {
-                document.getElementById("testDiv").innerHTML = "error";
-            }
-        }
-    }
     $("#testBtn").click(function () {
         var uri = "SalaryTableAction.action";
         $.post(uri, {department:"all", salaryType:"component"},
@@ -283,22 +246,21 @@
     }
     document.getElementById("enquiryDateInput").value = enquiryDate;
 
-
-    function getSalaryTableAjax(department, salaryType, tableCaption) {
+    //实现表头表内容皆为服务器回传
+    function getSalaryTableAjax(department, salaryType, tableCaption, tableHeadString, tableContentString) {
         var uri = "SalaryTableAction.action";
         $.post(uri, {department:department, salaryType:salaryType},
             function (data) {
-                var start = eval(data["test"]);
+                //$("#testDiv").text(data["salaryTableHead"]);
                 setCaption(document, tableCaption);
-                createTable(document, 'salaryTable', salaryTableHead, eval(data["test"]),'salaryTableHead');
-
+                createTable(document, 'salaryTable', JSON.parse(data[tableHeadString]), eval(data[tableContentString]),'salaryTableHead');
             },
             "json");
     }
     if ("${sessionScope.salaryType}" == "component"){
-        setCaption(document, "工资组成");
+        //setCaption(document, "工资组成");
         //createTable(document, 'salaryTable', salaryTableHead, employeesSalary,'salaryTableHead');
-        getSalaryTableAjax("all", "component", "工资组成");
+        getSalaryTableAjax("all", "component", "工资组成", "salaryTableHead", "employeesSalary");
     }else if ("${sessionScope.salaryType}" == "socialsecurity") {
         setCaption(document, "社会保险");
         createTable(document, 'salaryTable', socialsecurityTableHead, employeesSS, 'socialsecurityTableHead');

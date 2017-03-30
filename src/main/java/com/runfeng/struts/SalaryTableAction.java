@@ -2,6 +2,7 @@ package com.runfeng.struts;
 
 import com.opensymphony.xwork2.Action;
 import com.opensymphony.xwork2.ActionSupport;
+import com.runfeng.hibernate.SalaryTableHead;
 import com.runfeng.hibernate.SalaryTableRow;
 import com.runfeng.hibernate.Salary;
 import com.runfeng.utils.JsonUtil;
@@ -21,15 +22,23 @@ import java.util.Date;
 public class SalaryTableAction extends ActionSupport {
     private String department;
     private String salaryType;
-    private String test;
+    private String employeesSalary;
+    private String salaryTableHead;
 
-
-    public String getTest() {
-        return test;
+    public String getSalaryTableHead() {
+        return salaryTableHead;
     }
 
-    public void setTest(String test) {
-        this.test = test;
+    public void setSalaryTableHead(String salaryTableHead) {
+        this.salaryTableHead = salaryTableHead;
+    }
+
+    public String getEmployeesSalary() {
+        return employeesSalary;
+    }
+
+    public void setEmployeesSalary(String employeesSalary) {
+        this.employeesSalary = employeesSalary;
     }
 
     public String getDepartment() {
@@ -48,12 +57,20 @@ public class SalaryTableAction extends ActionSupport {
         this.salaryType = salaryType;
     }
 
+    public String convertTableHeadToJson(){
+        SalaryTableHead sth = new SalaryTableHead("EID", "姓名", "部门", "日期",
+                "应发工资", "基本工资", "考核工资", "浮动工资",
+                "节日", "假日", "夜班费", "保健、补助",
+                "合计");
+        return JsonUtil.toJson(sth);
+    }
+
+    public String fillTableContent(){
+        return null;
+    }
+
     @Override
     public String execute(){
-        test = "only for love";
-        if (department.equals("all") && salaryType.equals("component")){
-            test = "only for make love";
-        }
         try {
             Workbook wb = WorkbookFactory.create(new File("2017.xls"));
             FormulaEvaluator evaluator = wb.getCreationHelper().createFormulaEvaluator();
@@ -121,7 +138,8 @@ public class SalaryTableAction extends ActionSupport {
                 /*sess.save(test[i]);*/
             }
             salary2 = Arrays.copyOf(salary, n);
-            test = JsonUtil.toJson(salary2);
+            employeesSalary = JsonUtil.toJson(salary2);
+            salaryTableHead = convertTableHeadToJson();
             wb.close();
             /*tx.commit();
             sess.close();
