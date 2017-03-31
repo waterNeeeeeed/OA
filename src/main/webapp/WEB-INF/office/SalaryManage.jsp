@@ -27,7 +27,7 @@
 </head>
 
 <body>
-<div class="container">
+<div class="container-fluid" style="margin: 6px;">
     <!-- 导航条 -->
     <div class="row">
         <nav class="navbar navbar-inverse" role="navigation">
@@ -140,7 +140,7 @@
     </div>
 
     <div class="row">
-            <div class="col-md-2 leftside-bar btn-group-vertical" role="group" aria-label="...">
+            <div class="col-md-1 leftside-bar btn-group-vertical" role="group" aria-label="...">
                 <button id="all" type="button"
                         class="btn btn-primary btn-lg btn-block"
                         onclick="selectDepartmentToCreateTable('all', '${sessionScope.salaryType}')">
@@ -155,7 +155,7 @@
                 <button id="workshop" type="button" class="btn btn-primary">车间</button>
                 <button id="temp" type="button" class="btn btn-primary">临时用工</button>
             </div>
-        <div class="col-md-10">
+        <div class="col-md-11">
             <div id="captionTypeDiv" style="text-align: right"></div>
             <div>
                 <div style="margin: 10px;">

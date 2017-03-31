@@ -5,6 +5,12 @@ import com.runfeng.hibernate.Salary;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.ss.util.CellReference;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.hibernate.cfg.Configuration;
+import org.hibernate.service.ServiceRegistry;
+import org.hibernate.service.ServiceRegistryBuilder;
 
 import java.io.File;
 import java.io.IOException;
@@ -15,7 +21,9 @@ import java.util.*;
  * Created by lenovo on 2017/3/31.
  */
 public class EmployeeInfoExcelTableParseUtil {
-    public static void inputEmployeeInfo(String filePath){
+    public static Map<String, EmployeeInfo> inputEmployeeInfo(String filePath){
+        List<EmployeeInfo> Employees = new ArrayList<>();
+        Map<String, EmployeeInfo> employeeInfoMap = new HashMap<>();
         try {
             Workbook wb = WorkbookFactory.create(new File("江岳OA/江岳花名册-全部职工.xlsx"));
             Workbook wb2 = WorkbookFactory.create(new File("江岳OA/招工花名册.xls"));
@@ -25,8 +33,7 @@ public class EmployeeInfoExcelTableParseUtil {
 
             DecimalFormat df   = new DecimalFormat("######0.00");
 
-            List<EmployeeInfo> Employees = new ArrayList<>();
-            Map<String, EmployeeInfo> employeeInfoMap = new HashMap<>();
+
             //读取员工姓名、性别、部门
             Sheet sheet1 = wb.getSheet("女职工（正式）");//.getSheetAt(0);
             int n = 0;
@@ -53,12 +60,14 @@ public class EmployeeInfoExcelTableParseUtil {
                     a.setEid(n);
                     n++;
                     employeeInfoMap.put(a.getName(), a);
+                }else {
+                    //System.out.println(row.getCell(1).getRichStringCellValue().getString());
                 }
             }
-
+            int totalNum = employeeInfoMap.size();
             Sheet sheet2 = wb2.getSheet("正式人员");
             DecimalFormat df2   = new DecimalFormat("######0");
-            for (int rowIndex=4; rowIndex<=sheet1.getLastRowNum(); rowIndex++){
+            for (int rowIndex=4; rowIndex<=99; rowIndex++){
                 Row row = sheet2.getRow(rowIndex);
                 String name = row.getCell(3).getRichStringCellValue().getString();
                 if (employeeInfoMap.containsKey(name)){
@@ -73,9 +82,9 @@ public class EmployeeInfoExcelTableParseUtil {
                     employeeInfoMap.get(name).setTelephone(row.getCell(14).getRichStringCellValue().getString());
                 }
             }
-            for (Map.Entry<String, EmployeeInfo> entry : employeeInfoMap.entrySet()){
-                System.out.println(JsonUtil.toJson(entry.getValue()));
-            }
+
+            wb.close();
+            wb2.close();
             /*
             int n = 0;
             for (Row row : sheet1){
@@ -122,32 +131,13 @@ public class EmployeeInfoExcelTableParseUtil {
                     }
                 }
             }*/
-            /*Configuration conf = new Configuration().configure();
-            ServiceRegistry serviceRegistry = new ServiceRegistryBuilder().applySettings(conf.getProperties()).build();
-            SessionFactory sf = conf.buildSessionFactory(serviceRegistry);
 
-            Session sess = sf.openSession();
-            Transaction tx = sess.beginTransaction();*/
-            /*Salary[] salary2;
-            for (int i=0; i<n; i++){
-                salary[i].setEid(i);
-                salary[i].setDate(new Date());
-                *//*sess.save(test[i]);*//*
-            }
-            salary2 = Arrays.copyOf(salary, n);
-            employeesSalary = JsonUtil.toJson(salary2);
-            salaryTableHead = convertTableHeadToJson();*/
-
-            wb.close();
-            wb2.close();
-            /*tx.commit();
-            sess.close();
-            sf.close();*/
         } catch (IOException e) {
             e.printStackTrace();
         } catch (InvalidFormatException e) {
             e.printStackTrace();
         }
+        return employeeInfoMap;
     }
 
     public void outputEmployeeInfoToExcel(){

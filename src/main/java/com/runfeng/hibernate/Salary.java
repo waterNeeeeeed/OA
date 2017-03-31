@@ -2,11 +2,15 @@ package com.runfeng.hibernate;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.util.Date;
 
 /**
  * Created by 帝 on 2017/3/28.
  */
+@Entity
+@Table(name="salary_table")
 public class Salary {
     private int eid;
     private String name;

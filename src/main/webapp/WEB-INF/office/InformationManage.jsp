@@ -16,11 +16,20 @@
     <link rel="stylesheet" type="text/css" href="css/InfoSalaManage.css"/>
     <script src="js/createTable.js" type="text/javascript">
     </script>
+    <style type="text/css">
+        /*//添加后不自动换行*/
+        td{
+            /*white-space: nowrap;*/
+            text-align: center;
+        }
+    </style>
+
 
 </head>
 
 <body>
-<div class="container">
+<%--<div class="container">--%>
+<div class="container-fluid" style="margin: 6px;">
     <!-- 导航条 -->
     <div class="row">
         <nav class="navbar navbar-inverse" role="navigation">
@@ -133,7 +142,7 @@
     </div>
 
     <div class="row">
-            <div class="col-md-2 leftside-bar btn-group-vertical" role="group" aria-label="...">
+            <div class="col-md-1 leftside-bar btn-group-vertical" role="group" aria-label="...">
                 <button id="all" type="button"
                         class="btn btn-primary btn-lg btn-block"
                         onclick="selectDepartmentToCreateTable('all', '${sessionScope.infoType}');">
@@ -147,9 +156,9 @@
                 <button id="workshop" type="button" class="btn btn-primary">车间</button>
                 <button id="temp" type="button" class="btn btn-primary">临时用工</button>
             </div>
-        <div class="col-md-10">
-            <div>
-                <div id="captionTypeDiv" style="text-align: right">你好，${sessionScope.user}</div>
+        <div class="col-md-11">
+            <div class="table-responsive">
+                <div id="captionTypeDiv" style="text-align: right;">你好，${sessionScope.user}</div>
                 <table id="infoTable" class="table table-bordered">
                     <caption>你好，${sessionScope.user}</caption>
                     <thead>
@@ -207,11 +216,23 @@
         //总览按钮
         if (infoType == "basic"){
             if (department == "all") {
-                createTable(document, 'infoTable', informationTableHead, employeesInfo, 'informationTableHead');
+                //createTable(document, 'infoTable', informationTableHead, employeesInfo, 'informationTableHead');
+                //setCaption(document, "基本信息")
+                getInfoTableAjax("all", "basic", "基本信息", 'informationTableHead', 'employeesInfo');
             }else if (department == "office"){
                 createTable(document, 'infoTable', informationTableHead, employeesInfoOffice, 'informationTableHead');
             }
         }
+    }
+    function getInfoTableAjax(department, infoType, tableCaption, tableHeadString, tableContentString) {
+        var uri = "InfoTableAction.action";
+        $.post(uri, {department:department, infoType:infoType},
+            function (data) {
+                //$("#testDiv").text(data["salaryTableHead"]);
+                setCaption(document, tableCaption);
+                createTable(document, 'infoTable', informationTableHead, eval(data[tableContentString]),'informationTableHead');
+            },
+            "json");
     }
 </script>
 </body>

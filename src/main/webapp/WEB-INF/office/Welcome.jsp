@@ -18,7 +18,7 @@
 </head>
 
 <body>
-<div class="container">
+<div class="container-fluid" style="margin: 6px;">
     <!-- 导航条 -->
     <div class="row">
         <nav class="navbar navbar-inverse" role="navigation">

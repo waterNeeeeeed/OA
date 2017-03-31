@@ -14,11 +14,8 @@ var salaryTableHead ={
         totalSalary:"合计"
         };
  */
-@Entity
-@Table(name="salary_table")
+
 public class SalaryTableRow {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private Salary salary;
 
