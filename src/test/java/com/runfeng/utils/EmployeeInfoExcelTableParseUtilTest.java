@@ -30,18 +30,6 @@ public class EmployeeInfoExcelTableParseUtilTest {
             //System.out.println(JsonUtil.toJson(entry.getValue()));
             sess.save(entry.getValue());
         }
-            /*employeeInfoMap
-            for (int i=0; i<n; i++){
-                salary[i].setEid(i);
-                salary[i].setDate(new Date());
-                *//**//*sess.save(test[i]);*//**//*
-            }*/
-            /*Salary[] salary2;
-            salary2 = Arrays.copyOf(salary, n);
-            employeesSalary = JsonUtil.toJson(salary2);
-            salaryTableHead = convertTableHeadToJson();*/
-
-
         tx.commit();
         sess.close();
         sf.close();

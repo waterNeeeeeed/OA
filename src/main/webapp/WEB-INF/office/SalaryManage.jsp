@@ -156,37 +156,43 @@
                 <button id="temp" type="button" class="btn btn-primary">临时用工</button>
             </div>
         <div class="col-md-11">
-            <div id="captionTypeDiv" style="text-align: right"></div>
-            <div>
-                <div style="margin: 10px;">
-                    <input id="enquiryDateInput" class="form-control" type="month" style="text-align: center"></input>
-                    <%-- <div><button id="testBtn">test</button></div>--%>
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                    <div id="captionTypeDiv" style="text-align: right"></div>
+                </div>
+                <div class="panel-body">
+                    <div>
+                        <div style="margin: 10px;">
+                            <input id="enquiryDateInput" class="form-control" type="month" style="text-align: center"></input>
+                            <%-- <div><button id="testBtn">test</button></div>--%>
 
+                        </div>
+                    </div>
+                    <div class="table-responsive">
+                        <table id="salaryTable" class="table table-bordered">
+                            <caption>你好，${sessionScope.user}#${sessionScope.salaryType}</caption>
+                            <thead>
+                            <tr>
+                                <th>请选择日期</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                        <ul class="pagination">
+                            <li><a href="#">&laquo;</a></li>
+                            <li><a href="#">1</a></li>
+                            <li><a href="#">2</a></li>
+                            <li><a href="#">3</a></li>
+                            <li><a href="#">4</a></li>
+                            <li><a href="#">5</a></li>
+                            <li><a href="#">&raquo;</a></li>
+                        </ul>
+                    </div>
                 </div>
             </div>
-            <div id="testDiv"></div>
 
-            <div class="table-responsive">
-                <table id="salaryTable" class="table table-bordered">
-                    <caption>你好，${sessionScope.user}#${sessionScope.salaryType}</caption>
-                    <thead>
-                    <tr>
-                        <th>请选择日期</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    </tbody>
-                </table>
-                <ul class="pagination">
-                    <li><a href="#">&laquo;</a></li>
-                    <li><a href="#">1</a></li>
-                    <li><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
-                    <li><a href="#">4</a></li>
-                    <li><a href="#">5</a></li>
-                    <li><a href="#">&raquo;</a></li>
-                </ul>
-            </div>
+
 
             <!-- 用于修改信息的模态对话框 -->
             <div class="modal" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">

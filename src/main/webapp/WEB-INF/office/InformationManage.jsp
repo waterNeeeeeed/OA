@@ -157,25 +157,33 @@
                 <button id="temp" type="button" class="btn btn-primary">临时用工</button>
             </div>
         <div class="col-md-11">
-            <div class="table-responsive">
-                <div id="captionTypeDiv" style="text-align: right;">你好，${sessionScope.user}</div>
-                <table id="infoTable" class="table table-bordered">
-                    <caption>你好，${sessionScope.user}</caption>
-                    <thead>
-                    </thead>
-                    <tbody>
-                    </tbody>
-                </table>
-                <ul class="pagination">
-                    <li><a href="#">&laquo;</a></li>
-                    <li><a href="#">1</a></li>
-                    <li><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
-                    <li><a href="#">4</a></li>
-                    <li><a href="#">5</a></li>
-                    <li><a href="#">&raquo;</a></li>
-                </ul>
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                    <div id="captionTypeDiv" style="text-align: right;">你好，${sessionScope.user}</div>
+                </div>
+                <div class="panel-body">
+                    <div class="table-responsive">
+                        <%--<hr/>--%>
+                        <table id="infoTable" class="table table-bordered">
+                            <caption>你好，${sessionScope.user}</caption>
+                            <thead>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                        <ul class="pagination">
+                            <li><a href="#">&laquo;</a></li>
+                            <li><a href="#">1</a></li>
+                            <li><a href="#">2</a></li>
+                            <li><a href="#">3</a></li>
+                            <li><a href="#">4</a></li>
+                            <li><a href="#">5</a></li>
+                            <li><a href="#">&raquo;</a></li>
+                        </ul>
+                    </div>
+                </div>
             </div>
+
 
             <!-- 用于修改信息的模态对话框 -->
             <div class="modal" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
@@ -208,10 +216,11 @@
     </div>
 </div>
 <script type="text/javascript">
-    if ("${sessionScope.infoType}" == "basic"){
+    /*if ("${sessionScope.infoType}" == "basic"){
         setCaption(document, "基本信息")
         createTable(document, 'infoTable', informationTableHead, employeesInfo, 'informationTableHead');
-    };
+    };*/
+    selectDepartmentToCreateTable("all", "basic");
     function selectDepartmentToCreateTable(department, infoType) {
         //总览按钮
         if (infoType == "basic"){

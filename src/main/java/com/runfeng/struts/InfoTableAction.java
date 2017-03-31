@@ -2,6 +2,7 @@ package com.runfeng.struts;
 
 import com.opensymphony.xwork2.Action;
 import com.opensymphony.xwork2.ActionSupport;
+import com.runfeng.hibernate.HqlQuery;
 import com.runfeng.utils.EmployeeInfoExcelTableParseUtil;
 import com.runfeng.utils.JsonUtil;
 
@@ -38,7 +39,7 @@ public class InfoTableAction extends ActionSupport {
     }
 
     public String execute(){
-        employeesInfo = JsonUtil.toJson(EmployeeInfoExcelTableParseUtil.inputEmployeeInfo(null).values());
+        employeesInfo = HqlQuery.findEmployeeInfo();//JsonUtil.toJson(EmployeeInfoExcelTableParseUtil.inputEmployeeInfo(null).values());
         return Action.SUCCESS;
     }
 }
