@@ -11,7 +11,7 @@ public class Salary {
     private int eid;
     private String name;
     private String department;
-    @JsonFormat(locale="zh", timezone="GMT+8", pattern="yyyy-MM")
+    @JsonFormat(locale="zh", timezone="GMT+8", pattern="yyyy.MM")
     private Date date;
     private double salary;
     private double basicSalary;
