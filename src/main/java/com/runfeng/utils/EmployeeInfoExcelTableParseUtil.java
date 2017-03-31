@@ -42,10 +42,40 @@ public class EmployeeInfoExcelTableParseUtil {
                     employeeInfoMap.put(a.getName(), a);
                 }
             }
+            sheet1 = wb.getSheet("男职工（正式）");//.getSheetAt(0);
+            for (int rowIndex=3; rowIndex<=sheet1.getLastRowNum(); rowIndex++){
+                Row row = sheet1.getRow(rowIndex);
+                if (row.getCell(0).getCellTypeEnum() != CellType.BLANK){
+                    EmployeeInfo a = new EmployeeInfo();
+                    a.setDepartment(row.getCell(0).getRichStringCellValue().getString());
+                    a.setName(row.getCell(1).getRichStringCellValue().getString());
+                    a.setSex(row.getCell(2).getRichStringCellValue().getString());
+                    a.setEid(n);
+                    n++;
+                    employeeInfoMap.put(a.getName(), a);
+                }
+            }
+
+            Sheet sheet2 = wb2.getSheet("正式人员");
+            DecimalFormat df2   = new DecimalFormat("######0");
+            for (int rowIndex=4; rowIndex<=sheet1.getLastRowNum(); rowIndex++){
+                Row row = sheet2.getRow(rowIndex);
+                String name = row.getCell(3).getRichStringCellValue().getString();
+                if (employeeInfoMap.containsKey(name)){
+                    employeeInfoMap.get(name).setContractid("JY" + df2.format(row.getCell(2).getNumericCellValue()));
+                    employeeInfoMap.get(name).setEducationalbackground(row.getCell(6).getRichStringCellValue().getString());
+                    employeeInfoMap.get(name).setIdentification(row.getCell(7).getRichStringCellValue().getString());
+                    employeeInfoMap.get(name).setNativeplace(row.getCell(8).getRichStringCellValue().getString());
+                    employeeInfoMap.get(name).setContractstartdate(row.getCell(9).getRichStringCellValue().getString());
+                    employeeInfoMap.get(name).setContractenddate(row.getCell(10).getRichStringCellValue().getString());
+                    employeeInfoMap.get(name).setSchool(row.getCell(11).getRichStringCellValue().getString());
+                    employeeInfoMap.get(name).setMajor(row.getCell(12).getRichStringCellValue().getString());
+                    employeeInfoMap.get(name).setTelephone(row.getCell(14).getRichStringCellValue().getString());
+                }
+            }
             for (Map.Entry<String, EmployeeInfo> entry : employeeInfoMap.entrySet()){
                 System.out.println(JsonUtil.toJson(entry.getValue()));
             }
-            Sheet sheet2 = wb2.getSheet("正式人员");
             /*
             int n = 0;
             for (Row row : sheet1){
