@@ -1,6 +1,6 @@
 package com.runfeng.utils;
 
-import com.runfeng.hibernate.Information.EmployeeInfo;
+import com.runfeng.hibernate.InformationEntity.EmployeeInfo;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;

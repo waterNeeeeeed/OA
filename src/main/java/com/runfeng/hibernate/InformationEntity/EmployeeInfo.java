@@ -1,4 +1,4 @@
-package com.runfeng.hibernate.Information;
+package com.runfeng.hibernate.InformationEntity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -17,12 +17,9 @@ public class EmployeeInfo {
     private String name;
     private String sex;
     private String department;
+    private String post;
     private String position;
-
-    public void setTelephone(String telephone) {
-        this.telephone = telephone;
-    }
-
+    private String positionstate;
     private String telephone;
     private String identification;
     private String nativeplace;
@@ -38,7 +35,18 @@ public class EmployeeInfo {
     @Temporal(TemporalType.DATE)
     private Date contractenddate;
     private String contractstate;
-    private String positionstate;
+
+    public String getPost() {
+        return post;
+    }
+
+    public void setPost(String post) {
+        this.post = post;
+    }
+
+    public void setTelephone(String telephone) {
+        this.telephone = telephone;
+    }
 
     public String getTelephone() {
         return telephone;

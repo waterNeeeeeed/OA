@@ -1,10 +1,7 @@
-package com.runfeng.hibernate.Salary;
-
-import com.fasterxml.jackson.annotation.JsonFormat;
+package com.runfeng.hibernate.SalaryEntity;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
-import java.util.Date;
 
 /**
  * Created by lenovo on 2017/3/29.

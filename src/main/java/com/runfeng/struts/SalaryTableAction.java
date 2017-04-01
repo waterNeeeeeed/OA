@@ -3,7 +3,7 @@ package com.runfeng.struts;
 import com.opensymphony.xwork2.Action;
 import com.opensymphony.xwork2.ActionSupport;
 import com.runfeng.hibernate.HqlQuery;
-import com.runfeng.hibernate.Salary.SalaryTableHead;
+import com.runfeng.hibernate.SalaryEntity.SalaryTableHead;
 import com.runfeng.utils.JsonUtil;
 
 /**
@@ -62,7 +62,7 @@ public class SalaryTableAction extends ActionSupport {
     @Override
     public String execute(){
 
-        employeesSalary = JsonUtil.toJson(HqlQuery.findEmployeeInfo());
+        employeesSalary = HqlQuery.findSalary();
         salaryTableHead = convertTableHeadToJson();
         return Action.SUCCESS;
     }

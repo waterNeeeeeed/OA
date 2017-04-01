@@ -1,6 +1,6 @@
 package com.runfeng.utils;
 
-import com.runfeng.hibernate.Salary.Salary;
+import com.runfeng.hibernate.SalaryEntity.Salary;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;

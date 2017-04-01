@@ -1,6 +1,6 @@
 package com.runfeng.utils;
 
-import com.runfeng.hibernate.Information.EmployeeInfo;
+import com.runfeng.hibernate.InformationEntity.EmployeeInfo;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.*;
 

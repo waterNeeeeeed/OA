@@ -1,4 +1,4 @@
-package com.runfeng.hibernate.Salary;
+package com.runfeng.hibernate.SalaryEntity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
