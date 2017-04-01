@@ -1,6 +1,6 @@
 package com.runfeng.utils;
 
-import com.runfeng.hibernate.EmployeeInfo;
+import com.runfeng.hibernate.Information.EmployeeInfo;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -10,8 +10,6 @@ import org.hibernate.service.ServiceRegistryBuilder;
 import org.junit.Test;
 
 import java.util.Map;
-
-import static org.junit.Assert.*;
 
 /**
  * Created by lenovo on 2017/3/31.

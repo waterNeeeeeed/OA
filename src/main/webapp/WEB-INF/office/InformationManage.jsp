@@ -19,7 +19,7 @@
     <style type="text/css">
         /*//添加后不自动换行*/
         td{
-            /*white-space: nowrap;*/
+            white-space: nowrap;
             text-align: center;
         }
     </style>
@@ -45,6 +45,10 @@
                             </a>
                             <ul class="dropdown-menu">
                                 <li><a href="InformationManageAction.action?infoType=basic">基本信息</a> </li>
+                                <li class="divider"></li>
+                                <li><a href="#">岗位管理</a></li>
+                                <li><a href="#">合同管理</a></li>
+                                <li><a href="#">学历管理</a></li>
                                 <li class="divider"></li>
                                 <li><a href="#">新增员工</a></li>
                                 <li><a href="#">删除员工</a></li>

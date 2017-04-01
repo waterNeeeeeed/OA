@@ -3,19 +3,8 @@ package com.runfeng.struts;
 import com.opensymphony.xwork2.Action;
 import com.opensymphony.xwork2.ActionSupport;
 import com.runfeng.hibernate.HqlQuery;
-import com.runfeng.hibernate.SalaryTableHead;
-import com.runfeng.hibernate.SalaryTableRow;
-import com.runfeng.hibernate.Salary;
+import com.runfeng.hibernate.Salary.SalaryTableHead;
 import com.runfeng.utils.JsonUtil;
-import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
-import org.apache.poi.ss.usermodel.*;
-import org.apache.poi.ss.util.CellReference;
-
-import java.io.File;
-import java.io.IOException;
-import java.text.DecimalFormat;
-import java.util.Arrays;
-import java.util.Date;
 
 /**
  * Created by lenovo on 2017/3/27.

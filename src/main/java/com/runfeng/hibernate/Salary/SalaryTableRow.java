@@ -1,7 +1,4 @@
-package com.runfeng.hibernate;
-
-import javax.persistence.*;
-import java.util.Date;
+package com.runfeng.hibernate.Salary;
 
 /**
  * Created by 帝 on 2017/3/25.

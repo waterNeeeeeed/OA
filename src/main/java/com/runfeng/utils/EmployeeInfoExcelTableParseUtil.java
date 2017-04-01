@@ -1,20 +1,14 @@
 package com.runfeng.utils;
 
-import com.runfeng.hibernate.EmployeeInfo;
-import com.runfeng.hibernate.Salary;
+import com.runfeng.hibernate.Information.EmployeeInfo;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.*;
-import org.apache.poi.ss.util.CellReference;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
-import org.hibernate.cfg.Configuration;
-import org.hibernate.service.ServiceRegistry;
-import org.hibernate.service.ServiceRegistryBuilder;
 
 import java.io.File;
 import java.io.IOException;
 import java.text.DecimalFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
@@ -30,10 +24,7 @@ public class EmployeeInfoExcelTableParseUtil {
 
             FormulaEvaluator evaluator = wb.getCreationHelper().createFormulaEvaluator();
             DataFormatter formatter = new DataFormatter();
-
             DecimalFormat df   = new DecimalFormat("######0.00");
-
-
             //读取员工姓名、性别、部门
             Sheet sheet1 = wb.getSheet("女职工（正式）");//.getSheetAt(0);
             int n = 0;
@@ -44,8 +35,6 @@ public class EmployeeInfoExcelTableParseUtil {
                     a.setDepartment(row.getCell(0).getRichStringCellValue().getString());
                     a.setName(row.getCell(1).getRichStringCellValue().getString());
                     a.setSex(row.getCell(2).getRichStringCellValue().getString());
-                    a.setEid(n);
-                    n++;
                     employeeInfoMap.put(a.getName(), a);
                 }
             }
@@ -57,16 +46,26 @@ public class EmployeeInfoExcelTableParseUtil {
                     a.setDepartment(row.getCell(0).getRichStringCellValue().getString());
                     a.setName(row.getCell(1).getRichStringCellValue().getString());
                     a.setSex(row.getCell(2).getRichStringCellValue().getString());
-                    a.setEid(n);
-                    n++;
                     employeeInfoMap.put(a.getName(), a);
                 }else {
                     //System.out.println(row.getCell(1).getRichStringCellValue().getString());
                 }
             }
-            int totalNum = employeeInfoMap.size();
+            sheet1 = wb.getSheet("正式职工");
+            DecimalFormat eid = new DecimalFormat("#####");
+            for (int rowIndex=1; rowIndex<=108; rowIndex++){
+                Row row = sheet1.getRow(rowIndex);
+                if (row.getCell(0).getCellTypeEnum() != CellType.BLANK){
+                    employeeInfoMap.get(row.getCell(1).getRichStringCellValue().getString())
+                        .setEid(Integer.parseInt(eid.format(row.getCell(0).getNumericCellValue())));
+                }else {
+                    //System.out.println(row.getCell(1).getRichStringCellValue().getString());
+                }
+            }
             Sheet sheet2 = wb2.getSheet("正式人员");
             DecimalFormat df2   = new DecimalFormat("######0");
+            DecimalFormat telephone = new DecimalFormat("############");
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd");
             for (int rowIndex=4; rowIndex<=99; rowIndex++){
                 Row row = sheet2.getRow(rowIndex);
                 String name = row.getCell(3).getRichStringCellValue().getString();
@@ -75,12 +74,18 @@ public class EmployeeInfoExcelTableParseUtil {
                     employeeInfoMap.get(name).setEducationalbackground(row.getCell(6).getRichStringCellValue().getString());
                     employeeInfoMap.get(name).setIdentification(row.getCell(7).getRichStringCellValue().getString());
                     employeeInfoMap.get(name).setNativeplace(row.getCell(8).getRichStringCellValue().getString());
-                    employeeInfoMap.get(name).setContractstartdate(row.getCell(9).getRichStringCellValue().getString());
-                    employeeInfoMap.get(name).setContractenddate(row.getCell(10).getRichStringCellValue().getString());
+                    employeeInfoMap.get(name).setContractstartdate(sdf.parse(row.getCell(9).getRichStringCellValue().getString()));
+                    employeeInfoMap.get(name).setContractstartdate(sdf.parse(row.getCell(10).getRichStringCellValue().getString()));
+                    //employeeInfoMap.get(name).setContractenddate(row.getCell(10).getDateCellValue());//row.getCell(10).getRichStringCellValue().getString());
                     employeeInfoMap.get(name).setSchool(row.getCell(11).getRichStringCellValue().getString());
                     employeeInfoMap.get(name).setSchoolform(row.getCell(12).getRichStringCellValue().getString());
                     employeeInfoMap.get(name).setMajor(row.getCell(13).getRichStringCellValue().getString());
-                    employeeInfoMap.get(name).setTelephone(row.getCell(15).getRichStringCellValue().getString());
+                    if (row.getCell(15) != null){
+                        employeeInfoMap.get(name).setTelephone(telephone.format(row.getCell(15).getNumericCellValue()));
+
+                    }else {
+                        employeeInfoMap.get(name).setTelephone("-");
+                    }
                     employeeInfoMap.get(name).setContractstate(row.getCell(16).getRichStringCellValue().getString());
 
                 }
@@ -88,56 +93,11 @@ public class EmployeeInfoExcelTableParseUtil {
 
             wb.close();
             wb2.close();
-            /*
-            int n = 0;
-            for (Row row : sheet1){
-                if (row.getCell(2) != null){
-                    if (row.getCell(2).getCellTypeEnum() != CellType.BLANK && row.getRowNum() > 1){
-                        salary[n] = new Salary();
-                        for (Cell cell : row){
-                            CellReference cellReference = new CellReference(row.getRowNum(), cell.getColumnIndex());
-                            if (cellReference.getRow() > 1 && cellReference.getCol() >= 2
-                                    && cell.getCellTypeEnum() != CellType.BLANK){
-                                if (cellReference.getCol() == 2){
-                                    salary[n].setName(cell.getRichStringCellValue().getString());
-                                }
-                                if (cellReference.getCol() == 15){
-                                    salary[n].setSalary(Double.parseDouble(df.format(cell.getNumericCellValue())));
-                                }
-                                if (cellReference.getCol() == 16){
-                                    salary[n].setBasicSalary(Double.parseDouble(df.format(cell.getNumericCellValue())));
-                                }
-                                if (cellReference.getCol() == 17){
-                                    salary[n].setCheckSalary(Double.parseDouble(df.format(cell.getNumericCellValue())));
-                                }
-                                if (cellReference.getCol() == 18){
-                                    salary[n].setFloatingSalary(Double.parseDouble(df.format(cell.getNumericCellValue())));
-                                }
-                                if (cellReference.getCol() == 19){
-                                    salary[n].setFestivalSalary(Double.parseDouble(df.format(cell.getNumericCellValue())));
-                                }
-                                if (cellReference.getCol() == 20){
-                                    salary[n].setHolidaySalary(Double.parseDouble(df.format(cell.getNumericCellValue())));
-                                }
-                                if (cellReference.getCol() == 21){
-                                    salary[n].setNightSalary(Double.parseDouble(df.format(cell.getNumericCellValue())));
-                                }
-                                if (cellReference.getCol() == 22){
-                                    salary[n].setSubsidySalary(Double.parseDouble(df.format(cell.getNumericCellValue())));
-                                }
-                                if (cellReference.getCol() == 23){
-                                    salary[n].setTotalSalary(Double.parseDouble(df.format(cell.getNumericCellValue())));
-                                }
-                            }
-                        }
-                        n++;
-                    }
-                }
-            }*/
-
         } catch (IOException e) {
             e.printStackTrace();
         } catch (InvalidFormatException e) {
+            e.printStackTrace();
+        } catch (ParseException e) {
             e.printStackTrace();
         }
         return employeeInfoMap;

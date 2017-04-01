@@ -1,10 +1,9 @@
-package com.runfeng.hibernate;
+package com.runfeng.hibernate.Information;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.Date;
 
 /**
  * Created by lenovo on 2017/3/27.
@@ -19,6 +18,11 @@ public class EmployeeInfo {
     private String sex;
     private String department;
     private String position;
+
+    public void setTelephone(String telephone) {
+        this.telephone = telephone;
+    }
+
     private String telephone;
     private String identification;
     private String nativeplace;
@@ -28,11 +32,33 @@ public class EmployeeInfo {
     private String major;
     private String contractid;
     @JsonFormat(locale="zh", timezone="GMT+8", pattern="yyyy.MM.dd")
-    private String contractstartdate;
+    @Temporal(TemporalType.DATE)
+    private Date contractstartdate;
     @JsonFormat(locale="zh", timezone="GMT+8", pattern="yyyy.MM.dd")
-    private String contractenddate;
+    @Temporal(TemporalType.DATE)
+    private Date contractenddate;
     private String contractstate;
     private String positionstate;
+
+    public String getTelephone() {
+        return telephone;
+    }
+
+    public Date getContractstartdate() {
+        return contractstartdate;
+    }
+
+    public void setContractstartdate(Date contractstartdate) {
+        this.contractstartdate = contractstartdate;
+    }
+
+    public Date getContractenddate() {
+        return contractenddate;
+    }
+
+    public void setContractenddate(Date contractenddate) {
+        this.contractenddate = contractenddate;
+    }
 
     public String getSchoolform() {
         return schoolform;
@@ -80,14 +106,6 @@ public class EmployeeInfo {
 
     public void setPosition(String position) {
         this.position = position;
-    }
-
-    public String getTelephone() {
-        return telephone;
-    }
-
-    public void setTelephone(String telephone) {
-        this.telephone = telephone;
     }
 
     public String getIdentification() {
@@ -138,21 +156,6 @@ public class EmployeeInfo {
         this.contractid = contractid;
     }
 
-    public String getContractstartdate() {
-        return contractstartdate;
-    }
-
-    public void setContractstartdate(String contractstartdate) {
-        this.contractstartdate = contractstartdate;
-    }
-
-    public String getContractenddate() {
-        return contractenddate;
-    }
-
-    public void setContractenddate(String contractenddate) {
-        this.contractenddate = contractenddate;
-    }
 
     public String getContractstate() {
         return contractstate;

@@ -1,6 +1,6 @@
 package com.runfeng.utils;
 
-import com.runfeng.hibernate.Salary;
+import com.runfeng.hibernate.Salary.Salary;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -9,13 +9,8 @@ import org.hibernate.service.ServiceRegistry;
 import org.hibernate.service.ServiceRegistryBuilder;
 import org.junit.Test;
 
-import javax.swing.text.html.HTMLDocument;
-import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
-
-import static org.junit.Assert.*;
 
 /**
  * Created by lenovo on 2017/4/1.
@@ -28,8 +23,8 @@ public class SalaryExcelTableParseUtilTest {
         SessionFactory sf = conf.buildSessionFactory(serviceRegistry);
         Session sess = sf.openSession();
         Transaction tx = sess.beginTransaction();
-        /*String hqlDelete = "delete Salary";
-        sess.createQuery(hqlDelete).executeUpdate();*/
+        String hqlDelete = "delete Salary";
+        sess.createQuery(hqlDelete).executeUpdate();
         List<Salary> salaryList = SalaryExcelTableParseUtil.inputSalary();
 
         for (Iterator<Salary> it = salaryList.iterator(); it.hasNext(); ) {

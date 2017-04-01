@@ -1,7 +1,7 @@
 package com.runfeng.spring.service;
 
-import com.runfeng.hibernate.Salary;
-import com.runfeng.hibernate.SalaryTableRow;
+import com.runfeng.hibernate.Salary.Salary;
+import com.runfeng.hibernate.Salary.SalaryTableRow;
 import com.runfeng.utils.JsonUtil;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.*;
