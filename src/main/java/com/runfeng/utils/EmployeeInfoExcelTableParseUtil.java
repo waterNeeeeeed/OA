@@ -22,7 +22,7 @@ import java.util.*;
  */
 public class EmployeeInfoExcelTableParseUtil {
     public static Map<String, EmployeeInfo> inputEmployeeInfo(String filePath){
-        List<EmployeeInfo> Employees = new ArrayList<>();
+
         Map<String, EmployeeInfo> employeeInfoMap = new HashMap<>();
         try {
             Workbook wb = WorkbookFactory.create(new File("江岳OA/江岳花名册-全部职工.xlsx"));
@@ -78,8 +78,11 @@ public class EmployeeInfoExcelTableParseUtil {
                     employeeInfoMap.get(name).setContractstartdate(row.getCell(9).getRichStringCellValue().getString());
                     employeeInfoMap.get(name).setContractenddate(row.getCell(10).getRichStringCellValue().getString());
                     employeeInfoMap.get(name).setSchool(row.getCell(11).getRichStringCellValue().getString());
-                    employeeInfoMap.get(name).setMajor(row.getCell(12).getRichStringCellValue().getString());
-                    employeeInfoMap.get(name).setTelephone(row.getCell(14).getRichStringCellValue().getString());
+                    employeeInfoMap.get(name).setSchoolform(row.getCell(12).getRichStringCellValue().getString());
+                    employeeInfoMap.get(name).setMajor(row.getCell(13).getRichStringCellValue().getString());
+                    employeeInfoMap.get(name).setTelephone(row.getCell(15).getRichStringCellValue().getString());
+                    employeeInfoMap.get(name).setContractstate(row.getCell(16).getRichStringCellValue().getString());
+
                 }
             }
 

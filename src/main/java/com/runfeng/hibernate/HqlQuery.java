@@ -29,4 +29,18 @@ public class HqlQuery {
         sf.close();
         return JsonUtil.toJson(employeesInfo);
     }
+    public static String findSalary(){
+        Configuration conf = new Configuration().configure();
+        ServiceRegistry serviceRegistry = new ServiceRegistryBuilder().applySettings(conf.getProperties()).build();
+        SessionFactory sf = conf.buildSessionFactory(serviceRegistry);
+
+        Session sess = sf.openSession();
+        Transaction tx = sess.beginTransaction();
+        List salary = sess.createQuery("select distinct s from Salary s").list();
+        //System.out.println();
+        tx.commit();
+        sess.close();
+        sf.close();
+        return JsonUtil.toJson(salary);
+    }
 }

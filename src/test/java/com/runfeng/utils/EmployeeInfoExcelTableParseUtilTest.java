@@ -24,7 +24,8 @@ public class EmployeeInfoExcelTableParseUtilTest {
         SessionFactory sf = conf.buildSessionFactory(serviceRegistry);
         Session sess = sf.openSession();
         Transaction tx = sess.beginTransaction();
-
+        String hqlDelete = "delete EmployeeInfo";
+        sess.createQuery(hqlDelete).executeUpdate();
         Map<String, EmployeeInfo> employeeInfoMap = EmployeeInfoExcelTableParseUtil.inputEmployeeInfo(null);
         for (Map.Entry<String, EmployeeInfo> entry : employeeInfoMap.entrySet()){
             //System.out.println(JsonUtil.toJson(entry.getValue()));

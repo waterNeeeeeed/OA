@@ -24,6 +24,7 @@ public class EmployeeInfo {
     private String nativeplace;
     private String educationalbackground;
     private String school;
+    private String schoolform;
     private String major;
     private String contractid;
     @JsonFormat(locale="zh", timezone="GMT+8", pattern="yyyy.MM.dd")
@@ -32,6 +33,14 @@ public class EmployeeInfo {
     private String contractenddate;
     private String contractstate;
     private String positionstate;
+
+    public String getSchoolform() {
+        return schoolform;
+    }
+
+    public void setSchoolform(String schoolform) {
+        this.schoolform = schoolform;
+    }
 
     public int getEid() {
         return eid;

@@ -3,6 +3,7 @@ package com.runfeng.hibernate;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.Table;
 import java.util.Date;
 
@@ -12,6 +13,7 @@ import java.util.Date;
 @Entity
 @Table(name="salary_table")
 public class Salary {
+    @Id
     private int eid;
     private String name;
     private String department;
