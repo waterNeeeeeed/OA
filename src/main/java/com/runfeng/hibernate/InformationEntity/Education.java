@@ -1,5 +1,7 @@
 package com.runfeng.hibernate.InformationEntity;
 
+import org.hibernate.annotations.Parent;
+
 import javax.persistence.Embeddable;
 
 /**
@@ -11,6 +13,26 @@ public class Education {
     private String school;
     private String schoolform;
     private String major;
+    @Parent
+    private PersonalInfo personalInfo;
+
+    public Education() {
+    }
+
+    public Education(String educationalbackground, String school, String schoolform, String major) {
+        this.educationalbackground = educationalbackground;
+        this.school = school;
+        this.schoolform = schoolform;
+        this.major = major;
+    }
+
+    public PersonalInfo getPersonalInfo() {
+        return personalInfo;
+    }
+
+    public void setPersonalInfo(PersonalInfo personalInfo) {
+        this.personalInfo = personalInfo;
+    }
 
     public String getEducationalbackground() {
         return educationalbackground;

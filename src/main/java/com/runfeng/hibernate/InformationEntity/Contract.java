@@ -1,6 +1,7 @@
 package com.runfeng.hibernate.InformationEntity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import org.hibernate.annotations.Parent;
 
 import javax.persistence.Embeddable;
 import javax.persistence.Temporal;
@@ -20,6 +21,26 @@ public class Contract {
     @Temporal(TemporalType.DATE)
     private Date contractenddate;
     private String contractstate;
+    @Parent
+    private PersonalInfo personalInfo;
+
+    public Contract() {
+    }
+
+    public Contract(String contractid, Date contractstartdate, Date contractenddate, String contractstate) {
+        this.contractid = contractid;
+        this.contractstartdate = contractstartdate;
+        this.contractenddate = contractenddate;
+        this.contractstate = contractstate;
+    }
+
+    public PersonalInfo getPersonalInfo() {
+        return personalInfo;
+    }
+
+    public void setPersonalInfo(PersonalInfo personalInfo) {
+        this.personalInfo = personalInfo;
+    }
 
     public String getContractid() {
         return contractid;

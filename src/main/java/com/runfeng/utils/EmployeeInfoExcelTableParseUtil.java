@@ -74,9 +74,11 @@ public class EmployeeInfoExcelTableParseUtil {
                     employeeInfoMap.get(name).setEducationalbackground(row.getCell(6).getRichStringCellValue().getString());
                     employeeInfoMap.get(name).setIdentification(row.getCell(7).getRichStringCellValue().getString());
                     employeeInfoMap.get(name).setNativeplace(row.getCell(8).getRichStringCellValue().getString());
-                    employeeInfoMap.get(name).setContractstartdate(sdf.parse(row.getCell(9).getRichStringCellValue().getString()));
-                    employeeInfoMap.get(name).setContractstartdate(sdf.parse(row.getCell(10).getRichStringCellValue().getString()));
-                    //employeeInfoMap.get(name).setContractenddate(row.getCell(10).getDateCellValue());//row.getCell(10).getRichStringCellValue().getString());
+                    if (row.getCell(9).getCellTypeEnum() != CellType.BLANK && row.getCell(10).getCellTypeEnum() != CellType.BLANK){
+                        employeeInfoMap.get(name).setContractstartdate(sdf.parse(row.getCell(9).getRichStringCellValue().getString()));
+                        employeeInfoMap.get(name).setContractstartdate(sdf.parse(row.getCell(10).getRichStringCellValue().getString()));
+                    }
+                               //employeeInfoMap.get(name).setContractenddate(row.getCell(10).getDateCellValue());//row.getCell(10).getRichStringCellValue().getString());
                     employeeInfoMap.get(name).setSchool(row.getCell(11).getRichStringCellValue().getString());
                     employeeInfoMap.get(name).setSchoolform(row.getCell(12).getRichStringCellValue().getString());
                     employeeInfoMap.get(name).setMajor(row.getCell(13).getRichStringCellValue().getString());
@@ -100,6 +102,7 @@ public class EmployeeInfoExcelTableParseUtil {
         } catch (ParseException e) {
             e.printStackTrace();
         }
+
         return employeeInfoMap;
     }
 

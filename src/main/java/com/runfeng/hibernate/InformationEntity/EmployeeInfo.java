@@ -10,30 +10,48 @@ import java.util.Date;
  */
 
 @Entity
-@Table(name = "employees_info_table")
+@Table(name = "personalinfo_table")
 public class EmployeeInfo {
     @Id
+    @Column(name = "eid")
     private int eid;
+    @Column(name = "name")
     private String name;
+    @Column(name = "sex")
     private String sex;
+    @Column(name = "department")
     private String department;
+    @Column(name = "post")
     private String post;
+    @Column(name = "position")
     private String position;
+    @Column(name = "positionstate")
     private String positionstate;
+    @Column(name = "telephone")
     private String telephone;
+    @Column(name = "identification")
     private String identification;
+    @Column(name = "nativeplace")
     private String nativeplace;
+    @Column(name = "educationalbackground")
     private String educationalbackground;
+    @Column(name = "school")
     private String school;
+    @Column(name = "schoolform")
     private String schoolform;
+    @Column(name = "major")
     private String major;
+    @Column(name = "contractid")
     private String contractid;
+    @Column(name = "contractstartdate")
     @JsonFormat(locale="zh", timezone="GMT+8", pattern="yyyy.MM.dd")
     @Temporal(TemporalType.DATE)
     private Date contractstartdate;
     @JsonFormat(locale="zh", timezone="GMT+8", pattern="yyyy.MM.dd")
     @Temporal(TemporalType.DATE)
+    @Column(name = "contractenddate")
     private Date contractenddate;
+    @Column(name = "contractstate")
     private String contractstate;
 
     public String getPost() {
