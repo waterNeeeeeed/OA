@@ -56,7 +56,9 @@ public class EmployeeInfoExcelTableParseUtilTest {
         //System.out.println(JsonUtil.toJson(EmployeeInfoExcelTableParseUtil.inputEmployeeInfo(null).values()));
 
         //System.out.println(HqlQuery.findEmployeeInfo());
-        System.out.println(HqlQuery.findPositionInfo());
+        //System.out.println(HqlQuery.findPositionInfo());
+        //System.out.println(HqlQuery.findEducationInfo());
+        System.out.println(HqlQuery.findContractInfo());
     }
 
     @Test

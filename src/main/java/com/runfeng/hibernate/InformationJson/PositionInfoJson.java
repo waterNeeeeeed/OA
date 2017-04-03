@@ -19,13 +19,17 @@ public class PositionInfoJson {
     }
 
     public PositionInfoJson(MainID mainID, PositionInfo positionInfo) {
-        this.eid = mainID.getEid();
-        this.name = mainID.getName();
-        this.workid = positionInfo.getWorkid();
-        this.department = positionInfo.getDepartment();
-        this.post = positionInfo.getPost();
-        this.position = positionInfo.getPosition();
-        this.positionstate = positionInfo.getPositionstate();
+        if (mainID != null){
+            this.eid = mainID.getEid();
+            this.name = mainID.getName();
+        }
+        if (positionInfo != null){
+            this.workid = positionInfo.getWorkid();
+            this.department = positionInfo.getDepartment();
+            this.post = positionInfo.getPost();
+            this.position = positionInfo.getPosition();
+            this.positionstate = positionInfo.getPositionstate();
+        }
     }
 
     public int getEid() {

@@ -46,9 +46,10 @@
                             <ul class="dropdown-menu">
                                 <li><a href="InformationManageAction.action?department=all&infoType=basic">基本信息</a> </li>
                                 <li class="divider"></li>
+                                <li><a href="InformationManageAction.action?department=all&infoType=basicInfo">个人信息</a></li>
                                 <li><a href="InformationManageAction.action?department=all&infoType=position">岗位管理</a></li>
-                                <li><a href="#">合同管理</a></li>
-                                <li><a href="#">学历管理</a></li>
+                                <li><a href="InformationManageAction.action?department=all&infoType=contract">合同管理</a></li>
+                                <li><a href="InformationManageAction.action?department=all&infoType=education">学历管理</a></li>
                                 <li class="divider"></li>
                                 <li><a href="#">新增员工</a></li>
                                 <li><a href="#">删除员工</a></li>
@@ -227,8 +228,25 @@
 
     selectDepartmentToCreateTable("${sessionScope.department}", "${sessionScope.infoType}");
     function selectDepartmentToCreateTable(department, infoType) {
-        //总览按钮
+        var tableCaption;
+        //总览按钮basic basicInfo position education contract
         if (infoType == "basic"){
+            tableCaption = "员工信息";
+        }
+        if (infoType == "basicInfo"){
+            tableCaption = "基本信息";
+        }
+        if (infoType == "position"){
+            tableCaption = "岗位信息";
+        }
+        if (infoType == "education"){
+            tableCaption = "教育信息";
+        }
+        if (infoType == "contract"){
+            tableCaption = "合同信息";
+        }
+        getInfoTableAjax(department, infoType, tableCaption, 'informationTableHead', 'employeesInfo');
+        /*if (infoType == "basic"){
             if (department == "all") {
                 //createTable(document, 'infoTable', informationTableHead, employeesInfo, 'informationTableHead');
                 //setCaption(document, "基本信息")
@@ -242,7 +260,7 @@
                 getInfoTableAjax("all", "position", "岗位信息", 'informationTableHead', 'employeesInfo');
 
             }
-        }
+        }*/
     }
     function getInfoTableAjax(department, infoType, tableCaption, tableHeadString, tableContentString) {
         var uri = "InfoTableAction.action";

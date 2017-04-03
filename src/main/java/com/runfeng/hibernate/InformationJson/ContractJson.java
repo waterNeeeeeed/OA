@@ -1,19 +1,19 @@
-package com.runfeng.hibernate.InformationEntity;
+package com.runfeng.hibernate.InformationJson;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.hibernate.annotations.Parent;
+import com.runfeng.hibernate.InformationEntity.Contract;
+import com.runfeng.hibernate.InformationEntity.MainID;
 
-import javax.persistence.Embeddable;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import java.util.Date;
 
 /**
- * Created by lenovo on 2017/4/1.
+ * Created by lenovo on 2017/4/3.
  */
-@Embeddable
-public class Contract {
+public class ContractJson{
+    private int eid;
+    private String name;
     private String contractid;
     @JsonFormat(locale="zh", timezone="GMT+8", pattern="yyyy.MM.dd")
     @Temporal(TemporalType.DATE)
@@ -22,25 +22,35 @@ public class Contract {
     @Temporal(TemporalType.DATE)
     private Date contractenddate;
     private String contractstate;
-    @Parent
-    private PersonalInfo personalInfo;
 
-    public Contract() {
+    public ContractJson(MainID mainID, Contract contract) {
+        if (mainID != null){
+            this.eid = mainID.getEid();
+            this.name = mainID.getName();
+        }
+        if (contract != null){
+            this.contractid = contract.getContractid();
+            this.contractstartdate = contract.getContractstartdate();
+            this.contractenddate = contract.getContractenddate();
+            this.contractstate = contract.getContractstate();
+        }
+
     }
 
-    public Contract(String contractid, Date contractstartdate, Date contractenddate, String contractstate) {
-        this.contractid = contractid;
-        this.contractstartdate = contractstartdate;
-        this.contractenddate = contractenddate;
-        this.contractstate = contractstate;
+    public int getEid() {
+        return eid;
     }
 
-    public PersonalInfo getPersonalInfo() {
-        return personalInfo;
+    public void setEid(int eid) {
+        this.eid = eid;
     }
 
-    public void setPersonalInfo(PersonalInfo personalInfo) {
-        this.personalInfo = personalInfo;
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getContractid() {

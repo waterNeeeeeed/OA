@@ -4,6 +4,9 @@ import com.opensymphony.xwork2.Action;
 import com.opensymphony.xwork2.ActionSupport;
 import com.runfeng.hibernate.HqlQuery;
 import com.runfeng.hibernate.InformationEntity.*;
+import com.runfeng.hibernate.InformationJson.BasicInfoHead;
+import com.runfeng.hibernate.InformationJson.ContractHead;
+import com.runfeng.hibernate.InformationJson.EducationHead;
 import com.runfeng.hibernate.InformationJson.PositionInfoHead;
 import com.runfeng.utils.JsonUtil;
 
@@ -57,6 +60,12 @@ public class InfoTableAction extends ActionSupport {
                 "合同编号", "合同起始", "合同终止", "合同状态");
         return JsonUtil.toJson(sth);
     }
+    //个人信息表头
+    public String convertBasicInfoHeadToJson(){
+        BasicInfoHead basicInfoHead = new BasicInfoHead("EID", "姓名", "性别",
+                "身份证号码", "手机", "籍贯");
+        return JsonUtil.toJson(basicInfoHead);
+    }
 
     //岗位信息表头
     public String convertPositionHeadToJson(){
@@ -77,14 +86,28 @@ public class InfoTableAction extends ActionSupport {
         return JsonUtil.toJson(contractHead);
     }
 
+    //basic basicInfo position education contract
     public String execute(){
         if (department.equals("all") && infoType.equals("basic")){
             informationTableHead = convertEmployeesInfoHeadToJson();
             employeesInfo = HqlQuery.findEmployeeInfo();
         }
+        if (department.equals("all") && infoType.equals("basicInfo")){
+            informationTableHead = convertBasicInfoHeadToJson();
+            employeesInfo = HqlQuery.findBasicInfo();
+        }
         if (department.equals("all") && infoType.equals("position")){
             informationTableHead = convertPositionHeadToJson();
             employeesInfo = HqlQuery.findPositionInfo();
+        }
+        if (department.equals("all") && infoType.equals("education")){
+            informationTableHead = convertEducationHeadToJson();
+            employeesInfo = HqlQuery.findEducationInfo();
+        }
+
+        if (department.equals("all") && infoType.equals("contract")){
+            informationTableHead = convertContractHeadToJson();
+            employeesInfo = HqlQuery.findContractInfo();
         }
         //JsonUtil.toJson(EmployeeInfoExcelTableParseUtil.inputEmployeeInfo(null).values());
         //System.out.println(employeesInfo);
