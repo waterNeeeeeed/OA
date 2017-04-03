@@ -23,7 +23,6 @@
         <property name="hibernate.format_sql">true</property>
         <mapping class="com.runfeng.hibernate.News"></mapping>
         <mapping class="com.runfeng.hibernate.SalaryEntity.Salary"></mapping>
-        <mapping class="com.runfeng.hibernate.InformationEntity.EmployeeInfo"></mapping>
         <mapping class="com.runfeng.hibernate.InformationEntity.PersonalInfo"></mapping>
     </session-factory>
 </hibernate-configuration>

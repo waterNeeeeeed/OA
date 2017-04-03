@@ -28,22 +28,18 @@ public class EmployeeInfoExcelTableParseUtilTest {
         for (Map.Entry<String, EmployeeInfo> entry : employeeInfoMap.entrySet()){
             //System.out.println(JsonUtil.toJson(entry.getValue()));
             //
-            BasicInfo basicInfo = new BasicInfo();
+            BasicInfo basicInfo = new BasicInfo(entry.getValue().getName(), entry.getValue().getSex(),
+                                    entry.getValue().getIdentification(), entry.getValue().getTelephone(), entry.getValue().getNativeplace());
             Contract contract = new Contract(entry.getValue().getContractid(), entry.getValue().getContractstartdate(),
                                     entry.getValue().getContractenddate(), entry.getValue().getContractstate());
             Education education = new Education(entry.getValue().getEducationalbackground(), entry.getValue().getSchool(),
                                     entry.getValue().getSchoolform(), entry.getValue().getMajor());
 
-            basicInfo.setName(entry.getValue().getName());
-            basicInfo.setSex(entry.getValue().getSex());
-            basicInfo.setIdentification(entry.getValue().getIdentification());
-            basicInfo.setDepartment(entry.getValue().getDepartment());
-            basicInfo.setPost(entry.getValue().getPost());
-            basicInfo.setPosition(entry.getValue().getPosition());
-            basicInfo.setPositionstate(entry.getValue().getPositionstate());
+            PositionInfo positionInfo = new PositionInfo(entry.getValue().getWorkid(), entry.getValue().getDepartment(), entry.getValue().getPost(),
+                                    entry.getValue().getPosition(), entry.getValue().getPositionstate());
 
 
-            PersonalInfo personalInfo = new PersonalInfo(entry.getValue().getEid(), basicInfo, contract, education);
+            PersonalInfo personalInfo = new PersonalInfo(entry.getValue().getEid(), basicInfo, positionInfo, education, contract);
 
             sess.save(personalInfo);
             System.out.println(JsonUtil.toJson(personalInfo));
@@ -56,7 +52,7 @@ public class EmployeeInfoExcelTableParseUtilTest {
 
     @Test
     public void inputEmployeeInfo2() throws Exception {
-        System.out.println(JsonUtil.toJson(EmployeeInfoExcelTableParseUtil.inputEmployeeInfo(null).values()));
+        //System.out.println(JsonUtil.toJson(EmployeeInfoExcelTableParseUtil.inputEmployeeInfo(null).values()));
     }
 
     @Test

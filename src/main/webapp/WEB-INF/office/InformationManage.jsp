@@ -243,7 +243,7 @@
             function (data) {
                 //$("#testDiv").text(data["salaryTableHead"]);
                 setCaption(document, tableCaption);
-                createTable(document, 'infoTable', informationTableHead, eval(data[tableContentString]),'informationTableHead');
+                createTable(document, 'infoTable', JSON.parse(data[tableHeadString]), eval(data[tableContentString]),'informationTableHead');
             },
             "json");
     }

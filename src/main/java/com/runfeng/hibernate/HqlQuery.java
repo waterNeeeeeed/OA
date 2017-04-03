@@ -1,6 +1,7 @@
 package com.runfeng.hibernate;
 
 import com.runfeng.hibernate.InformationEntity.EmployeeInfo;
+import com.runfeng.hibernate.InformationEntity.PersonalInfo;
 import com.runfeng.utils.JsonUtil;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -10,6 +11,7 @@ import org.hibernate.service.ServiceRegistry;
 import org.hibernate.service.ServiceRegistryBuilder;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -23,12 +25,16 @@ public class HqlQuery {
 
         Session sess = sf.openSession();
         Transaction tx = sess.beginTransaction();
-        List employeesInfo = sess.createQuery("select distinct e from EmployeeInfo e").list();
-        //System.out.println();
+        List infoList = sess.createQuery("select distinct pi from PersonalInfo pi").list();
+        List<EmployeeInfo> infoTransferList = new ArrayList<>();
+        for (Iterator<PersonalInfo> it = infoList.iterator(); it.hasNext();){
+            PersonalInfo temp = it.next();
+            infoTransferList.add(new EmployeeInfo(temp.getEid(), temp.getBasicInfo(), temp.getPositionInfo(), temp.getContract(), temp.getEducation()));
+        }
         tx.commit();
         sess.close();
         sf.close();
-        return JsonUtil.toJson(employeesInfo);
+        return JsonUtil.toJson(infoTransferList);
     }
     public static String findSalary(){
         Configuration conf = new Configuration().configure();

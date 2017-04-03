@@ -15,15 +15,27 @@ public class PersonalInfo {
     @Id
     private int eid;
     private BasicInfo basicInfo;
-    private Contract contract;
+    private PositionInfo positionInfo;
     private Education education;
+    private Contract contract;
 
+    public PersonalInfo() {
+    }
 
-    public PersonalInfo(int eid, BasicInfo basicInfo, Contract contract, Education education) {
+    public PersonalInfo(int eid, BasicInfo basicInfo, PositionInfo positionInfo, Education education, Contract contract) {
         this.eid = eid;
         this.basicInfo = basicInfo;
-        this.contract = contract;
+        this.positionInfo = positionInfo;
         this.education = education;
+        this.contract = contract;
+    }
+
+    public PositionInfo getPositionInfo() {
+        return positionInfo;
+    }
+
+    public void setPositionInfo(PositionInfo positionInfo) {
+        this.positionInfo = positionInfo;
     }
 
     public int getEid() {
