@@ -1,5 +1,6 @@
 package com.runfeng.utils;
 
+import com.runfeng.hibernate.HqlQuery;
 import com.runfeng.hibernate.InformationEntity.*;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -28,7 +29,8 @@ public class EmployeeInfoExcelTableParseUtilTest {
         for (Map.Entry<String, EmployeeInfo> entry : employeeInfoMap.entrySet()){
             //System.out.println(JsonUtil.toJson(entry.getValue()));
             //
-            BasicInfo basicInfo = new BasicInfo(entry.getValue().getName(), entry.getValue().getSex(),
+            MainID mainID = new MainID(entry.getValue().getEid(), entry.getValue().getName());
+            BasicInfo basicInfo = new BasicInfo(entry.getValue().getSex(),
                                     entry.getValue().getIdentification(), entry.getValue().getTelephone(), entry.getValue().getNativeplace());
             Contract contract = new Contract(entry.getValue().getContractid(), entry.getValue().getContractstartdate(),
                                     entry.getValue().getContractenddate(), entry.getValue().getContractstate());
@@ -39,10 +41,9 @@ public class EmployeeInfoExcelTableParseUtilTest {
                                     entry.getValue().getPosition(), entry.getValue().getPositionstate());
 
 
-            PersonalInfo personalInfo = new PersonalInfo(entry.getValue().getEid(), basicInfo, positionInfo, education, contract);
+            PersonalInfo personalInfo = new PersonalInfo(mainID, basicInfo, positionInfo, education, contract);
 
             sess.save(personalInfo);
-            System.out.println(JsonUtil.toJson(personalInfo));
         }
         tx.commit();
         sess.close();
@@ -53,6 +54,8 @@ public class EmployeeInfoExcelTableParseUtilTest {
     @Test
     public void inputEmployeeInfo2() throws Exception {
         //System.out.println(JsonUtil.toJson(EmployeeInfoExcelTableParseUtil.inputEmployeeInfo(null).values()));
+
+        System.out.println(HqlQuery.findEmployeeInfo());
     }
 
     @Test

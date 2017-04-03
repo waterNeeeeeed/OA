@@ -2,6 +2,7 @@ package com.runfeng.hibernate;
 
 import com.runfeng.hibernate.InformationEntity.EmployeeInfo;
 import com.runfeng.hibernate.InformationEntity.PersonalInfo;
+import com.runfeng.hibernate.InformationEntity.PositionInfo;
 import com.runfeng.utils.JsonUtil;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -25,17 +26,41 @@ public class HqlQuery {
 
         Session sess = sf.openSession();
         Transaction tx = sess.beginTransaction();
-        List infoList = sess.createQuery("select distinct pi from PersonalInfo pi").list();
+        List<PersonalInfo> infoList = sess.createQuery("select distinct pi from PersonalInfo pi").list();
+
         List<EmployeeInfo> infoTransferList = new ArrayList<>();
         for (Iterator<PersonalInfo> it = infoList.iterator(); it.hasNext();){
             PersonalInfo temp = it.next();
-            infoTransferList.add(new EmployeeInfo(temp.getEid(), temp.getBasicInfo(), temp.getPositionInfo(), temp.getContract(), temp.getEducation()));
+            infoTransferList.add(new EmployeeInfo(temp.getMainID(), temp.getBasicInfo(), temp.getPositionInfo(), temp.getContract(), temp.getEducation()));
+
         }
         tx.commit();
         sess.close();
         sf.close();
         return JsonUtil.toJson(infoTransferList);
     }
+
+    public static String findPositionInfo(){
+        Configuration conf = new Configuration().configure();
+        ServiceRegistry serviceRegistry = new ServiceRegistryBuilder().applySettings(conf.getProperties()).build();
+        SessionFactory sf = conf.buildSessionFactory(serviceRegistry);
+
+        Session sess = sf.openSession();
+        Transaction tx = sess.beginTransaction();
+        List infoList = sess.createQuery("select distinct pi.MainID, pi.PositionInfo from PersonalInfo pi").list();
+
+        /*List<PositionInfo> infoTransferList = new ArrayList<>();
+        for (Iterator it = infoList.iterator(); it.hasNext();){
+            PersonalInfo temp = it.next();
+            infoTransferList.add();
+
+        }*/
+        tx.commit();
+        sess.close();
+        sf.close();
+        return JsonUtil.toJson(infoList);
+    }
+
     public static String findSalary(){
         Configuration conf = new Configuration().configure();
         ServiceRegistry serviceRegistry = new ServiceRegistryBuilder().applySettings(conf.getProperties()).build();

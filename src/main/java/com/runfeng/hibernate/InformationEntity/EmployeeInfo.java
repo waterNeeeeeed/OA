@@ -38,32 +38,43 @@ public class EmployeeInfo {
     public EmployeeInfo() {
     }
 
-    public EmployeeInfo(int eid, BasicInfo basicInfo, PositionInfo positionInfo,
+    public EmployeeInfo(MainID mainID, BasicInfo basicInfo, PositionInfo positionInfo,
                         Contract contract, Education education) {
-        this.eid = eid;
+        if (mainID != null){
+            this.eid = mainID.getEid();
+            this.name = mainID.getName();
+        }
 
-        this.name = basicInfo.getName();
-        this.sex = basicInfo.getSex();
-        this.identification = basicInfo.getIdentification();
-        this.telephone = basicInfo.getTelephone();
-        this.nativeplace = basicInfo.getNativeplace();
+        if (basicInfo != null){
 
-        this.workid = positionInfo.getWorkid();
-        this.department = positionInfo.getDepartment();
-        this.post = positionInfo.getPost();
-        this.position = positionInfo.getPosition();
-        this.positionstate = positionInfo.getPositionstate();
+            this.sex = basicInfo.getSex();
+            this.identification = basicInfo.getIdentification();
+            this.telephone = basicInfo.getTelephone();
+            this.nativeplace = basicInfo.getNativeplace();
+        }
 
-        this.educationalbackground = education.getEducationalbackground();
-        this.school = education.getSchool();
-        this.schoolform = education.getSchoolform();
-        this.major = education.getMajor();
+        if (positionInfo != null){
+            this.workid = positionInfo.getWorkid();
+            this.department = positionInfo.getDepartment();
+            this.post = positionInfo.getPost();
+            this.position = positionInfo.getPosition();
+            this.positionstate = positionInfo.getPositionstate();
+        }
 
-        this.contractid = contract.getContractid();
-        this.contractstartdate = contract.getContractstartdate();
-        this.contractenddate = contract.getContractenddate();
-        this.contractstate = contract.getContractstate();
+        if (education != null){
+            this.educationalbackground = education.getEducationalbackground();
+            this.school = education.getSchool();
+            this.schoolform = education.getSchoolform();
+            this.major = education.getMajor();
+        }
 
+        if (contract != null){
+            this.contractid = contract.getContractid();
+            this.contractstartdate = contract.getContractstartdate();
+            this.contractenddate = contract.getContractenddate();
+            this.contractstate = contract.getContractstate();
+
+        }
     }
 
     public int getWorkid() {

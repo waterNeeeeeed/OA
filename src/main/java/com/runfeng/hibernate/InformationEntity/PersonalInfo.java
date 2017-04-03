@@ -2,9 +2,7 @@ package com.runfeng.hibernate.InformationEntity;
 
 import org.hibernate.annotations.Parent;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
  * Created by 帝 on 2017/4/2.
@@ -12,8 +10,14 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "personalinfo_table")
 public class PersonalInfo {
-    @Id
-    private int eid;
+    @EmbeddedId
+    @AttributeOverrides({
+            @AttributeOverride(name = "eid",
+            column = @Column(name = "eid")),
+            @AttributeOverride(name = "name",
+            column = @Column(name = "name"))
+    })
+    private MainID mainID;
     private BasicInfo basicInfo;
     private PositionInfo positionInfo;
     private Education education;
@@ -22,12 +26,20 @@ public class PersonalInfo {
     public PersonalInfo() {
     }
 
-    public PersonalInfo(int eid, BasicInfo basicInfo, PositionInfo positionInfo, Education education, Contract contract) {
-        this.eid = eid;
+    public PersonalInfo(MainID mainID, BasicInfo basicInfo, PositionInfo positionInfo, Education education, Contract contract) {
+        this.mainID = mainID;
         this.basicInfo = basicInfo;
         this.positionInfo = positionInfo;
         this.education = education;
         this.contract = contract;
+    }
+
+    public MainID getMainID() {
+        return mainID;
+    }
+
+    public void setMainID(MainID mainID) {
+        this.mainID = mainID;
     }
 
     public PositionInfo getPositionInfo() {
@@ -38,13 +50,6 @@ public class PersonalInfo {
         this.positionInfo = positionInfo;
     }
 
-    public int getEid() {
-        return eid;
-    }
-
-    public void setEid(int eid) {
-        this.eid = eid;
-    }
 
     public BasicInfo getBasicInfo() {
         return basicInfo;

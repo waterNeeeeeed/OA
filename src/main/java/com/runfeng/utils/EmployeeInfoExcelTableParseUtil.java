@@ -76,7 +76,7 @@ public class EmployeeInfoExcelTableParseUtil {
                     employeeInfoMap.get(name).setNativeplace(row.getCell(8).getRichStringCellValue().getString());
                     if (row.getCell(9).getCellTypeEnum() != CellType.BLANK && row.getCell(10).getCellTypeEnum() != CellType.BLANK){
                         employeeInfoMap.get(name).setContractstartdate(sdf.parse(row.getCell(9).getRichStringCellValue().getString()));
-                        employeeInfoMap.get(name).setContractstartdate(sdf.parse(row.getCell(10).getRichStringCellValue().getString()));
+                        employeeInfoMap.get(name).setContractenddate(sdf.parse(row.getCell(10).getRichStringCellValue().getString()));
                     }
                                //employeeInfoMap.get(name).setContractenddate(row.getCell(10).getDateCellValue());//row.getCell(10).getRichStringCellValue().getString());
                     employeeInfoMap.get(name).setSchool(row.getCell(11).getRichStringCellValue().getString());

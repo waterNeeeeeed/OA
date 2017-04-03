@@ -9,7 +9,6 @@ import javax.persistence.Embeddable;
  */
 @Embeddable
 public class BasicInfo {
-    private String name;
     private String sex;
     private String identification;
     private String telephone;
@@ -21,8 +20,8 @@ public class BasicInfo {
     public BasicInfo() {
     }
 
-    public BasicInfo(String name, String sex, String identification, String telephone, String nativeplace) {
-        this.name = name;
+    public BasicInfo(String sex, String identification, String telephone, String nativeplace) {
+
         this.sex = sex;
         this.identification = identification;
         this.telephone = telephone;
@@ -45,13 +44,7 @@ public class BasicInfo {
         this.personalInfo = personalInfo;
     }
 
-    public String getName() {
-        return name;
-    }
 
-    public void setName(String name) {
-        this.name = name;
-    }
 
     public String getSex() {
         return sex;

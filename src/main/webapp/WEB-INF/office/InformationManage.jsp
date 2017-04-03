@@ -236,6 +236,12 @@
                 createTable(document, 'infoTable', informationTableHead, employeesInfoOffice, 'informationTableHead');
             }
         }
+        if (infoType == "position"){
+            if (department == "all"){
+                getInfoTableAjax("all", "position", "岗位信息", 'informationTableHead', 'employeesInfo');
+
+            }
+        }
     }
     function getInfoTableAjax(department, infoType, tableCaption, tableHeadString, tableContentString) {
         var uri = "InfoTableAction.action";
