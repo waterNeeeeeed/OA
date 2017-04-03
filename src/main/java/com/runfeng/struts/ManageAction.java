@@ -10,6 +10,15 @@ import org.springframework.context.ApplicationContext;
 public class ManageAction extends ActionSupport {
     private String salaryType;
     private String infoType;
+    private String department;
+
+    public String getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(String department) {
+        this.department = department;
+    }
 
     public String getInfoType() {
         return infoType;
@@ -36,6 +45,7 @@ public class ManageAction extends ActionSupport {
 
     public String InformationManage(){
         ActionContext.getContext().getSession().put("infoType", getInfoType());
+        ActionContext.getContext().getSession().put("department", getDepartment());
         return "InformationManage";
     }
 

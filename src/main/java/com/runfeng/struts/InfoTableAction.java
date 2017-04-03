@@ -78,7 +78,7 @@ public class InfoTableAction extends ActionSupport {
     }
 
     public String execute(){
-        if (department.equals("all") && infoType.equals("basic"));{
+        if (department.equals("all") && infoType.equals("basic")){
             informationTableHead = convertEmployeesInfoHeadToJson();
             employeesInfo = HqlQuery.findEmployeeInfo();
         }

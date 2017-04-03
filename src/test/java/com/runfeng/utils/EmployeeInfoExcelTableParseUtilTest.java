@@ -55,7 +55,8 @@ public class EmployeeInfoExcelTableParseUtilTest {
     public void inputEmployeeInfo2() throws Exception {
         //System.out.println(JsonUtil.toJson(EmployeeInfoExcelTableParseUtil.inputEmployeeInfo(null).values()));
 
-        System.out.println(HqlQuery.findEmployeeInfo());
+        //System.out.println(HqlQuery.findEmployeeInfo());
+        System.out.println(HqlQuery.findPositionInfo());
     }
 
     @Test

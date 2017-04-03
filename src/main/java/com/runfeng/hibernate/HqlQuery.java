@@ -1,8 +1,10 @@
 package com.runfeng.hibernate;
 
 import com.runfeng.hibernate.InformationEntity.EmployeeInfo;
+import com.runfeng.hibernate.InformationEntity.MainID;
 import com.runfeng.hibernate.InformationEntity.PersonalInfo;
 import com.runfeng.hibernate.InformationEntity.PositionInfo;
+import com.runfeng.hibernate.InformationJson.PositionInfoJson;
 import com.runfeng.utils.JsonUtil;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -47,8 +49,17 @@ public class HqlQuery {
 
         Session sess = sf.openSession();
         Transaction tx = sess.beginTransaction();
-        List infoList = sess.createQuery("select distinct pi.MainID, pi.PositionInfo from PersonalInfo pi").list();
-
+        List infoList = sess.createQuery("select distinct pi.mainID, pi.positionInfo from PersonalInfo pi").list();
+        List<PositionInfoJson> positionJson = new ArrayList<>();
+        MainID temp_MainID;
+        PositionInfo temp_PositionInfo;
+        for (Iterator it = infoList.iterator(); it.hasNext();){
+            Object[] objects = (Object[])it.next();
+            temp_MainID = (MainID)objects[0];
+            temp_PositionInfo = (PositionInfo)objects[1];
+            positionJson.add(new PositionInfoJson(temp_MainID, temp_PositionInfo));
+        }
+        System.out.print("");
         /*List<PositionInfo> infoTransferList = new ArrayList<>();
         for (Iterator it = infoList.iterator(); it.hasNext();){
             PersonalInfo temp = it.next();
@@ -58,7 +69,7 @@ public class HqlQuery {
         tx.commit();
         sess.close();
         sf.close();
-        return JsonUtil.toJson(infoList);
+        return JsonUtil.toJson(positionJson);
     }
 
     public static String findSalary(){
