@@ -21,10 +21,17 @@ import java.util.List;
  * Created by 帝 on 2017/3/31.
  */
 public class HqlQuery {
-    public static String findEmployeeInfo(){
+    public static String findEmployeeInfo(String department){
         Session sess = HqlUtil.currentSession();
         Transaction tx = sess.beginTransaction();
-        List<PersonalInfo> infoList = sess.createQuery("select distinct pi from PersonalInfo pi").list();
+        List<PersonalInfo> infoList = null;
+        if (department.equals("all")){
+            infoList = sess.createQuery("select distinct pi from PersonalInfo pi").list();
+        }else if (department.equals("office")){
+            infoList = sess.createQuery("select distinct pi from PersonalInfo pi " +
+                    "where pi.positionInfo.department = :department").setString("department", "经理办").list();
+        }
+
 
         List<EmployeeInfo> infoTransferList = new ArrayList<>();
         for (Iterator<PersonalInfo> it = infoList.iterator(); it.hasNext();){

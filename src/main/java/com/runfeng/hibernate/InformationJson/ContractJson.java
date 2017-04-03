@@ -17,6 +17,9 @@ public class ContractJson{
     private String contractid;
     @JsonFormat(locale="zh", timezone="GMT+8", pattern="yyyy.MM.dd")
     @Temporal(TemporalType.DATE)
+    private Date contractfirstsigndate;
+    @JsonFormat(locale="zh", timezone="GMT+8", pattern="yyyy.MM.dd")
+    @Temporal(TemporalType.DATE)
     private Date contractstartdate;
     @JsonFormat(locale="zh", timezone="GMT+8", pattern="yyyy.MM.dd")
     @Temporal(TemporalType.DATE)
@@ -30,11 +33,20 @@ public class ContractJson{
         }
         if (contract != null){
             this.contractid = contract.getContractid();
+            this.contractfirstsigndate = contract.getContractfirstsigndate();
             this.contractstartdate = contract.getContractstartdate();
             this.contractenddate = contract.getContractenddate();
             this.contractstate = contract.getContractstate();
         }
 
+    }
+
+    public Date getContractfirstsigndate() {
+        return contractfirstsigndate;
+    }
+
+    public void setContractfirstsigndate(Date contractfirstsigndate) {
+        this.contractfirstsigndate = contractfirstsigndate;
     }
 
     public int getEid() {

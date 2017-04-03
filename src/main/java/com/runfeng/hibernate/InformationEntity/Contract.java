@@ -17,6 +17,9 @@ public class Contract {
     private String contractid;
     @JsonFormat(locale="zh", timezone="GMT+8", pattern="yyyy.MM.dd")
     @Temporal(TemporalType.DATE)
+    private Date contractfirstsigndate;
+    @JsonFormat(locale="zh", timezone="GMT+8", pattern="yyyy.MM.dd")
+    @Temporal(TemporalType.DATE)
     private Date contractstartdate;
     @JsonFormat(locale="zh", timezone="GMT+8", pattern="yyyy.MM.dd")
     @Temporal(TemporalType.DATE)
@@ -28,11 +31,20 @@ public class Contract {
     public Contract() {
     }
 
-    public Contract(String contractid, Date contractstartdate, Date contractenddate, String contractstate) {
+    public Contract(String contractid, Date contractfirstsigndate, Date contractstartdate, Date contractenddate, String contractstate) {
         this.contractid = contractid;
+        this.contractfirstsigndate = contractfirstsigndate;
         this.contractstartdate = contractstartdate;
         this.contractenddate = contractenddate;
         this.contractstate = contractstate;
+    }
+
+    public Date getContractfirstsigndate() {
+        return contractfirstsigndate;
+    }
+
+    public void setContractfirstsigndate(Date contractfirstsigndate) {
+        this.contractfirstsigndate = contractfirstsigndate;
     }
 
     public PersonalInfo getPersonalInfo() {

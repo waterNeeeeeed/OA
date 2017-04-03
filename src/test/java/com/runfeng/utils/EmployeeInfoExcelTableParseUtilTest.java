@@ -32,7 +32,7 @@ public class EmployeeInfoExcelTableParseUtilTest {
             MainID mainID = new MainID(entry.getValue().getEid(), entry.getValue().getName());
             BasicInfo basicInfo = new BasicInfo(entry.getValue().getSex(),
                                     entry.getValue().getIdentification(), entry.getValue().getTelephone(), entry.getValue().getNativeplace());
-            Contract contract = new Contract(entry.getValue().getContractid(), entry.getValue().getContractstartdate(),
+            Contract contract = new Contract(entry.getValue().getContractid(), entry.getValue().getContractfirstsigndate(), entry.getValue().getContractstartdate(),
                                     entry.getValue().getContractenddate(), entry.getValue().getContractstate());
             Education education = new Education(entry.getValue().getEducationalbackground(), entry.getValue().getSchool(),
                                     entry.getValue().getSchoolform(), entry.getValue().getMajor());

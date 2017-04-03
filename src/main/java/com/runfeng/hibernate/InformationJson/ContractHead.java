@@ -6,17 +6,27 @@ public class ContractHead {
     private String eid;
     private String name;
     private String contractid;
+    private String contractfirstsigndate;
     private String contractstartdate;
     private String contractenddate;
     private String contractstate;
 
-    public ContractHead(String eid, String name, String contractid, String contractstartdate, String contractenddate, String contractstate) {
+    public ContractHead(String eid, String name, String contractid, String contractfirstsigndate, String contractstartdate, String contractenddate, String contractstate) {
         this.eid = eid;
         this.name = name;
         this.contractid = contractid;
+        this.contractfirstsigndate = contractfirstsigndate;
         this.contractstartdate = contractstartdate;
         this.contractenddate = contractenddate;
         this.contractstate = contractstate;
+    }
+
+    public String getContractfirstsigndate() {
+        return contractfirstsigndate;
+    }
+
+    public void setContractfirstsigndate(String contractfirstsigndate) {
+        this.contractfirstsigndate = contractfirstsigndate;
     }
 
     public String getEid() {

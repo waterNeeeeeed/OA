@@ -27,6 +27,7 @@ public class EmployeesInfoHead {
     private String major;
 
     private String contractid;
+    private String contractfirstsigndate;
     private String contractstartdate;
     private String contractenddate;
     private String contractstate;
@@ -35,7 +36,7 @@ public class EmployeesInfoHead {
                              String name, String sex, String identification, String telephone, String nativeplace,
                              String workid, String department, String post, String position, String positionstate,
                              String educationalbackground, String school, String schoolform, String major,
-                             String contractid, String contractstartdate, String contractenddate, String contractstate) {
+                             String contractid, String contractfirstsigndate, String contractstartdate, String contractenddate, String contractstate) {
         this.eid = eid;
         this.name = name;
         this.sex = sex;
@@ -52,9 +53,18 @@ public class EmployeesInfoHead {
         this.schoolform = schoolform;
         this.major = major;
         this.contractid = contractid;
+        this.contractfirstsigndate = contractfirstsigndate;
         this.contractstartdate = contractstartdate;
         this.contractenddate = contractenddate;
         this.contractstate = contractstate;
+    }
+
+    public String getContractfirstsigndate() {
+        return contractfirstsigndate;
+    }
+
+    public void setContractfirstsigndate(String contractfirstsigndate) {
+        this.contractfirstsigndate = contractfirstsigndate;
     }
 
     public String getEid() {

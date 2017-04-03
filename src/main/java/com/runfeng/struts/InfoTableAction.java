@@ -57,7 +57,7 @@ public class InfoTableAction extends ActionSupport {
                 "手机号码", "籍贯", "工号", "部门",
                 "岗位", "职务", "职务状态",
                 "学历", "学校", "办学形式", "主修",
-                "合同编号", "合同起始", "合同终止", "合同状态");
+                "合同编号", "第一次签合同","合同起始", "合同终止", "合同状态");
         return JsonUtil.toJson(sth);
     }
     //个人信息表头
@@ -82,7 +82,7 @@ public class InfoTableAction extends ActionSupport {
     //合同信息表头
     public String convertContractHeadToJson(){
         ContractHead contractHead = new ContractHead("EID", "姓名",
-                "合同编号", "合同起始", "合同终止","合同状态");
+                "合同编号",  "第一次签合同","合同起始", "合同终止","合同状态");
         return JsonUtil.toJson(contractHead);
     }
 
@@ -90,7 +90,11 @@ public class InfoTableAction extends ActionSupport {
     public String execute(){
         if (department.equals("all") && infoType.equals("basic")){
             informationTableHead = convertEmployeesInfoHeadToJson();
-            employeesInfo = HqlQuery.findEmployeeInfo();
+            employeesInfo = HqlQuery.findEmployeeInfo("all");
+        }
+        if (department.equals("office") && infoType.equals("basic")){
+            informationTableHead = convertEmployeesInfoHeadToJson();
+            employeesInfo = HqlQuery.findEmployeeInfo("office");
         }
         if (department.equals("all") && infoType.equals("basicInfo")){
             informationTableHead = convertBasicInfoHeadToJson();

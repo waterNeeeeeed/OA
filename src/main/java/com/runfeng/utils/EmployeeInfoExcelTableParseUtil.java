@@ -89,7 +89,9 @@ public class EmployeeInfoExcelTableParseUtil {
                         employeeInfoMap.get(name).setTelephone("-");
                     }
                     employeeInfoMap.get(name).setContractstate(row.getCell(16).getRichStringCellValue().getString());
-
+                    if (row.getCell(17).getCellTypeEnum() != CellType.BLANK ){
+                        employeeInfoMap.get(name).setContractfirstsigndate(sdf.parse(row.getCell(17).getRichStringCellValue().getString()));
+                    }
                 }
             }
 

@@ -10,7 +10,7 @@ import static org.junit.Assert.*;
 public class HqlQueryTest {
     @Test
     public void findEmployeeInfo() throws Exception {
-        HqlQuery.findEmployeeInfo();
+        HqlQuery.findEmployeeInfo("all");
     }
 
 }
