@@ -22,11 +22,7 @@ import java.util.List;
  */
 public class HqlQuery {
     public static String findEmployeeInfo(){
-        Configuration conf = new Configuration().configure();
-        ServiceRegistry serviceRegistry = new ServiceRegistryBuilder().applySettings(conf.getProperties()).build();
-        SessionFactory sf = conf.buildSessionFactory(serviceRegistry);
-
-        Session sess = sf.openSession();
+        Session sess = HqlUtil.currentSession();
         Transaction tx = sess.beginTransaction();
         List<PersonalInfo> infoList = sess.createQuery("select distinct pi from PersonalInfo pi").list();
 
@@ -37,17 +33,12 @@ public class HqlQuery {
 
         }
         tx.commit();
-        sess.close();
-        sf.close();
+        HqlUtil.closeSession();
         return JsonUtil.toJson(infoTransferList);
     }
 
     public static String findPositionInfo(){
-        Configuration conf = new Configuration().configure();
-        ServiceRegistry serviceRegistry = new ServiceRegistryBuilder().applySettings(conf.getProperties()).build();
-        SessionFactory sf = conf.buildSessionFactory(serviceRegistry);
-
-        Session sess = sf.openSession();
+        Session sess = HqlUtil.currentSession();
         Transaction tx = sess.beginTransaction();
         List infoList = sess.createQuery("select distinct pi.mainID, pi.positionInfo from PersonalInfo pi").list();
         List<PositionInfoJson> positionJson = new ArrayList<>();
@@ -66,17 +57,12 @@ public class HqlQuery {
 
         }*/
         tx.commit();
-        sess.close();
-        sf.close();
+        HqlUtil.closeSession();
         return JsonUtil.toJson(positionJson);
     }
 
     public static String findEducationInfo(){
-        Configuration conf = new Configuration().configure();
-        ServiceRegistry serviceRegistry = new ServiceRegistryBuilder().applySettings(conf.getProperties()).build();
-        SessionFactory sf = conf.buildSessionFactory(serviceRegistry);
-
-        Session sess = sf.openSession();
+        Session sess = HqlUtil.currentSession();
         Transaction tx = sess.beginTransaction();
         List infoList = sess.createQuery("select distinct pi.mainID, pi.education from PersonalInfo pi").list();
         List<EducationJson> educationJsons = new ArrayList<>();
@@ -95,18 +81,13 @@ public class HqlQuery {
 
         }*/
         tx.commit();
-        sess.close();
-        sf.close();
+        HqlUtil.closeSession();
         return JsonUtil.toJson(educationJsons);
 
     }
 
     public static String findContractInfo(){
-        Configuration conf = new Configuration().configure();
-        ServiceRegistry serviceRegistry = new ServiceRegistryBuilder().applySettings(conf.getProperties()).build();
-        SessionFactory sf = conf.buildSessionFactory(serviceRegistry);
-
-        Session sess = sf.openSession();
+        Session sess = HqlUtil.currentSession();
         Transaction tx = sess.beginTransaction();
         List infoList = sess.createQuery("select distinct pi.mainID, pi.contract from PersonalInfo pi").list();
         List<ContractJson> contractJsons = new ArrayList<>();
@@ -125,17 +106,12 @@ public class HqlQuery {
 
         }*/
         tx.commit();
-        sess.close();
-        sf.close();
+        HqlUtil.closeSession();
         return JsonUtil.toJson(contractJsons);
 
     }
     public static String findBasicInfo(){
-        Configuration conf = new Configuration().configure();
-        ServiceRegistry serviceRegistry = new ServiceRegistryBuilder().applySettings(conf.getProperties()).build();
-        SessionFactory sf = conf.buildSessionFactory(serviceRegistry);
-
-        Session sess = sf.openSession();
+        Session sess = HqlUtil.currentSession();
         Transaction tx = sess.beginTransaction();
         List infoList = sess.createQuery("select distinct pi.mainID, pi.basicInfo from PersonalInfo pi").list();
         List<BasicInfoJson> basicInfoJsons = new ArrayList<>();
@@ -154,22 +130,16 @@ public class HqlQuery {
 
         }*/
         tx.commit();
-        sess.close();
-        sf.close();
+        HqlUtil.closeSession();
         return JsonUtil.toJson(basicInfoJsons);
     }
     public static String findSalary(){
-        Configuration conf = new Configuration().configure();
-        ServiceRegistry serviceRegistry = new ServiceRegistryBuilder().applySettings(conf.getProperties()).build();
-        SessionFactory sf = conf.buildSessionFactory(serviceRegistry);
-
-        Session sess = sf.openSession();
+        Session sess = HqlUtil.currentSession();
         Transaction tx = sess.beginTransaction();
         List salary = sess.createQuery("select distinct s from Salary s").list();
         //System.out.println();
         tx.commit();
-        sess.close();
-        sf.close();
+        HqlUtil.closeSession();
         return JsonUtil.toJson(salary);
     }
 }
