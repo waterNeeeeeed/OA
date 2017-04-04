@@ -11,17 +11,15 @@ import java.util.*;
  * Created by lenovo on 2017/4/4.
  */
 public class TableHeadParseUtil {
-
-
-    public static String convertEmployeesInfoHeadToJson(){
+    public static String convertTableHeadToJson(String resourcePath, String classPath){
         Locale myLocale = Locale.getDefault(Locale.Category.FORMAT);
-        ResourceBundle resourceBundle = ResourceBundle.getBundle("tablehead/employeesinfo_tablehead", myLocale);
+        ResourceBundle resourceBundle = ResourceBundle.getBundle(resourcePath, myLocale);
 
         try {
-            Class clz = Class.forName("com.runfeng.hibernate.InformationEntity.EmployeesInfoHead");
+            Class clz = Class.forName(classPath);
             Object tableHead = clz.newInstance();
 
-            Field[] fields = EmployeesInfoHead.class.getDeclaredFields();
+            Field[] fields = clz.getDeclaredFields();
             for (Field field : fields){
                 String method_name = "set" + field.getName().substring(0,1).toUpperCase() + field.getName().substring(1);
                 clz.getMethod(method_name, String.class)

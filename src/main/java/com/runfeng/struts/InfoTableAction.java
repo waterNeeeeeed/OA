@@ -9,6 +9,7 @@ import com.runfeng.hibernate.InformationJson.ContractHead;
 import com.runfeng.hibernate.InformationJson.EducationHead;
 import com.runfeng.hibernate.InformationJson.PositionInfoHead;
 import com.runfeng.utils.JsonUtil;
+import com.runfeng.utils.TableHeadParseUtil;
 
 /**
  * Created by lenovo on 2017/3/31.
@@ -89,7 +90,8 @@ public class InfoTableAction extends ActionSupport {
     //basic basicInfo position education contract
     public String execute(){
         if (getInfoType().equals("basic")){
-            informationTableHead = convertEmployeesInfoHeadToJson();
+            informationTableHead = TableHeadParseUtil.convertTableHeadToJson("tablehead/employeesinfo_tablehead",
+                    "com.runfeng.hibernate.InformationEntity.EmployeesInfoHead");
             employeesInfo = HqlQuery.findEmployeeInfo(getDepartment());
         }
         if (department.equals("all") && infoType.equals("basicInfo")){

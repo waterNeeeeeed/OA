@@ -11,6 +11,9 @@ public class BasicInfoHead {
     private String telephone;
     private String nativeplace;
 
+    public BasicInfoHead() {
+    }
+
     public BasicInfoHead(String eid, String name, String sex, String identification, String telephone, String nativeplace) {
         this.eid = eid;
         this.name = name;
