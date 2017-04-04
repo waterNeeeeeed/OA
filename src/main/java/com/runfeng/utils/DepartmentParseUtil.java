@@ -4,26 +4,21 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Enumeration;
+import java.util.Locale;
 import java.util.Properties;
+import java.util.ResourceBundle;
 
 /**
  * Created by 帝 on 2017/4/3.
  */
-class DepartmentParseUtil {
+public class DepartmentParseUtil {
 
-    public static Properties departmentParse(){
-        Properties properties = new Properties();
-        try {
-            FileInputStream fin = new FileInputStream(new File("../../../basicR/Department.properties"));
-            properties.load(fin);
-            return properties;
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }finally {
-            throw new RuntimeException("Department.properties don't exist!");
-        }
+    public static String departmentParse(String key){
+        Locale myLocale = Locale.getDefault(Locale.Category.FORMAT);
+        ResourceBundle resourceBundle = ResourceBundle.getBundle("Department", myLocale);
+
+        return resourceBundle.getString(key);
 
     }
 }

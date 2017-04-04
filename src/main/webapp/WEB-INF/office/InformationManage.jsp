@@ -154,12 +154,20 @@
                     <span class="glyphicon glyphicon-home" aria-hidden="true"></span>&nbsp;&nbsp;总览</button>
                 <button id="office" type="button" class="btn btn-primary"
                         onclick="selectDepartmentToCreateTable('office', '${sessionScope.infoType}');">经理办</button>
-                <button id="fd" type="button" class="btn btn-primary">财务部</button>
-                <button id="eed" type="button" class="btn btn-primary">设备工程部</button>
-                <button id="pwd" type="button" class="btn btn-primary">公用工程部</button>
-                <button id="pd" type="button" class="btn btn-primary">生产部</button>
-                <button id="workshop" type="button" class="btn btn-primary">车间</button>
-                <button id="temp" type="button" class="btn btn-primary">临时用工</button>
+                <button id="fd" type="button" class="btn btn-primary"
+                        onclick="selectDepartmentToCreateTable('fd', '${sessionScope.infoType}');">财务部</button>
+                <button id="eed" type="button" class="btn btn-primary"
+                        onclick="selectDepartmentToCreateTable('eed', '${sessionScope.infoType}');">设备工程部</button>
+                <button id="pwd" type="button" class="btn btn-primary"
+                        onclick="selectDepartmentToCreateTable('pwd', '${sessionScope.infoType}');">公用工程部</button>
+                <button id="pd" type="button" class="btn btn-primary"
+                        onclick="selectDepartmentToCreateTable('pd', '${sessionScope.infoType}');">生产部</button>
+                <button id="qcd" type="button" class="btn btn-primary"
+                        onclick="selectDepartmentToCreateTable('qcd', '${sessionScope.infoType}');">质检部</button>
+                <button id="workshop" type="button" class="btn btn-primary"
+                        onclick="selectDepartmentToCreateTable('workshop', '${sessionScope.infoType}');">车间</button>
+                <button id="temp" type="button" class="btn btn-primary"
+                        onclick="selectDepartmentToCreateTable('temp', '${sessionScope.infoType}');">临时用工</button>
             </div>
         <div class="col-md-11">
             <div class="panel panel-success">

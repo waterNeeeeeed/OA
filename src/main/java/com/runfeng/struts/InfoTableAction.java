@@ -88,13 +88,9 @@ public class InfoTableAction extends ActionSupport {
 
     //basic basicInfo position education contract
     public String execute(){
-        if (department.equals("all") && infoType.equals("basic")){
+        if (getInfoType().equals("basic")){
             informationTableHead = convertEmployeesInfoHeadToJson();
-            employeesInfo = HqlQuery.findEmployeeInfo("all");
-        }
-        if (department.equals("office") && infoType.equals("basic")){
-            informationTableHead = convertEmployeesInfoHeadToJson();
-            employeesInfo = HqlQuery.findEmployeeInfo("office");
+            employeesInfo = HqlQuery.findEmployeeInfo(getDepartment());
         }
         if (department.equals("all") && infoType.equals("basicInfo")){
             informationTableHead = convertBasicInfoHeadToJson();

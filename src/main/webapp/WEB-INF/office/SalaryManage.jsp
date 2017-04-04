@@ -156,6 +156,7 @@
                 <button id="eed" type="button" class="btn btn-primary">设备工程部</button>
                 <button id="pwd" type="button" class="btn btn-primary">公用工程部</button>
                 <button id="pd" type="button" class="btn btn-primary">生产部</button>
+                <button id="qcd" type="button" class="btn btn-primary">质检部</button>
                 <button id="workshop" type="button" class="btn btn-primary">车间</button>
                 <button id="temp" type="button" class="btn btn-primary">临时用工</button>
             </div>

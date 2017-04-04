@@ -12,8 +12,8 @@ import static org.junit.Assert.*;
 public class DepartmentParseUtilTest {
     @Test
     public void departmentParse() throws Exception {
-        Properties properties = DepartmentParseUtil.departmentParse();
-        System.out.println(properties.getProperty("office"));
+        String department = DepartmentParseUtil.departmentParse("eed");
+        System.out.println(department);
     }
 
 }

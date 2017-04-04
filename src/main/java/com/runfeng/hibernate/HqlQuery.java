@@ -5,6 +5,7 @@ import com.runfeng.hibernate.InformationJson.BasicInfoJson;
 import com.runfeng.hibernate.InformationJson.ContractJson;
 import com.runfeng.hibernate.InformationJson.EducationJson;
 import com.runfeng.hibernate.InformationJson.PositionInfoJson;
+import com.runfeng.utils.DepartmentParseUtil;
 import com.runfeng.utils.JsonUtil;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -16,7 +17,7 @@ import org.hibernate.service.ServiceRegistryBuilder;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-
+import com.runfeng.utils.*;
 /**
  * Created by 帝 on 2017/3/31.
  */
@@ -27,9 +28,11 @@ public class HqlQuery {
         List<PersonalInfo> infoList = null;
         if (department.equals("all")){
             infoList = sess.createQuery("select distinct pi from PersonalInfo pi").list();
-        }else if (department.equals("office")){
+        }else{
+            String department_zh_CN = DepartmentParseUtil.departmentParse(department);
             infoList = sess.createQuery("select distinct pi from PersonalInfo pi " +
-                    "where pi.positionInfo.department = :department").setString("department", "经理办").list();
+                    "where pi.positionInfo.department = :department")
+                    .setString("department", department_zh_CN).list();
         }
 
 
