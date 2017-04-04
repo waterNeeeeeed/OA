@@ -19,14 +19,15 @@ public class TableHeadParseUtil {
 
         try {
             Class clz = Class.forName("com.runfeng.hibernate.InformationEntity.EmployeesInfoHead");
+            Object tableHead = clz.newInstance();
 
             Field[] fields = EmployeesInfoHead.class.getDeclaredFields();
             for (Field field : fields){
                 String method_name = "set" + field.getName().substring(0,1).toUpperCase() + field.getName().substring(1);
                 clz.getMethod(method_name, String.class)
-                        .invoke(clz.newInstance(), resourceBundle.getString(field.getName()));
+                        .invoke(tableHead, resourceBundle.getString(field.getName()));
             }
-            return JsonUtil.toJson(clz.newInstance());
+            return JsonUtil.toJson(tableHead);
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         } catch (NoSuchMethodException e) {
