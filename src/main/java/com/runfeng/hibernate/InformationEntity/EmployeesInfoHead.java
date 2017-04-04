@@ -32,6 +32,9 @@ public class EmployeesInfoHead {
     private String contractenddate;
     private String contractstate;
 
+    public EmployeesInfoHead() {
+    }
+
     public EmployeesInfoHead(String eid,
                              String name, String sex, String identification, String telephone, String nativeplace,
                              String workid, String department, String post, String position, String positionstate,
