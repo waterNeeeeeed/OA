@@ -22,6 +22,7 @@ import com.runfeng.utils.*;
  * Created by 帝 on 2017/3/31.
  */
 public class HqlQuery {
+
     public static String findEmployeeInfo(String department){
         Session sess = HqlUtil.currentSession();
         Transaction tx = sess.beginTransaction();

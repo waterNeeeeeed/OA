@@ -1,7 +1,4 @@
-package com.runfeng.spring.constructor;
-
-import com.runfeng.spring.service.Axe;
-import com.runfeng.spring.service.Person;
+package com.runfeng.spring.test;
 
 /**
  * Created by hasee-pc on 2017/2/21.

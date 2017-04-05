@@ -1,4 +1,4 @@
-package com.runfeng.spring.service;
+package com.runfeng.spring.test;
 
 import com.runfeng.hibernate.SalaryEntity.Salary;
 import com.runfeng.hibernate.SalaryEntity.SalaryTableRow;
