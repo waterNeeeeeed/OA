@@ -109,12 +109,6 @@ public class HqlQuery {
             temp_Contract = (Contract)objects[1];
             contractJsons.add(new ContractJson(temp_MainID, temp_Contract));
         }
-        /*List<PositionInfo> infoTransferList = new ArrayList<>();
-        for (Iterator it = infoList.iterator(); it.hasNext();){
-            PersonalInfo temp = it.next();
-            infoTransferList.add();
-
-        }*/
         tx.commit();
         HqlUtil.closeSession();
         return JsonUtil.toJson(contractJsons);
@@ -133,12 +127,6 @@ public class HqlQuery {
             temp_BasicInfo = (BasicInfo)objects[1];
             basicInfoJsons.add(new BasicInfoJson(temp_MainID, temp_BasicInfo));
         }
-        /*List<PositionInfo> infoTransferList = new ArrayList<>();
-        for (Iterator it = infoList.iterator(); it.hasNext();){
-            PersonalInfo temp = it.next();
-            infoTransferList.add();
-
-        }*/
         tx.commit();
         HqlUtil.closeSession();
         return JsonUtil.toJson(basicInfoJsons);

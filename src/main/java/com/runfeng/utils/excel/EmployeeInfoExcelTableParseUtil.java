@@ -1,4 +1,4 @@
-package com.runfeng.utils;
+package com.runfeng.utils.excel;
 
 import com.runfeng.hibernate.InformationEntity.EmployeeInfo;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
@@ -13,8 +13,10 @@ import java.util.*;
 
 /**
  * Created by lenovo on 2017/3/31.
+ * 期初建立信息
  */
 public class EmployeeInfoExcelTableParseUtil {
+    private static int EMPLOYEE_NUMBER = 109;
     public static Map<String, EmployeeInfo> inputEmployeeInfo(String filePath){
 
         Map<String, EmployeeInfo> employeeInfoMap = new HashMap<>();
@@ -51,15 +53,20 @@ public class EmployeeInfoExcelTableParseUtil {
                     //System.out.println(row.getCell(1).getRichStringCellValue().getString());
                 }
             }
+            //读取EID
             sheet1 = wb.getSheet("正式职工");
             DecimalFormat eid = new DecimalFormat("#####");
-            for (int rowIndex=1; rowIndex<=108; rowIndex++){
+            for (int rowIndex=1; rowIndex<=EMPLOYEE_NUMBER; rowIndex++){
                 Row row = sheet1.getRow(rowIndex);
                 if (row.getCell(0).getCellTypeEnum() != CellType.BLANK){
-                    employeeInfoMap.get(row.getCell(1).getRichStringCellValue().getString())
-                        .setEid(Integer.parseInt(eid.format(row.getCell(0).getNumericCellValue())));
+                    String key = row.getCell(1).getRichStringCellValue().getString();
+                    int number = Integer.parseInt(eid.format(row.getCell(0).getNumericCellValue()));
+                    employeeInfoMap.get(key).setEid(number);
+                    //工号暂用ＥＩＤ
+                    employeeInfoMap.get(key).setWorkid(number);
                 }else {
-                    //System.out.println(row.getCell(1).getRichStringCellValue().getString());
+                    employeeInfoMap.get(row.getCell(1).getRichStringCellValue().getString())
+                            .setEid(999999);
                 }
             }
             Sheet sheet2 = wb2.getSheet("正式人员");
@@ -82,17 +89,28 @@ public class EmployeeInfoExcelTableParseUtil {
                     employeeInfoMap.get(name).setSchool(row.getCell(11).getRichStringCellValue().getString());
                     employeeInfoMap.get(name).setSchoolform(row.getCell(12).getRichStringCellValue().getString());
                     employeeInfoMap.get(name).setMajor(row.getCell(13).getRichStringCellValue().getString());
-                    if (row.getCell(15) != null){
-                        employeeInfoMap.get(name).setTelephone(telephone.format(row.getCell(15).getNumericCellValue()));
 
-                    }else {
-                        employeeInfoMap.get(name).setTelephone("-");
-                    }
                     employeeInfoMap.get(name).setContractstate(row.getCell(16).getRichStringCellValue().getString());
                     if (row.getCell(17).getCellTypeEnum() != CellType.BLANK ){
                         employeeInfoMap.get(name).setContractfirstsigndate(sdf.parse(row.getCell(17).getRichStringCellValue().getString()));
                     }
                 }
+            }
+            //电话
+            sheet2 = wb2.getSheet("电话");
+            for (int rowIndex=1; rowIndex<=sheet2.getLastRowNum(); rowIndex++){
+                Row row = sheet2.getRow(rowIndex);
+                if (row.getCell(1).getCellTypeEnum() != CellType.BLANK){
+                    String name = row.getCell(1).getRichStringCellValue().getString();
+                    if (employeeInfoMap.containsKey(name)){
+                        if (row.getCell(2) != null){
+                            employeeInfoMap.get(name).setTelephone(telephone.format(row.getCell(2).getNumericCellValue()));
+                        }else {
+                            employeeInfoMap.get(name).setTelephone("无");
+                        }
+                    }
+                }
+
             }
 
             wb.close();
