@@ -117,14 +117,14 @@ public class InfoTableAction extends ActionSupport {
             informationTableHead = convertPositionHeadToJson();
             employeesInfo = HqlQuery.findPositionInfo(getDepartment());
         }
-        if (department.equals("all") && infoType.equals("education")){
+        if (infoType.equals("education")){
             informationTableHead = convertEducationHeadToJson();
-            employeesInfo = HqlQuery.findEducationInfo();
+            employeesInfo = HqlQuery.findEducationInfo(getDepartment());
         }
 
-        if (department.equals("all") && infoType.equals("contract")){
+        if (infoType.equals("contract")){
             informationTableHead = convertContractHeadToJson();
-            employeesInfo = HqlQuery.findContractInfo();
+            employeesInfo = HqlQuery.findContractInfo(getDepartment());
         }
         //JsonUtil.toJson(EmployeeInfoExcelTableParseUtil.inputEmployeeInfo(null).values());
         //System.out.println(employeesInfo);

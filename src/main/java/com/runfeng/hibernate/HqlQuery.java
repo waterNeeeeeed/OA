@@ -7,6 +7,7 @@ import com.runfeng.hibernate.InformationJson.EducationJson;
 import com.runfeng.hibernate.InformationJson.PositionInfoJson;
 import com.runfeng.utils.DepartmentParseUtil;
 import com.runfeng.utils.JsonUtil;
+import org.apache.struts2.json.annotations.JSON;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -35,6 +36,7 @@ public class HqlQuery {
         return infoList;
     }
 
+    //所有信息整合后的信息
     public static String findEmployeeInfo(String department){
         Session sess = HqlUtil.currentSession();
         Transaction tx = sess.beginTransaction();
@@ -53,23 +55,19 @@ public class HqlQuery {
         return JsonUtil.toJson(infoTransferList);
     }
 
+    //职位信息
     public static String findPositionInfo(String department){
+        return JsonUtil.toJson(queryPositionInfo(department));
+    }
+
+    public static List<PositionInfoJson> queryPositionInfo(String department){
         Session sess = HqlUtil.currentSession();
         Transaction tx = sess.beginTransaction();
         //List infoList = sess.createQuery("select distinct pi.mainID, pi.positionInfo from PersonalInfo pi").list();
-
-        List infoList;
         StringBuffer hql = new StringBuffer();
         hql.append("select distinct pi.mainID, pi.positionInfo from PersonalInfo pi").append(" ");
-        if (department.equals("all")){
-            infoList = (List<PersonalInfo>)sess.createQuery(hql.toString()).list();
-        }else{
+        List infoList = queryEntity(sess, department, hql);
 
-            String department_zh_CN = DepartmentParseUtil.departmentParse(department);
-            hql.append("where pi.positionInfo.department = :department");
-            infoList = sess.createQuery(hql.toString())
-                    .setString("department", department_zh_CN).list();
-        }
         List<PositionInfoJson> positionJson = new ArrayList<>();
         MainID temp_MainID;
         PositionInfo temp_PositionInfo;
@@ -81,13 +79,20 @@ public class HqlQuery {
         }
         tx.commit();
         HqlUtil.closeSession();
-        return JsonUtil.toJson(positionJson);
+        return positionJson;
     }
 
-    public static String findEducationInfo(){
+    //教育信息
+    public static String findEducationInfo(String department){
+        return JsonUtil.toJson(queryEducationInfo(department));
+    }
+    public static List<EducationJson> queryEducationInfo(String department){
         Session sess = HqlUtil.currentSession();
         Transaction tx = sess.beginTransaction();
-        List infoList = sess.createQuery("select distinct pi.mainID, pi.education from PersonalInfo pi").list();
+        StringBuffer hql = new StringBuffer().append("select distinct pi.mainID, pi.education from PersonalInfo pi")
+                            .append(" ");
+        List infoList = queryEntity(sess, department, hql);
+
         List<EducationJson> educationJsons = new ArrayList<>();
         MainID temp_MainID;
         Education temp_PositionInfo;
@@ -99,14 +104,21 @@ public class HqlQuery {
         }
         tx.commit();
         HqlUtil.closeSession();
-        return JsonUtil.toJson(educationJsons);
+        return educationJsons;
 
     }
 
-    public static String findContractInfo(){
+    //合同信息
+    public static String findContractInfo(String department){
+        return JsonUtil.toJson(queryContractInfo(department));
+    }
+    public static List<ContractJson> queryContractInfo(String department){
         Session sess = HqlUtil.currentSession();
         Transaction tx = sess.beginTransaction();
-        List infoList = sess.createQuery("select distinct pi.mainID, pi.contract from PersonalInfo pi").list();
+        StringBuffer hql = new StringBuffer().append("select distinct pi.mainID, pi.contract from PersonalInfo pi")
+                            .append(" ");
+        List infoList = queryEntity(sess, department, hql);
+
         List<ContractJson> contractJsons = new ArrayList<>();
         MainID temp_MainID;
         Contract temp_Contract;
@@ -118,10 +130,11 @@ public class HqlQuery {
         }
         tx.commit();
         HqlUtil.closeSession();
-        return JsonUtil.toJson(contractJsons);
+        return contractJsons;
 
     }
 
+    //基本信息
     public static String findBasicInfo(String department){
         return JsonUtil.toJson(queryBasicInfoList(department));
     }
