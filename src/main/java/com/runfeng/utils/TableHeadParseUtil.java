@@ -12,6 +12,10 @@ import java.util.*;
  */
 public class TableHeadParseUtil {
     public static String convertTableHeadToJson(String resourcePath, String classPath){
+        return JsonUtil.toJson(getTableHead(resourcePath, classPath));
+    }
+
+    public static Object getTableHead(String resourcePath, String classPath){
         Locale myLocale = Locale.getDefault(Locale.Category.FORMAT);
         ResourceBundle resourceBundle = ResourceBundle.getBundle(resourcePath, myLocale);
 
@@ -25,7 +29,7 @@ public class TableHeadParseUtil {
                 clz.getMethod(method_name, String.class)
                         .invoke(tableHead, resourceBundle.getString(field.getName()));
             }
-            return JsonUtil.toJson(tableHead);
+            return tableHead;
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         } catch (NoSuchMethodException e) {

@@ -1,6 +1,7 @@
 package com.runfeng.struts;
 
 import com.opensymphony.xwork2.Action;
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.runfeng.hibernate.HqlQuery;
 import com.runfeng.hibernate.InformationEntity.*;
@@ -8,6 +9,7 @@ import com.runfeng.hibernate.InformationJson.BasicInfoHead;
 import com.runfeng.hibernate.InformationJson.ContractHead;
 import com.runfeng.hibernate.InformationJson.EducationHead;
 import com.runfeng.hibernate.InformationJson.PositionInfoHead;
+import com.runfeng.utils.DepartmentParseUtil;
 import com.runfeng.utils.JsonUtil;
 import com.runfeng.utils.TableHeadParseUtil;
 
@@ -18,7 +20,16 @@ public class InfoTableAction extends ActionSupport {
     private String employeesInfo;
     private String informationTableHead;
     private String department;
+    private String department_zh_CN;
     private String infoType;
+
+    public String getDepartment_zh_CN() {
+        return department_zh_CN;
+    }
+
+    public void setDepartment_zh_CN(String department_zh_CN) {
+        this.department_zh_CN = department_zh_CN;
+    }
 
     public String getEmployeesInfo() {
         return employeesInfo;
@@ -52,7 +63,7 @@ public class InfoTableAction extends ActionSupport {
         this.infoType = infoType;
     }
 
-    //基本信息表头
+    /*//基本信息表头
     public String convertEmployeesInfoHeadToJson(){
         EmployeesInfoHead sth = new EmployeesInfoHead("EID", "姓名", "性别", "身份证号",
                 "手机号码", "籍贯", "工号", "部门",
@@ -60,7 +71,7 @@ public class InfoTableAction extends ActionSupport {
                 "学历", "学校", "办学形式", "主修",
                 "合同编号", "第一次签合同","合同起始", "合同终止", "合同状态");
         return JsonUtil.toJson(sth);
-    }
+    }*/
     //个人信息表头
     public String convertBasicInfoHeadToJson(){
         BasicInfoHead basicInfoHead = new BasicInfoHead("EID", "姓名", "性别",
@@ -89,18 +100,22 @@ public class InfoTableAction extends ActionSupport {
 
     //basic basicInfo position education contract
     public String execute(){
+        /*ActionContext actx = ActionContext.getContext();
+        actx.getSession().put("department_zh_CN", DepartmentParseUtil.departmentParse(department));*/
+        department_zh_CN = DepartmentParseUtil.departmentParse(department);
+
         if (getInfoType().equals("basic")){
             informationTableHead = TableHeadParseUtil.convertTableHeadToJson("tablehead/employeesinfo_tablehead",
                     "com.runfeng.hibernate.InformationEntity.EmployeesInfoHead");
             employeesInfo = HqlQuery.findEmployeeInfo(getDepartment());
         }
-        if (department.equals("all") && infoType.equals("basicInfo")){
+        if (infoType.equals("basicInfo")){
             informationTableHead = convertBasicInfoHeadToJson();
-            employeesInfo = HqlQuery.findBasicInfo();
+            employeesInfo = HqlQuery.findBasicInfo(getDepartment());
         }
-        if (department.equals("all") && infoType.equals("position")){
+        if (infoType.equals("position")){
             informationTableHead = convertPositionHeadToJson();
-            employeesInfo = HqlQuery.findPositionInfo();
+            employeesInfo = HqlQuery.findPositionInfo(getDepartment());
         }
         if (department.equals("all") && infoType.equals("education")){
             informationTableHead = convertEducationHeadToJson();

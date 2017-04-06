@@ -37,6 +37,9 @@ public class EmployeeInfoExcelTableParseUtil {
                     a.setDepartment(row.getCell(0).getRichStringCellValue().getString());
                     a.setName(row.getCell(1).getRichStringCellValue().getString());
                     a.setSex(row.getCell(2).getRichStringCellValue().getString());
+                    a.setPost(row.getCell(3).getRichStringCellValue().getString());
+                    a.setPosition(row.getCell(4).getRichStringCellValue().getString());
+                    a.setPositionstate(row.getCell(5).getRichStringCellValue().getString());
                     employeeInfoMap.put(a.getName(), a);
                 }
             }
@@ -48,6 +51,9 @@ public class EmployeeInfoExcelTableParseUtil {
                     a.setDepartment(row.getCell(0).getRichStringCellValue().getString());
                     a.setName(row.getCell(1).getRichStringCellValue().getString());
                     a.setSex(row.getCell(2).getRichStringCellValue().getString());
+                    a.setPost(row.getCell(3).getRichStringCellValue().getString());
+                    a.setPosition(row.getCell(4).getRichStringCellValue().getString());
+                    a.setPositionstate(row.getCell(5).getRichStringCellValue().getString());
                     employeeInfoMap.put(a.getName(), a);
                 }else {
                     //System.out.println(row.getCell(1).getRichStringCellValue().getString());
@@ -73,11 +79,16 @@ public class EmployeeInfoExcelTableParseUtil {
             DecimalFormat df2   = new DecimalFormat("######0");
             DecimalFormat telephone = new DecimalFormat("############");
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd");
-            for (int rowIndex=4; rowIndex<=99; rowIndex++){
+            for (int rowIndex=4; rowIndex<=100; rowIndex++){
                 Row row = sheet2.getRow(rowIndex);
                 String name = row.getCell(3).getRichStringCellValue().getString();
                 if (employeeInfoMap.containsKey(name)){
-                    employeeInfoMap.get(name).setContractid("JY" + df2.format(row.getCell(2).getNumericCellValue()));
+                    //如果合同号为空则认为没签
+                    if (row.getCell(2).getCellTypeEnum() == CellType.BLANK){
+                        employeeInfoMap.get(name).setContractid("-");
+                    }else {
+                        employeeInfoMap.get(name).setContractid("JY" + df2.format(row.getCell(2).getNumericCellValue()));
+                    }
                     employeeInfoMap.get(name).setEducationalbackground(row.getCell(6).getRichStringCellValue().getString());
                     employeeInfoMap.get(name).setIdentification(row.getCell(7).getRichStringCellValue().getString());
                     employeeInfoMap.get(name).setNativeplace(row.getCell(8).getRichStringCellValue().getString());

@@ -22,21 +22,26 @@ import com.runfeng.utils.*;
  * Created by 帝 on 2017/3/31.
  */
 public class HqlQuery {
+    public static List queryEntity(Session session, String department, StringBuffer hql){
+        List infoList;
+        if (department.equals("all")){
+            infoList = (List<PersonalInfo>)session.createQuery(hql.toString()).list();
+        }else{
+            String department_zh_CN = DepartmentParseUtil.departmentParse(department);
+            hql.append("where pi.positionInfo.department = :department");
+            infoList = session.createQuery(hql.toString())
+                    .setString("department", department_zh_CN).list();
+        }
+        return infoList;
+    }
 
     public static String findEmployeeInfo(String department){
         Session sess = HqlUtil.currentSession();
         Transaction tx = sess.beginTransaction();
-        List<PersonalInfo> infoList = null;
-        if (department.equals("all")){
-            infoList = sess.createQuery("select distinct pi from PersonalInfo pi").list();
-        }else{
-            String department_zh_CN = DepartmentParseUtil.departmentParse(department);
-            infoList = sess.createQuery("select distinct pi from PersonalInfo pi " +
-                    "where pi.positionInfo.department = :department")
-                    .setString("department", department_zh_CN).list();
-        }
-
-
+        List<PersonalInfo> infoList;
+        StringBuffer hql = new StringBuffer();
+        hql.append("select distinct pi from PersonalInfo pi").append(" ");
+        infoList = queryEntity(sess, department, hql);
         List<EmployeeInfo> infoTransferList = new ArrayList<>();
         for (Iterator<PersonalInfo> it = infoList.iterator(); it.hasNext();){
             PersonalInfo temp = it.next();
@@ -48,10 +53,23 @@ public class HqlQuery {
         return JsonUtil.toJson(infoTransferList);
     }
 
-    public static String findPositionInfo(){
+    public static String findPositionInfo(String department){
         Session sess = HqlUtil.currentSession();
         Transaction tx = sess.beginTransaction();
-        List infoList = sess.createQuery("select distinct pi.mainID, pi.positionInfo from PersonalInfo pi").list();
+        //List infoList = sess.createQuery("select distinct pi.mainID, pi.positionInfo from PersonalInfo pi").list();
+
+        List infoList;
+        StringBuffer hql = new StringBuffer();
+        hql.append("select distinct pi.mainID, pi.positionInfo from PersonalInfo pi").append(" ");
+        if (department.equals("all")){
+            infoList = (List<PersonalInfo>)sess.createQuery(hql.toString()).list();
+        }else{
+
+            String department_zh_CN = DepartmentParseUtil.departmentParse(department);
+            hql.append("where pi.positionInfo.department = :department");
+            infoList = sess.createQuery(hql.toString())
+                    .setString("department", department_zh_CN).list();
+        }
         List<PositionInfoJson> positionJson = new ArrayList<>();
         MainID temp_MainID;
         PositionInfo temp_PositionInfo;
@@ -61,12 +79,6 @@ public class HqlQuery {
             temp_PositionInfo = (PositionInfo)objects[1];
             positionJson.add(new PositionInfoJson(temp_MainID, temp_PositionInfo));
         }
-        /*List<PositionInfo> infoTransferList = new ArrayList<>();
-        for (Iterator it = infoList.iterator(); it.hasNext();){
-            PersonalInfo temp = it.next();
-            infoTransferList.add();
-
-        }*/
         tx.commit();
         HqlUtil.closeSession();
         return JsonUtil.toJson(positionJson);
@@ -85,12 +97,6 @@ public class HqlQuery {
             temp_PositionInfo = (Education)objects[1];
             educationJsons.add(new EducationJson(temp_MainID, temp_PositionInfo));
         }
-        /*List<PositionInfo> infoTransferList = new ArrayList<>();
-        for (Iterator it = infoList.iterator(); it.hasNext();){
-            PersonalInfo temp = it.next();
-            infoTransferList.add();
-
-        }*/
         tx.commit();
         HqlUtil.closeSession();
         return JsonUtil.toJson(educationJsons);
@@ -115,10 +121,19 @@ public class HqlQuery {
         return JsonUtil.toJson(contractJsons);
 
     }
-    public static String findBasicInfo(){
+
+    public static String findBasicInfo(String department){
+        return JsonUtil.toJson(queryBasicInfoList(department));
+    }
+
+    public static List<BasicInfoJson> queryBasicInfoList(String department){
         Session sess = HqlUtil.currentSession();
         Transaction tx = sess.beginTransaction();
-        List infoList = sess.createQuery("select distinct pi.mainID, pi.basicInfo from PersonalInfo pi").list();
+        //List infoList = sess.createQuery("select distinct pi.mainID, pi.basicInfo from PersonalInfo pi").list();
+        StringBuffer hql = new StringBuffer();
+        hql.append("select distinct pi.mainID, pi.basicInfo from PersonalInfo pi").append(" ");
+        List infoList = queryEntity(sess, department, hql);
+
         List<BasicInfoJson> basicInfoJsons = new ArrayList<>();
         MainID temp_MainID;
         BasicInfo temp_BasicInfo;
@@ -130,13 +145,13 @@ public class HqlQuery {
         }
         tx.commit();
         HqlUtil.closeSession();
-        return JsonUtil.toJson(basicInfoJsons);
+        return basicInfoJsons;
     }
+
     public static String findSalary(){
         Session sess = HqlUtil.currentSession();
         Transaction tx = sess.beginTransaction();
         List salary = sess.createQuery("select distinct s from Salary s").list();
-        //System.out.println();
         tx.commit();
         HqlUtil.closeSession();
         return JsonUtil.toJson(salary);

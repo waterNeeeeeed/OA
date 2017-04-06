@@ -178,7 +178,7 @@
                     <div class="table-responsive">
                         <%--<hr/>--%>
                         <table id="infoTable" class="table table-bordered">
-                            <caption>你好，${sessionScope.user}</caption>
+                            <caption id="infoTableCaption">你好，${sessionScope.department_zh_CN}</caption>
                             <thead>
                             </thead>
                             <tbody>
@@ -276,6 +276,7 @@
             function (data) {
                 //$("#testDiv").text(data["salaryTableHead"]);
                 setCaption(document, tableCaption);
+                $("#infoTableCaption").text(data["department_zh_CN"]);
                 createTable(document, 'infoTable', JSON.parse(data[tableHeadString]), eval(data[tableContentString]),'informationTableHead');
             },
             "json");
