@@ -48,7 +48,8 @@ public class FullCompanySalaryExcelUtil {
                         personalSalary.setName(name);
                         personalSalary.setSalary(ss);
                     }
-                    if (row.getCell(8) != null){
+                    if (row.getCell(8) != null &&
+                            row.getCell(8).getCellTypeEnum() != CellType.BLANK){
                         personalSalary.setIdentification(row.getCell(8).getRichStringCellValue().getString());
                     }
 
