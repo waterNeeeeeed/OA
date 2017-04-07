@@ -7,7 +7,7 @@ public class PersonalSalary {
     private String name;
     private String identification;
     private String personal_id;
-    private Double[] salary;
+    private Double[][] salary;
 
     public String getName() {
         return name;
@@ -33,11 +33,11 @@ public class PersonalSalary {
         this.personal_id = personal_id;
     }
 
-    public Double[] getSalary() {
+    public Double[][] getSalary() {
         return salary;
     }
 
-    public void setSalary(Double[] salary) {
+    public void setSalary(Double[][] salary) {
         this.salary = salary;
     }
 }
