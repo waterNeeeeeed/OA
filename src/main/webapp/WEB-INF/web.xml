@@ -6,6 +6,14 @@
     <welcome-file-list>
         <welcome-file>Welcome.jsp</welcome-file>
     </welcome-file-list>
+    <!-- struts2中 spring 的启动 -->
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>classpath:applicationContext.xml</param-value>
+    </context-param>
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
     <filter>
         <filter-name>struts2test</filter-name>
         <filter-class>org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter</filter-class>
@@ -14,7 +22,5 @@
         <filter-name>struts2test</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
-    <!--<listener>
-        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-    </listener>-->
+
 </web-app>

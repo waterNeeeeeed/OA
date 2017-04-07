@@ -2,10 +2,13 @@ package com.runfeng.struts;
 
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
+import com.runfeng.spring.service.ValidPasswordService;
 import org.apache.struts2.interceptor.ServletResponseAware;
 import org.apache.struts2.util.ServletContextAware;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.web.context.WebApplicationContext;
+import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
@@ -20,6 +23,15 @@ public class LoginAction extends ActionSupport
     private String pass;
     private String tip;
     private HttpServletResponse responseAware;
+    private ValidPasswordService vps;
+
+    public ValidPasswordService getVps() {
+        return vps;
+    }
+
+    public void setVps(ValidPasswordService vps) {
+        this.vps = vps;
+    }
 
     public String getTip() {
         return tip;
@@ -45,10 +57,11 @@ public class LoginAction extends ActionSupport
         this.pass = pass;
     }
     public String execute(){
+        /*WebApplicationContext wactx = WebApplicationContextUtils.getWebApplicationContext(ser)
         ActionContext actx = ActionContext.getContext();
-        Integer counter;
+        Integer counter;*/
 
-        counter = (Integer)actx.getApplication().get("counter");
+        /*counter = (Integer)actx.getApplication().get("counter");
         if (null == counter){
             counter = 1;
         }else {
@@ -56,10 +69,10 @@ public class LoginAction extends ActionSupport
         }
         actx.getApplication().put("counter", counter);
         actx.getSession().put("user", getUser());
-
+*/
         LOGGER.info("用户:'" + getUser() + "'登录");
-        if (getUser().equals("gongtao") && getPass().equals("123")){
-            actx.put("tip", "Server:login successful");
+        if (vps.validPassword(getUser(), getPass())){
+            /*actx.put("tip", "Server:login successful");*/
             Cookie cookie = new Cookie("user", getUser());
             cookie.setMaxAge(60 * 60);
             responseAware.addCookie(cookie);
@@ -68,8 +81,8 @@ public class LoginAction extends ActionSupport
             LOGGER.info("用户:'" + getUser() + "'登录成功!");
             return SUCCESS;
         }
-
-        actx.put("tip", "Server:login failed");
+/*
+        actx.put("tip", "Server:login failed");*/
         return ERROR;
     }
 
