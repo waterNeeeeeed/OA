@@ -75,54 +75,67 @@ public class EmployeeInfoExcelTableParseUtil {
                             .setEid(999999);
                 }
             }
-            Sheet sheet2 = wb2.getSheet("正式人员");
-            DecimalFormat df2   = new DecimalFormat("######0");
-            DecimalFormat telephone = new DecimalFormat("############");
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd");
-            for (int rowIndex=4; rowIndex<=100; rowIndex++){
-                Row row = sheet2.getRow(rowIndex);
-                String name = row.getCell(3).getRichStringCellValue().getString();
-                if (employeeInfoMap.containsKey(name)){
-                    //如果合同号为空则认为没签
-                    if (row.getCell(2).getCellTypeEnum() == CellType.BLANK){
-                        employeeInfoMap.get(name).setContractid("-");
-                    }else {
-                        employeeInfoMap.get(name).setContractid("JY" + df2.format(row.getCell(2).getNumericCellValue()));
-                    }
-                    employeeInfoMap.get(name).setEducationalbackground(row.getCell(6).getRichStringCellValue().getString());
-                    employeeInfoMap.get(name).setIdentification(row.getCell(7).getRichStringCellValue().getString());
-                    employeeInfoMap.get(name).setNativeplace(row.getCell(8).getRichStringCellValue().getString());
-                    if (row.getCell(9).getCellTypeEnum() != CellType.BLANK && row.getCell(10).getCellTypeEnum() != CellType.BLANK){
-                        employeeInfoMap.get(name).setContractstartdate(sdf.parse(row.getCell(9).getRichStringCellValue().getString()));
-                        employeeInfoMap.get(name).setContractenddate(sdf.parse(row.getCell(10).getRichStringCellValue().getString()));
-                    }
-                               //employeeInfoMap.get(name).setContractenddate(row.getCell(10).getDateCellValue());//row.getCell(10).getRichStringCellValue().getString());
-                    employeeInfoMap.get(name).setSchool(row.getCell(11).getRichStringCellValue().getString());
-                    employeeInfoMap.get(name).setSchoolform(row.getCell(12).getRichStringCellValue().getString());
-                    employeeInfoMap.get(name).setMajor(row.getCell(13).getRichStringCellValue().getString());
-
-                    employeeInfoMap.get(name).setContractstate(row.getCell(16).getRichStringCellValue().getString());
-                    if (row.getCell(17).getCellTypeEnum() != CellType.BLANK ){
-                        employeeInfoMap.get(name).setContractfirstsigndate(sdf.parse(row.getCell(17).getRichStringCellValue().getString()));
-                    }
-                }
-            }
-            //电话
-            sheet2 = wb2.getSheet("电话");
-            for (int rowIndex=1; rowIndex<=sheet2.getLastRowNum(); rowIndex++){
-                Row row = sheet2.getRow(rowIndex);
-                if (row.getCell(1).getCellTypeEnum() != CellType.BLANK){
-                    String name = row.getCell(1).getRichStringCellValue().getString();
+            String[] sheetName = {"正式人员", "非合同"};
+            for (int i=0; i<2; i++){
+                Sheet sheet2 = wb2.getSheet(sheetName[i]);
+                DecimalFormat df2   = new DecimalFormat("######0");
+                DecimalFormat telephone = new DecimalFormat("############");
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd");
+                for (int rowIndex=4; rowIndex<=100; rowIndex++){
+                    Row row = sheet2.getRow(rowIndex);
+                    String name = row.getCell(3).getRichStringCellValue().getString();
+                    //包含就读，不包含就过
                     if (employeeInfoMap.containsKey(name)){
-                        if (row.getCell(2) != null){
-                            employeeInfoMap.get(name).setTelephone(telephone.format(row.getCell(2).getNumericCellValue()));
-                        }else {
-                            employeeInfoMap.get(name).setTelephone("无");
+                        //如果合同号为空则认为没签
+                        if (!isCellNull(row, 2)){
+                            if (row.getCell(2).getCellTypeEnum() == CellType.BLANK){
+                                employeeInfoMap.get(name).setContractid("-");
+                            }else {
+                                StringBuffer contractid = new StringBuffer().append(row.getCell(1).getRichStringCellValue().getString());
+                                contractid.append(df2.format(row.getCell(2).getNumericCellValue()));
+                                employeeInfoMap.get(name).setContractid(contractid.toString());
+                            }
+                        }
+                        else {
+                            employeeInfoMap.get(name).setContractid("-");
+                        }
+
+                        employeeInfoMap.get(name).setEducationalbackground(row.getCell(6).getRichStringCellValue().getString());
+                        employeeInfoMap.get(name).setIdentification(row.getCell(7).getRichStringCellValue().getString());
+                        employeeInfoMap.get(name).setNativeplace(row.getCell(8).getRichStringCellValue().getString());
+                        if (row.getCell(9).getCellTypeEnum() != CellType.BLANK && row.getCell(10).getCellTypeEnum() != CellType.BLANK){
+                            employeeInfoMap.get(name).setContractstartdate(sdf.parse(row.getCell(9).getRichStringCellValue().getString()));
+                            employeeInfoMap.get(name).setContractenddate(sdf.parse(row.getCell(10).getRichStringCellValue().getString()));
+                        }
+                        //employeeInfoMap.get(name).setContractenddate(row.getCell(10).getDateCellValue());//row.getCell(10).getRichStringCellValue().getString());
+                        employeeInfoMap.get(name).setSchool(row.getCell(11).getRichStringCellValue().getString());
+                        employeeInfoMap.get(name).setSchoolform(row.getCell(12).getRichStringCellValue().getString());
+                        employeeInfoMap.get(name).setMajor(row.getCell(13).getRichStringCellValue().getString());
+
+                        employeeInfoMap.get(name).setContractstate(row.getCell(16).getRichStringCellValue().getString());
+                        if (row.getCell(17).getCellTypeEnum() != CellType.BLANK ){
+                            employeeInfoMap.get(name).setContractfirstsigndate(sdf.parse(row.getCell(17).getRichStringCellValue().getString()));
                         }
                     }
                 }
+                //电话
+                sheet2 = wb2.getSheet("电话");
+                for (int rowIndex=1; rowIndex<=sheet2.getLastRowNum(); rowIndex++){
+                    Row row = sheet2.getRow(rowIndex);
+                    if (row.getCell(1).getCellTypeEnum() != CellType.BLANK){
+                        String name = row.getCell(1).getRichStringCellValue().getString();
+                        if (employeeInfoMap.containsKey(name)){
+                            if (row.getCell(2) != null){
+                                employeeInfoMap.get(name).setTelephone(telephone.format(row.getCell(2).getNumericCellValue()));
+                            }else {
+                                employeeInfoMap.get(name).setTelephone("无");
+                            }
+                        }
+                    }
 
+                }
             }
+
 
             wb.close();
             wb2.close();
@@ -137,6 +150,9 @@ public class EmployeeInfoExcelTableParseUtil {
         return employeeInfoMap;
     }
 
+    public static boolean isCellNull(Row row, int index){
+        return row.getCell(index) == null;
+    }
     public void outputEmployeeInfoToExcel(){
 
     }

@@ -7,6 +7,6 @@
 </head>
 
 <body>
-ERROR
+<a href="login.action">返回。。。</a>
 </body>
 </html>

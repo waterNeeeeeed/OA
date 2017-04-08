@@ -42,11 +42,12 @@
                                 员工信息管理<b class="caret"></b>
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a href="InformationManageAction.action?department=all&infoType=basic">基本信息</a> </li>
+                                <li><a href="InformationManageAction.action?department=all&infoType=basicInfo">基本信息</a> </li>
                                 <li class="divider"></li>
-                                <li><a href="InformationManageAction.action?department=all&infoType=position">岗位管理</a></li>
-                                <li><a href="#">合同管理</a></li>
-                                <li><a href="#">学历管理</a></li>
+                                <li><a href="InformationManageAction.action?department=all&infoType=basic">综合信息</a></li>
+                                <li><a href="InformationManageAction.action?department=all&infoType=position">岗位信息</a></li>
+                                <li><a href="InformationManageAction.action?department=all&infoType=contract">合同信息</a></li>
+                                <li><a href="InformationManageAction.action?department=all&infoType=education">学历信息</a></li>
                                 <li class="divider"></li>
                                 <li><a href="#">新增员工</a></li>
                                 <li><a href="#">删除员工</a></li>

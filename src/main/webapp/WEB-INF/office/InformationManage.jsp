@@ -44,12 +44,12 @@
                                 员工信息管理<b class="caret"></b>
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a href="InformationManageAction.action?department=all&infoType=basic">基本信息</a> </li>
+                                <li><a href="InformationManageAction.action?department=all&infoType=basicInfo">基本信息</a> </li>
                                 <li class="divider"></li>
-                                <li><a href="InformationManageAction.action?department=all&infoType=basicInfo">个人信息</a></li>
-                                <li><a href="InformationManageAction.action?department=all&infoType=position">岗位管理</a></li>
-                                <li><a href="InformationManageAction.action?department=all&infoType=contract">合同管理</a></li>
-                                <li><a href="InformationManageAction.action?department=all&infoType=education">学历管理</a></li>
+                                <li><a href="InformationManageAction.action?department=all&infoType=basic">综合信息</a></li>
+                                <li><a href="InformationManageAction.action?department=all&infoType=position">岗位信息</a></li>
+                                <li><a href="InformationManageAction.action?department=all&infoType=contract">合同信息</a></li>
+                                <li><a href="InformationManageAction.action?department=all&infoType=education">学历信息</a></li>
                                 <li class="divider"></li>
                                 <li><a href="#">新增员工</a></li>
                                 <li><a href="#">删除员工</a></li>
@@ -229,17 +229,13 @@
     </div>
 </div>
 <script type="text/javascript">
-    /*if ("${sessionScope.infoType}" == "basic"){
-        setCaption(document, "基本信息")
-        createTable(document, 'infoTable', informationTableHead, employeesInfo, 'informationTableHead');
-    };*/
 
     selectDepartmentToCreateTable("${sessionScope.department}", "${sessionScope.infoType}");
     function selectDepartmentToCreateTable(department, infoType) {
         var tableCaption;
         //总览按钮basic basicInfo position education contract
         if (infoType == "basic"){
-            tableCaption = "员工信息";
+            tableCaption = "综合信息";
         }
         if (infoType == "basicInfo"){
             tableCaption = "基本信息";
@@ -254,21 +250,7 @@
             tableCaption = "合同信息";
         }
         getInfoTableAjax(department, infoType, tableCaption, 'informationTableHead', 'employeesInfo');
-        /*if (infoType == "basic"){
-            if (department == "all") {
-                //createTable(document, 'infoTable', informationTableHead, employeesInfo, 'informationTableHead');
-                //setCaption(document, "基本信息")
-                getInfoTableAjax("all", "basic", "基本信息", 'informationTableHead', 'employeesInfo');
-            }else if (department == "office"){
-                createTable(document, 'infoTable', informationTableHead, employeesInfoOffice, 'informationTableHead');
-            }
-        }
-        if (infoType == "position"){
-            if (department == "all"){
-                getInfoTableAjax("all", "position", "岗位信息", 'informationTableHead', 'employeesInfo');
 
-            }
-        }*/
     }
     function getInfoTableAjax(department, infoType, tableCaption, tableHeadString, tableContentString) {
         var uri = "InfoTableAction.action";

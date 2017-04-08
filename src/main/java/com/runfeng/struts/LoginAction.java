@@ -3,6 +3,7 @@ package com.runfeng.struts;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.runfeng.spring.service.ValidPasswordService;
+import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.interceptor.ServletResponseAware;
 import org.apache.struts2.util.ServletContextAware;
 import org.slf4j.Logger;
@@ -10,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 
@@ -24,6 +26,15 @@ public class LoginAction extends ActionSupport
     private String tip;
     private HttpServletResponse responseAware;
     private ValidPasswordService vps;
+    private ActionContext actionContext;
+
+    public ActionContext getActionContext() {
+        return actionContext;
+    }
+
+    public void setActionContext(ActionContext actionContext) {
+        this.actionContext = actionContext;
+    }
 
     public ValidPasswordService getVps() {
         return vps;
@@ -56,33 +67,21 @@ public class LoginAction extends ActionSupport
     public void setPass(String pass) {
         this.pass = pass;
     }
-    public String execute(){
-        /*WebApplicationContext wactx = WebApplicationContextUtils.getWebApplicationContext(ser)
-        ActionContext actx = ActionContext.getContext();
-        Integer counter;*/
 
-        /*counter = (Integer)actx.getApplication().get("counter");
-        if (null == counter){
-            counter = 1;
-        }else {
-            counter++;
-        }
-        actx.getApplication().put("counter", counter);
-        actx.getSession().put("user", getUser());
-*/
+    public String execute(){
+
         LOGGER.info("用户:'" + getUser() + "'登录");
         if (vps.validPassword(getUser(), getPass())){
-            /*actx.put("tip", "Server:login successful");*/
             Cookie cookie = new Cookie("user", getUser());
             cookie.setMaxAge(60 * 60);
             responseAware.addCookie(cookie);
-            /*setUser(null);
-            setPass(null);*/
+            actionContext.getSession().put("user", getUser());
             LOGGER.info("用户:'" + getUser() + "'登录成功!");
+            actionContext.getSession().put("tip", "登录成功!");
             return SUCCESS;
         }
-/*
-        actx.put("tip", "Server:login failed");*/
+
+        actionContext.getSession().put("tip", "用户名或密码不正确!");
         return ERROR;
     }
 

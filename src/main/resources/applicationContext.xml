@@ -3,14 +3,19 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">
 
-
+    <!-- loginAction -->
     <bean id="loginAction" class="com.runfeng.struts.LoginAction"
         scope="prototype">
-        <property name="vps" ref="validPasswordService"/>
+        <property name="vps" ref="vps"/>
+        <property name="actionContext" ref="actionContext"/>
     </bean>
-    <bean id="validPasswordService" class="com.runfeng.spring.service.ValidPasswordService"/>
+    <bean id="actionContext" class="com.opensymphony.xwork2.ActionContext" factory-method="getContext"/>
+    <bean id="vps" class="com.runfeng.spring.service.ValidPasswordService"/>
+    
+    <!-- ManageAction -->
+    <bean id="ManageAction" class="com.runfeng.struts.ManageAction"/>
+    <bean id="SalaryTableAction" class="com.runfeng.struts.SalaryTableAction"/>
+    <bean id="InfoTableAction" class="com.runfeng.struts.InfoTableAction"/>
 
-    <bean id="ManageAction" class="com.runfeng.struts.ManageAction">
 
-    </bean>
 </beans>

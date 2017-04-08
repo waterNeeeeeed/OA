@@ -7,15 +7,18 @@
     <constant name="struts.devMode" value="true"/>
     <constant name="struts.objectFactory" value="spring"/>
     <package name="gt" namespace="/" extends="struts-default,json-default">
+        <!-- 登录相关 -->
         <action name="">
             <result>/WEB-INF/Login.jsp</result>
         </action>
-        <action name="OA">
-            <result>/WEB-INF/office/Welcome.jsp</result>
-        </action>
         <action name="login" class="loginAction">
             <result name="success">/WEB-INF/office/Welcome.jsp</result>
-            <result name="error">/WEB-INF/error.jsp</result>
+            <result name="error">/WEB-INF/Login.jsp</result>
+        </action>
+
+        <!-- 管理界面相关 -->
+        <action name="OA">
+            <result>/WEB-INF/office/Welcome.jsp</result>
         </action>
         <action name="*ManageAction" class="ManageAction"
             method="{1}Manage">
@@ -27,13 +30,13 @@
             <result name="ExitAction">/WEB-INF/Login.jsp</result>
             <result name="error">/WEB-INF/error.jsp</result>
         </action>
-        <action name="SalaryTableAction" class="com.runfeng.struts.SalaryTableAction">
+        <action name="SalaryTableAction" class="SalaryTableAction">
             <result type="json">
                 <param name="noCache">true</param>
                 <param name="contentType">text/html</param>
             </result>
         </action>
-        <action name="InfoTableAction" class="com.runfeng.struts.InfoTableAction">
+        <action name="InfoTableAction" class="InfoTableAction">
             <result type="json">
                 <param name="noCache">true</param>
                 <param name="contentType">text/html</param>
