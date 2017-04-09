@@ -44,8 +44,10 @@ public class CasualWorkerServiceImplTest {
     }
 
     @Test
-    public void deleteCasualWorkerByIdentification() throws Exception {
-
+    public void deleteCasualWorker() throws Exception {
+        CasualWorker casualWorker = new CasualWorker("gongtao", "男", 30, "370783198708256132",
+                "15953680098", "滨海");
+        casualWorkerService.deleteCasualWorker(casualWorker);
     }
 
     @Test

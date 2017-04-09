@@ -30,9 +30,10 @@ public class CasualWorkerServiceImpl implements CasualWorkerService {
     }
 
     @Override
-    public void deleteCasualWorkerByIdentification(String identification) {
-
+    public void deleteCasualWorker(CasualWorker casualWorker) {
+        casualWorkerDAO.delete(CasualWorker.class, casualWorker.getIdentification());
     }
+    
 
     @Override
     public CasualWorker queryCasualWorker(String identification) {

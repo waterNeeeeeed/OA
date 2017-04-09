@@ -10,7 +10,7 @@ import java.util.List;
 public interface CasualWorkerService {
     void addCasualWorker(CasualWorker casualWorker);
     void addCasualWorkerList(List<CasualWorker> casualWorkerList);
-    void deleteCasualWorkerByIdentification(String identification);
+    void deleteCasualWorker(CasualWorker casualWorker);
     CasualWorker queryCasualWorker(String identification);
     List<CasualWorker> queryCasualWorker();
     List<CasualWorker> queryCasualWorkerByName(String Name);
