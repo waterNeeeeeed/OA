@@ -1,8 +1,7 @@
 package com.runfeng.hibernate;
 
-import com.runfeng.hibernate.BaseDAO;
+import org.hibernate.Query;
 import org.hibernate.SessionFactory;
-import org.springframework.orm.hibernate4.support.HibernateDaoSupport;
 
 import java.io.Serializable;
 import java.util.List;
@@ -33,7 +32,7 @@ public class BaseDAOImpl<T> implements BaseDAO<T>{
 
     @Override
     public void update(T entity) {
-        getSessionFactory().getCurrentSession().update(entity);
+        getSessionFactory().getCurrentSession().saveOrUpdate(entity);
     }
 
     @Override
@@ -51,15 +50,49 @@ public class BaseDAOImpl<T> implements BaseDAO<T>{
 
     @Override
     public List<T> findAll(Class<T> entityClz) {
-        return null;
+        String hql = "select en from " + entityClz.getSimpleName() + " en";
+        return (List<T>)find(hql);
     }
 
     @Override
     public long findCount(Class<T> entityClz) {
+        List l = find("select count(*) from " + entityClz.getSimpleName());
+        if (l != null && l.size() == 1){
+            return (int)l.get(0);
+        }
         return 0;
     }
 
-    public List<T> findByPage(String hql, int pageNum, int pageSize){
-        return null;
+    protected List find(String hql){
+        return getSessionFactory().getCurrentSession()
+                .createQuery(hql).list();
+    }
+
+    protected List find(String hql, Object... params){
+        Query query = getSessionFactory().getCurrentSession().createQuery(hql);
+        for (int i=0; i<params.length; i++){
+            query.setParameter(i + "", params[i]);
+        }
+        return query.list();
+    }
+
+    protected List findByPage(String hql, int pageNum, int pageSize){
+        return getSessionFactory().getCurrentSession().createQuery(hql)
+                .setFirstResult((pageNum-1) * pageSize)
+                .setMaxResults(pageSize).list();
+    }
+
+    protected List findByPage(String hql, int pageNum, int pageSize, Object... params){
+        Query query = getSessionFactory().getCurrentSession().createQuery(hql);
+        for (int i=0; i<params.length; i++){
+            query.setParameter(i + "", params[i]);
+        }
+        return query.list();
+    }
+
+    /**
+     * Created by hasee-pc on 2017/4/9.
+     */
+    public static class BasicInfoDAOImpl {
     }
 }

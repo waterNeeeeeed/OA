@@ -20,6 +20,7 @@
         <property name="annotatedClasses">
             <list>
                 <value>com.runfeng.hibernate.InformationEntity.CasualWorker</value>
+                <value>com.runfeng.hibernate.InformationEntity.PersonalInfo</value>
             </list>
         </property>
         <property name="hibernateProperties">
@@ -33,6 +34,7 @@
         </property>
     </bean>
 
+    <!--CasualWorkerService-->
     <bean id="casualWorkerService" class="com.runfeng.spring.service.CasualWorkerServiceImpl">
         <property name="casualWorkerDAO" ref="casualWorkerDAO"/>
     </bean>
@@ -40,6 +42,17 @@
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
 
+    <!--PersonalINfoService-->
+    <bean id="personalInfoService" class="com.runfeng.spring.service.InformationService.PersonalInfoServiceImpl">
+        <property name="personalInfoDAO" ref="personalInfoDAO"></property>
+        <property name="personalInfoJsonFactory" ref="personalInfoJsonFactory"></property>
+    </bean>
+    <bean id="personalInfoDAO" class="com.runfeng.hibernate.PersonalInfoDAOImpl">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    <bean id="personalInfoJsonFactory" class="com.runfeng.hibernate.InformationJson.PersonalInfoJsonFactory"/>
+
+    <!--事务管理-->
     <bean id="transactionManager"
           class="org.springframework.orm.hibernate4.HibernateTransactionManager">
         <property name="sessionFactory" ref="sessionFactory"/>
@@ -54,4 +67,16 @@
         <aop:pointcut id="pointCut" expression="bean(casualWorkerService)"/>
         <aop:advisor advice-ref="txM" pointcut-ref="pointCut"/>
     </aop:config>
+
+    <tx:advice id="PersonalInfoTX" transaction-manager="transactionManager">
+        <tx:attributes>
+            <tx:method name="get*" read-only="true"/>
+            <tx:method name="*" isolation="DEFAULT" propagation="REQUIRED" timeout="5"/>
+        </tx:attributes>
+    </tx:advice>
+    <aop:config>
+        <aop:pointcut id="PersonalInfoPointCut" expression="bean(personalInfoService)"/>
+        <aop:advisor advice-ref="PersonalInfoTX" pointcut-ref="PersonalInfoPointCut"/>
+    </aop:config>
+
 </beans>

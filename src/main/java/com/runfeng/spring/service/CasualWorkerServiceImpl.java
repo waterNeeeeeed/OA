@@ -2,6 +2,7 @@ package com.runfeng.spring.service;
 
 import com.runfeng.hibernate.CasualWorkerDAO;
 import com.runfeng.hibernate.InformationEntity.CasualWorker;
+import com.runfeng.hibernate.Page;
 
 import java.util.List;
 
@@ -37,12 +38,12 @@ public class CasualWorkerServiceImpl implements CasualWorkerService {
 
     @Override
     public CasualWorker queryCasualWorker(String identification) {
-        return null;
+        return casualWorkerDAO.get(CasualWorker.class, identification);
     }
 
     @Override
-    public List<CasualWorker> queryCasualWorker() {
-        return null;
+    public List<CasualWorker> queryCasualWorkerList(Page page) {
+        return casualWorkerDAO.findCasualWorkerByPage(page.getPageNum(), page.getPageSize());
     }
 
     @Override

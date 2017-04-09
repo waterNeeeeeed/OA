@@ -1,6 +1,7 @@
 package com.runfeng.spring.service;
 
 import com.runfeng.hibernate.InformationEntity.CasualWorker;
+import com.runfeng.hibernate.Page;
 
 import java.util.List;
 
@@ -12,7 +13,7 @@ public interface CasualWorkerService {
     void addCasualWorkerList(List<CasualWorker> casualWorkerList);
     void deleteCasualWorker(CasualWorker casualWorker);
     CasualWorker queryCasualWorker(String identification);
-    List<CasualWorker> queryCasualWorker();
+    List<CasualWorker> queryCasualWorkerList(Page page);
     List<CasualWorker> queryCasualWorkerByName(String Name);
 
 }
