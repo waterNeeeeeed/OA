@@ -34,7 +34,7 @@ public class PersonalInfoServiceImpl implements PersonalInfoService {
     }
 
     /********BasicInfo***************/
-    private List<BasicInfoJson> createBIJ( List srcList, List objList){
+    private List<BasicInfoJson> createBIJ(List srcList, List objList){
         for (Iterator it=srcList.iterator(); it.hasNext(); ){
             Object[] objects = (Object[])it.next();
             MainID mainID = (MainID)objects[0];
