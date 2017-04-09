@@ -51,9 +51,7 @@
                                 <li><a href="InformationManageAction.action?department=all&infoType=contract">合同信息</a></li>
                                 <li><a href="InformationManageAction.action?department=all&infoType=education">学历信息</a></li>
                                 <li class="divider"></li>
-                                <li><a href="#">新增员工</a></li>
-                                <li><a href="#">删除员工</a></li>
-                                <li><a href="#">部门调动</a></li>
+                                <li><a href="#">员工管理</a></li>
                                 <li class="divider"></li>
                                 <li><a href="#">档案管理</a></li>
                             </ul>
@@ -65,8 +63,12 @@
                             <ul class="dropdown-menu">
                                 <li><a href="SalaryManageAction.action?salaryType=component">工资组成</a></li>
                                 <li class="divider"></li>
-                                <li><a href="SalaryManageAction.action?salaryType=socialsecurity">社会保险</a></li>
-                                <li><a href="#">公积金</a></li>
+                                <li><a href="#">社保基数</a></li>
+                                <li><a href="SalaryManageAction.action?salaryType=socialsecurity">社保信息</a></li>
+                                <li class="divider"></li>
+                                <li><a href="#">公积金基数</a></li>
+                                <li><a href="#">公积金信息</a></li>
+                                <li class="divider"></li>
                                 <li><a href="#">所得税</a></li>
                                 <li class="divider"></li>
                                 <li><a href="#">考勤管理</a></li>

@@ -20,7 +20,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class LoginAction extends ActionSupport
     implements ServletResponseAware{
-    private final Logger LOGGER = LoggerFactory.getLogger(LoginAction.class);
+    private final static Logger LOGGER = LoggerFactory.getLogger(LoginAction.class);
     private String user;
     private String pass;
     private String tip;
@@ -32,8 +32,8 @@ public class LoginAction extends ActionSupport
         return actionContext;
     }
 
-    public void setActionContext(ActionContext actionContext) {
-        this.actionContext = actionContext;
+    public void setActionContext() {
+        this.actionContext = ActionContext.getContext();
     }
 
     public ValidPasswordService getVps() {
@@ -69,19 +69,19 @@ public class LoginAction extends ActionSupport
     }
 
     public String execute(){
-
+        setActionContext();
         LOGGER.info("用户:'" + getUser() + "'登录");
         if (vps.validPassword(getUser(), getPass())){
             Cookie cookie = new Cookie("user", getUser());
             cookie.setMaxAge(60 * 60);
             responseAware.addCookie(cookie);
-            actionContext.getSession().put("user", getUser());
+            getActionContext().getSession().put("user", getUser());
             LOGGER.info("用户:'" + getUser() + "'登录成功!");
-            actionContext.getSession().put("tip", "登录成功!");
+            getActionContext().getSession().put("tip", "登录成功!");
             return SUCCESS;
         }
 
-        actionContext.getSession().put("tip", "用户名或密码不正确!");
+        getActionContext().getSession().put("tip", "用户名或密码不正确!");
         return ERROR;
     }
 

@@ -5,17 +5,16 @@
 
     <!-- loginAction -->
     <bean id="loginAction" class="com.runfeng.struts.LoginAction"
-        scope="prototype">
+        scope="request">
         <property name="vps" ref="vps"/>
-        <property name="actionContext" ref="actionContext"/>
     </bean>
-    <bean id="actionContext" class="com.opensymphony.xwork2.ActionContext" factory-method="getContext"/>
+    <!--<bean id="actionContext" class="com.opensymphony.xwork2.ActionContext" factory-method="getContext"/>-->
     <bean id="vps" class="com.runfeng.spring.service.ValidPasswordService"/>
     
     <!-- ManageAction -->
-    <bean id="ManageAction" class="com.runfeng.struts.ManageAction"/>
-    <bean id="SalaryTableAction" class="com.runfeng.struts.SalaryTableAction"/>
-    <bean id="InfoTableAction" class="com.runfeng.struts.InfoTableAction"/>
+    <bean id="ManageAction" class="com.runfeng.struts.ManageAction" scope="session"/>
+    <bean id="SalaryTableAction" class="com.runfeng.struts.SalaryTableAction" scope="session"/>
+    <bean id="InfoTableAction" class="com.runfeng.struts.InfoTableAction" scope="session"/>
 
 
 </beans>
