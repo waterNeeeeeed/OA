@@ -22,7 +22,7 @@ public class PersonalInfoServiceImplTest {
     }
     @Test
     public void findBasicInfo() throws Exception {
-        System.out.println(personalInfoService.findBasicInfo("all"));
+        System.out.println(personalInfoService.findBasicInfo("经理办"));
     }
 
 }

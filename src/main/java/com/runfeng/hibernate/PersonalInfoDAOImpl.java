@@ -19,7 +19,7 @@ public class PersonalInfoDAOImpl extends BaseDAOImpl<PersonalInfo>
 
     @Override
     public List findBasicInfoByDepartment(String department) {
-        StringBuffer hql = new StringBuffer().append("select p.mainId, p.basicInfo from PersonalInfo p").append(" ");
+        StringBuffer hql = new StringBuffer().append("select p.mainID, p.basicInfo from PersonalInfo p").append(" ");
         hql.append("where p.positionInfo.department = ?0");
 
         return find(hql.toString(), department);

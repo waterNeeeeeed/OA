@@ -45,8 +45,9 @@ public class PersonalInfoServiceImpl implements PersonalInfoService {
     }
     /*@Override*/
     public List<BasicInfoJson> findBasicInfoByDepartmentToJson(String department) {
-
-        return null;
+        List srcList = personalInfoDAO.findBasicInfoByDepartment(department);
+        List<BasicInfoJson> listBIJ = personalInfoJsonFactory.createBasicInfoJsonList();
+        return createBIJ(srcList, listBIJ);
     }
 
     /*@Override*/
