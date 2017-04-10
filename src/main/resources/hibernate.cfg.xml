@@ -21,7 +21,6 @@
         <property name="hbm2ddl.auto">update</property>
         <property name="show_sql">true</property>
         <property name="hibernate.format_sql">true</property>
-        <mapping class="com.runfeng.hibernate.News"></mapping>
         <mapping class="com.runfeng.hibernate.SalaryEntity.Salary"></mapping>
         <mapping class="com.runfeng.hibernate.InformationEntity.PersonalInfo"></mapping>
     </session-factory>

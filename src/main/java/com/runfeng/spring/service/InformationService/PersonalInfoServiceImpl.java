@@ -4,7 +4,7 @@ import com.runfeng.hibernate.InformationEntity.BasicInfo;
 import com.runfeng.hibernate.InformationEntity.MainID;
 import com.runfeng.hibernate.InformationJson.BasicInfoJson;
 import com.runfeng.hibernate.InformationJson.PersonalInfoJsonFactory;
-import com.runfeng.hibernate.PersonalInfoDAO;
+import com.runfeng.hibernate.InformationDAO.PersonalInfoDAO;
 import com.runfeng.utils.JsonUtil;
 
 import java.util.Iterator;

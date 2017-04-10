@@ -1,12 +1,11 @@
 package com.runfeng.spring.service;
 
 import com.runfeng.hibernate.InformationEntity.CasualWorker;
+import com.runfeng.spring.service.InformationService.CasualWorkerService;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-
-import static org.junit.Assert.*;
 
 /**
  * Created by hasee-pc on 2017/4/9.

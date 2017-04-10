@@ -256,9 +256,11 @@
     }
     function getInfoTableAjax(department, infoType, tableCaption, tableHeadString, tableContentString) {
         var uri = "InfoTableAction.action";
+        /*alert("getInfoTableAjax");*/
         $.post(uri, {department:department, infoType:infoType},
             function (data) {
                 //$("#testDiv").text(data["salaryTableHead"]);
+                alert("test_post");
                 setCaption(document, tableCaption);
                 $("#infoTableCaption").text(data["department_zh_CN"]);
                 createTable(document, 'infoTable', JSON.parse(data[tableHeadString]), eval(data[tableContentString]),'informationTableHead');

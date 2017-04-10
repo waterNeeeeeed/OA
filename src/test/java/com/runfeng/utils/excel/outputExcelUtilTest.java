@@ -10,7 +10,7 @@ import static org.junit.Assert.*;
 public class outputExcelUtilTest {
     @Test
     public void outputExcelUtil() throws Exception {
-        outputExcelUtil.outputExcelUtil("office", "basic");
+        outputExcelUtil.outputExcelUtil("all", "basic");
     }
 
 }

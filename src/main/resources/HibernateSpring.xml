@@ -35,10 +35,10 @@
     </bean>
 
     <!--CasualWorkerService-->
-    <bean id="casualWorkerService" class="com.runfeng.spring.service.CasualWorkerServiceImpl">
+    <bean id="casualWorkerService" class="com.runfeng.spring.service.InformationService.CasualWorkerServiceImpl">
         <property name="casualWorkerDAO" ref="casualWorkerDAO"/>
     </bean>
-    <bean id="casualWorkerDAO" class="com.runfeng.hibernate.CasualWorkerDAOImpl">
+    <bean id="casualWorkerDAO" class="com.runfeng.hibernate.InformationDAO.CasualWorkerDAOImpl">
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
 
@@ -47,7 +47,7 @@
         <property name="personalInfoDAO" ref="personalInfoDAO"></property>
         <property name="personalInfoJsonFactory" ref="personalInfoJsonFactory"></property>
     </bean>
-    <bean id="personalInfoDAO" class="com.runfeng.hibernate.PersonalInfoDAOImpl">
+    <bean id="personalInfoDAO" class="com.runfeng.hibernate.InformationDAO.PersonalInfoDAOImpl">
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
     <bean id="personalInfoJsonFactory" class="com.runfeng.hibernate.InformationJson.PersonalInfoJsonFactory"/>

@@ -9,12 +9,14 @@
         <property name="vps" ref="vps"/>
     </bean>
     <!--<bean id="actionContext" class="com.opensymphony.xwork2.ActionContext" factory-method="getContext"/>-->
-    <bean id="vps" class="com.runfeng.spring.service.ValidPasswordService"/>
+    <bean id="vps" class="com.runfeng.spring.service.LoginValidService.ValidPasswordService"/>
     
     <!-- ManageAction -->
     <bean id="ManageAction" class="com.runfeng.struts.ManageAction" scope="session"/>
     <bean id="SalaryTableAction" class="com.runfeng.struts.SalaryTableAction" scope="session"/>
-    <bean id="InfoTableAction" class="com.runfeng.struts.InfoTableAction" scope="session"/>
-
+    <bean id="InfoTableAction" class="com.runfeng.struts.InfoTableAction" scope="session">
+        <property name="personalInfoService" ref="personalInfoService"/>
+    </bean>
+    <bean id="personalInfoService" class="com.runfeng.spring.service.InformationService.PersonalInfoServiceImpl" scope="session"/>
 
 </beans>

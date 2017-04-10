@@ -1,5 +1,6 @@
-package com.runfeng.hibernate;
+package com.runfeng.hibernate.InformationDAO;
 
+import com.runfeng.hibernate.BaseDAOImpl;
 import com.runfeng.hibernate.InformationEntity.PersonalInfo;
 
 import java.util.List;

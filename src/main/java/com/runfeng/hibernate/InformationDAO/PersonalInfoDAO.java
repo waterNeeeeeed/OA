@@ -1,5 +1,6 @@
-package com.runfeng.hibernate;
+package com.runfeng.hibernate.InformationDAO;
 
+import com.runfeng.hibernate.BaseDAO;
 import com.runfeng.hibernate.InformationEntity.BasicInfo;
 import com.runfeng.hibernate.InformationEntity.MainID;
 import com.runfeng.hibernate.InformationEntity.PersonalInfo;
@@ -16,7 +17,7 @@ import java.util.List;
     private Education education;
     private Contract contract;
  */
-public interface PersonalInfoDAO extends BaseDAO<PersonalInfo>{
+public interface PersonalInfoDAO extends BaseDAO<PersonalInfo> {
     List findAllBasicInfo();//
     List findBasicInfoByDepartment(String Department);
 

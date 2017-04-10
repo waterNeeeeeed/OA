@@ -1,5 +1,6 @@
-package com.runfeng.hibernate;
+package com.runfeng.hibernate.InformationDAO;
 
+import com.runfeng.hibernate.BaseDAO;
 import com.runfeng.hibernate.InformationEntity.CasualWorker;
 
 import java.util.List;

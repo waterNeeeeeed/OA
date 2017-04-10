@@ -9,6 +9,7 @@ import com.runfeng.hibernate.InformationJson.BasicInfoHead;
 import com.runfeng.hibernate.InformationJson.ContractHead;
 import com.runfeng.hibernate.InformationJson.EducationHead;
 import com.runfeng.hibernate.InformationJson.PositionInfoHead;
+import com.runfeng.spring.service.InformationService.PersonalInfoService;
 import com.runfeng.utils.DepartmentParseUtil;
 import com.runfeng.utils.JsonUtil;
 import com.runfeng.utils.TableHeadParseUtil;
@@ -22,6 +23,16 @@ public class InfoTableAction extends ActionSupport {
     private String department;
     private String department_zh_CN;
     private String infoType;
+
+    private PersonalInfoService personalInfoService;
+
+    public PersonalInfoService getPersonalInfoService() {
+        return personalInfoService;
+    }
+
+    public void setPersonalInfoService(PersonalInfoService personalInfoService) {
+        this.personalInfoService = personalInfoService;
+    }
 
     public String getDepartment_zh_CN() {
         return department_zh_CN;
@@ -110,8 +121,11 @@ public class InfoTableAction extends ActionSupport {
             employeesInfo = HqlQuery.findEmployeeInfo(getDepartment());
         }
         if (infoType.equals("basicInfo")){
+
             informationTableHead = convertBasicInfoHeadToJson();
             employeesInfo = HqlQuery.findBasicInfo(getDepartment());
+            /*employeesInfo = personalInfoService.findBasicInfo(getDepartment());
+            System.out.print(employeesInfo);*/
         }
         if (infoType.equals("position")){
             informationTableHead = convertPositionHeadToJson();
@@ -127,7 +141,7 @@ public class InfoTableAction extends ActionSupport {
             employeesInfo = HqlQuery.findContractInfo(getDepartment());
         }
         //JsonUtil.toJson(EmployeeInfoExcelTableParseUtil.inputEmployeeInfo(null).values());
-        //System.out.println(employeesInfo);
+        System.out.println(employeesInfo);
         return Action.SUCCESS;
     }
 }

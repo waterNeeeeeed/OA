@@ -1,4 +1,4 @@
-package com.runfeng.spring.service;
+package com.runfeng.spring.service.LoginValidService;
 
 /**
  * Created by 帝 on 2017/4/5.

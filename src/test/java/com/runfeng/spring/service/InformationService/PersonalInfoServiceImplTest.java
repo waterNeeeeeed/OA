@@ -1,12 +1,9 @@
 package com.runfeng.spring.service.InformationService;
 
-import com.runfeng.spring.service.CasualWorkerService;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-
-import static org.junit.Assert.*;
 
 /**
  * Created by hasee-pc on 2017/4/10.

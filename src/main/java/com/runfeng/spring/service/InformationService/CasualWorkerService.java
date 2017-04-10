@@ -1,4 +1,4 @@
-package com.runfeng.spring.service;
+package com.runfeng.spring.service.InformationService;
 
 import com.runfeng.hibernate.InformationEntity.CasualWorker;
 import com.runfeng.hibernate.Page;
