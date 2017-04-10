@@ -28,16 +28,53 @@ public class PersonalInfoDAOImpl extends BaseDAOImpl<PersonalInfo>
 
     @Override
     public List findAllPositionInfo() {
-        return null;
+        String hql = "select distinct pi.mainID, pi.positionInfo from PersonalInfo pi";
+        return find(hql);
+    }
+
+    @Override
+    public List findPositionInfoByDepartment(String department) {
+        StringBuffer hql = new StringBuffer().append("select distinct pi.mainID, pi.positionInfo from PersonalInfo pi")
+                .append(" ").append("where pi.positionInfo.department = ?0");
+        return find(hql.toString(), department);
     }
 
     @Override
     public List findAllEducationInfo() {
-        return null;
+        String hql = "select distinct pi.mainID, pi.education from PersonalInfo pi";
+        return find(hql);
+    }
+
+    @Override
+    public List findEducationInfoByDepartment(String department) {
+        StringBuffer hql = new StringBuffer().append("select distinct pi.mainID, pi.education from PersonalInfo pi")
+                .append(" ").append("where pi.positionInfo.department = ?0");
+        return find(hql.toString(), department);
     }
 
     @Override
     public List findAllContractInfo() {
-        return null;
+        String hql = "select distinct pi.mainID, pi.contract from PersonalInfo pi";
+        return find(hql);
+    }
+
+    @Override
+    public List findContractInfoByDepartment(String department) {
+        StringBuffer hql = new StringBuffer().append("select distinct pi.mainID, pi.contract from PersonalInfo pi")
+                .append(" ").append("where pi.positionInfo.department = ?0");
+        return find(hql.toString(), department);
+    }
+
+    @Override
+    public List findAllEmployeeInfo() {
+        String hql = "select distinct pi from PersonalInfo pi";
+        return find(hql);
+    }
+
+    @Override
+    public List findEmployeeInfoByDepartment(String department) {
+        StringBuffer hql = new StringBuffer().append("select pi from PersonalInfo pi")
+                .append(" ").append("where pi.positionInfo.department = ?0");
+        return find(hql.toString(), department);
     }
 }

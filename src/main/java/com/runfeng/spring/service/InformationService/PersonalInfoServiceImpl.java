@@ -1,13 +1,12 @@
 package com.runfeng.spring.service.InformationService;
 
-import com.runfeng.hibernate.InformationEntity.BasicInfo;
-import com.runfeng.hibernate.InformationEntity.MainID;
-import com.runfeng.hibernate.InformationJson.BasicInfoJson;
-import com.runfeng.hibernate.InformationJson.PersonalInfoJsonFactory;
+import com.runfeng.hibernate.InformationEntity.*;
+import com.runfeng.hibernate.InformationJson.*;
 import com.runfeng.hibernate.InformationDAO.PersonalInfoDAO;
 import com.runfeng.utils.DepartmentParseUtil;
 import com.runfeng.utils.JsonUtil;
 
+import java.io.Serializable;
 import java.util.Iterator;
 import java.util.List;
 
@@ -34,38 +33,91 @@ public class PersonalInfoServiceImpl implements PersonalInfoService {
         this.personalInfoDAO = personalInfoDAO;
     }
 
-    /********BasicInfo***************/
-    private List<BasicInfoJson> createBIJ(List srcList, List objList){
+
+    private<T> List<T> createBIJ(List srcList, List objList, Class<T> Clz){
         for (Iterator it=srcList.iterator(); it.hasNext(); ){
             Object[] objects = (Object[])it.next();
             MainID mainID = (MainID)objects[0];
-            BasicInfo basicInfo = (BasicInfo)objects[1];
-            objList.add(personalInfoJsonFactory.createBasicInfoJson(mainID, basicInfo));
+            /*BasicInfo basicInfo = (BasicInfo)objects[1];*/
+            objList.add(personalInfoJsonFactory.create(mainID, objects[1], Clz));
         }
         return objList;
     }
-    /*@Override*/
-    public List<BasicInfoJson> findBasicInfoByDepartmentToJson(String department) {
-        List srcList = personalInfoDAO.findBasicInfoByDepartment(department);
-        List<BasicInfoJson> listBIJ = personalInfoJsonFactory.createBasicInfoJsonList();
-        return createBIJ(srcList, listBIJ);
+
+    /********BasicInfo***************/
+    @Override
+    public String findBasicInfo(String department) {
+        List srcList;
+        if (department.equals("all")){
+            srcList = personalInfoDAO.findAllBasicInfo();
+        }else {
+            String department_zh_CN = DepartmentParseUtil.departmentParse(department);
+            srcList = personalInfoDAO.findBasicInfoByDepartment(department_zh_CN);
+        }
+        List<BasicInfoJson> listBIJ = personalInfoJsonFactory.createInfoJsonList();
+
+        return JsonUtil.toJson(createBIJ(srcList, listBIJ, BasicInfoJson.class));
     }
 
-    /*@Override*/
-    public List<BasicInfoJson> findAllBasicInfoToJson() {
-        List srcList = personalInfoDAO.findAllBasicInfo();
-        List<BasicInfoJson> listBIJ = personalInfoJsonFactory.createBasicInfoJsonList();
-        return createBIJ(srcList, listBIJ);
+    /**/
+
+    @Override
+    public String findPositionInfo(String department) {
+        List srcList;
+        if (department.equals("all")){
+            srcList = personalInfoDAO.findAllPositionInfo();
+        }else {
+            String department_zh_CN = DepartmentParseUtil.departmentParse(department);
+            srcList = personalInfoDAO.findPositionInfoByDepartment(department_zh_CN);
+        }
+        List<PositionInfoJson> listBIJ = personalInfoJsonFactory.createInfoJsonList();
+
+        return JsonUtil.toJson(createBIJ(srcList, listBIJ, PositionInfoJson.class));
+    }
+
+    public String findEducationInfo(String department){
+        List srcList;
+        if (department.equals("all")){
+            srcList = personalInfoDAO.findAllEducationInfo();
+        }else {
+            String department_zh_CN = DepartmentParseUtil.departmentParse(department);
+            srcList = personalInfoDAO.findEducationInfoByDepartment(department_zh_CN);
+        }
+        List<EducationJson> listBIJ = personalInfoJsonFactory.createInfoJsonList();
+
+        return JsonUtil.toJson(createBIJ(srcList, listBIJ, EducationJson.class));
     }
 
     @Override
-    public String findBasicInfo(String department) {
+    public String findContractInfo(String department) {
+        List srcList;
         if (department.equals("all")){
-            return JsonUtil.toJson(findAllBasicInfoToJson());
+            srcList = personalInfoDAO.findAllContractInfo();
         }else {
             String department_zh_CN = DepartmentParseUtil.departmentParse(department);
-            return JsonUtil.toJson(findBasicInfoByDepartmentToJson(department));
+            srcList = personalInfoDAO.findContractInfoByDepartment(department_zh_CN);
         }
+        List<ContractJson> listBIJ = personalInfoJsonFactory.createInfoJsonList();
+
+        return JsonUtil.toJson(createBIJ(srcList, listBIJ, ContractJson.class));
+    }
+
+    /**/
+    @Override
+    public String findEmployeeInfo(String department){
+        List srcList;
+        if (department.equals("all")){
+            srcList = personalInfoDAO.findAllEmployeeInfo();
+        }else {
+            String department_zh_CN = DepartmentParseUtil.departmentParse(department);
+            srcList = personalInfoDAO.findEmployeeInfoByDepartment(department_zh_CN);
+        }
+        List<EmployeeInfo> objList = personalInfoJsonFactory.createInfoJsonList();
+        for (Iterator it=srcList.iterator(); it.hasNext(); ){
+            PersonalInfo personalInfo = (PersonalInfo)it.next();
+            objList.add(personalInfoJsonFactory.createEmployeeInfo(personalInfo));
+        }
+        return JsonUtil.toJson(objList);
     }
 
 

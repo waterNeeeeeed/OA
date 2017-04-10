@@ -121,10 +121,9 @@ public class InfoTableAction extends ActionSupport {
         if (getInfoType().equals("basic")){
             informationTableHead = TableHeadParseUtil.convertTableHeadToJson("tablehead/employeesinfo_tablehead",
                     "com.runfeng.hibernate.InformationEntity.EmployeesInfoHead");
-            employeesInfo = HqlQuery.findEmployeeInfo(getDepartment());
+            employeesInfo = personalInfoService.findEmployeeInfo(getDepartment());
         }
         if (infoType.equals("basicInfo")){
-
             informationTableHead = convertBasicInfoHeadToJson();
             /*employeesInfo = HqlQuery.findBasicInfo(getDepartment());*/
             employeesInfo = personalInfoService.findBasicInfo(getDepartment());
@@ -132,19 +131,19 @@ public class InfoTableAction extends ActionSupport {
         }
         if (infoType.equals("position")){
             informationTableHead = convertPositionHeadToJson();
-            employeesInfo = HqlQuery.findPositionInfo(getDepartment());
+            employeesInfo = personalInfoService.findPositionInfo(getDepartment());
         }
         if (infoType.equals("education")){
             informationTableHead = convertEducationHeadToJson();
-            employeesInfo = HqlQuery.findEducationInfo(getDepartment());
+            employeesInfo = personalInfoService.findEducationInfo(getDepartment());
         }
 
         if (infoType.equals("contract")){
             informationTableHead = convertContractHeadToJson();
-            employeesInfo = HqlQuery.findContractInfo(getDepartment());
+            employeesInfo = personalInfoService.findContractInfo(getDepartment());
         }
         //JsonUtil.toJson(EmployeeInfoExcelTableParseUtil.inputEmployeeInfo(null).values());
-        /*System.out.println(employeesInfo);*/
+        System.out.println(employeesInfo);
         return Action.SUCCESS;
     }
 }

@@ -19,9 +19,17 @@ import java.util.List;
  */
 public interface PersonalInfoDAO extends BaseDAO<PersonalInfo> {
     List findAllBasicInfo();//
-    List findBasicInfoByDepartment(String Department);
+    List findBasicInfoByDepartment(String department);
 
     List findAllPositionInfo();
+    List findPositionInfoByDepartment(String department);
+
     List findAllEducationInfo();
+    List findEducationInfoByDepartment(String department);
+
     List findAllContractInfo();
+    List findContractInfoByDepartment(String department);
+
+    List findAllEmployeeInfo();
+    List findEmployeeInfoByDepartment(String department);
 }
