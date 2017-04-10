@@ -5,6 +5,7 @@ import com.runfeng.hibernate.InformationEntity.MainID;
 import com.runfeng.hibernate.InformationJson.BasicInfoJson;
 import com.runfeng.hibernate.InformationJson.PersonalInfoJsonFactory;
 import com.runfeng.hibernate.InformationDAO.PersonalInfoDAO;
+import com.runfeng.utils.DepartmentParseUtil;
 import com.runfeng.utils.JsonUtil;
 
 import java.util.Iterator;
@@ -62,6 +63,7 @@ public class PersonalInfoServiceImpl implements PersonalInfoService {
         if (department.equals("all")){
             return JsonUtil.toJson(findAllBasicInfoToJson());
         }else {
+            String department_zh_CN = DepartmentParseUtil.departmentParse(department);
             return JsonUtil.toJson(findBasicInfoByDepartmentToJson(department));
         }
     }

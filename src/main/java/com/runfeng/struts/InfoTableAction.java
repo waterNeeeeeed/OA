@@ -24,11 +24,14 @@ public class InfoTableAction extends ActionSupport {
     private String department_zh_CN;
     private String infoType;
 
+    //????????????????????????????????
+    //可以有set但不能有get，应为使用strust2 json插件，会把这个也转化，造成问题。
+    //如果序列化的话呢？
     private PersonalInfoService personalInfoService;
 
-    public PersonalInfoService getPersonalInfoService() {
+    /*public PersonalInfoService getPersonalInfoService() {
         return personalInfoService;
-    }
+    }*/
 
     public void setPersonalInfoService(PersonalInfoService personalInfoService) {
         this.personalInfoService = personalInfoService;
@@ -123,9 +126,9 @@ public class InfoTableAction extends ActionSupport {
         if (infoType.equals("basicInfo")){
 
             informationTableHead = convertBasicInfoHeadToJson();
-            employeesInfo = HqlQuery.findBasicInfo(getDepartment());
-            /*employeesInfo = personalInfoService.findBasicInfo(getDepartment());
-            System.out.print(employeesInfo);*/
+            /*employeesInfo = HqlQuery.findBasicInfo(getDepartment());*/
+            employeesInfo = personalInfoService.findBasicInfo(getDepartment());
+            //System.out.print(employeesInfo);
         }
         if (infoType.equals("position")){
             informationTableHead = convertPositionHeadToJson();
@@ -141,7 +144,7 @@ public class InfoTableAction extends ActionSupport {
             employeesInfo = HqlQuery.findContractInfo(getDepartment());
         }
         //JsonUtil.toJson(EmployeeInfoExcelTableParseUtil.inputEmployeeInfo(null).values());
-        System.out.println(employeesInfo);
+        /*System.out.println(employeesInfo);*/
         return Action.SUCCESS;
     }
 }

@@ -2,7 +2,7 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">
-
+    <import resource="HibernateSpring.xml"/>
     <!-- loginAction -->
     <bean id="loginAction" class="com.runfeng.struts.LoginAction"
         scope="request">
@@ -16,7 +16,12 @@
     <bean id="SalaryTableAction" class="com.runfeng.struts.SalaryTableAction" scope="session"/>
     <bean id="InfoTableAction" class="com.runfeng.struts.InfoTableAction" scope="session">
         <property name="personalInfoService" ref="personalInfoService"/>
+    </bean><!--
+    <bean id="personalInfoService" class="com.runfeng.spring.service.InformationService.PersonalInfoServiceImpl" scope="session">
+        <property name="personalInfoDAO" ref="personalInfoDAO"/>
+        <property name="personalInfoJsonFactory" ref="personalInfoJsonFactory"/>
     </bean>
-    <bean id="personalInfoService" class="com.runfeng.spring.service.InformationService.PersonalInfoServiceImpl" scope="session"/>
+    <bean id="personalInfoDAO" class="com.runfeng.hibernate.InformationDAO.PersonalInfoDAOImpl"/>
+    <bean id="personalInfoJsonFactory" class="com.runfeng.hibernate.InformationJson.PersonalInfoJsonFactory"/>-->
 
 </beans>
