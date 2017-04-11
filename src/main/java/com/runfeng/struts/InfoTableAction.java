@@ -143,7 +143,7 @@ public class InfoTableAction extends ActionSupport {
             employeesInfo = personalInfoService.findContractInfo(getDepartment());
         }
         //JsonUtil.toJson(EmployeeInfoExcelTableParseUtil.inputEmployeeInfo(null).values());
-        System.out.println(employeesInfo);
+        //System.out.println(employeesInfo);
         return Action.SUCCESS;
     }
 }
