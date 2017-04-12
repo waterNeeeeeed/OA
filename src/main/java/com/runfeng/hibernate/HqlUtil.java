@@ -14,9 +14,9 @@ public class HqlUtil {
     private static ThreadLocal<Session> session = new ThreadLocal<>();
     static {
         try{
-            /*Configuration conf = new Configuration().configure();
+            Configuration conf = new Configuration().configure();
             ServiceRegistry serviceRegistry = new ServiceRegistryBuilder().applySettings(conf.getProperties()).build();
-            sessionFactory = conf.buildSessionFactory(serviceRegistry);*/
+            sessionFactory = conf.buildSessionFactory(serviceRegistry);
         }catch (Exception e){
             e.printStackTrace();
         }

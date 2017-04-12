@@ -3,7 +3,7 @@ package com.runfeng.struts;
 import com.opensymphony.xwork2.Action;
 import com.opensymphony.xwork2.ActionSupport;
 import com.runfeng.hibernate.HqlQuery;
-import com.runfeng.hibernate.SalaryEntity.SalaryTableHead;
+import com.runfeng.hibernate.SalaryJson.SalaryTableHead;
 import com.runfeng.utils.JsonUtil;
 
 /**

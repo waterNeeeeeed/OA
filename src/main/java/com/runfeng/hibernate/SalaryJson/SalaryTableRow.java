@@ -1,4 +1,6 @@
-package com.runfeng.hibernate.SalaryEntity;
+package com.runfeng.hibernate.SalaryJson;
+
+import com.runfeng.hibernate.SalaryEntity.Salary;
 
 /**
  * Created by 帝 on 2017/3/25.

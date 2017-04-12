@@ -65,7 +65,7 @@ public class outputExcelUtil {
                     }
                 }
 
-                FileOutputStream fileOutputStream = new FileOutputStream(new File("基本信息" + ".xlsx"));
+                FileOutputStream fileOutputStream = new FileOutputStream(new File(department + ".xlsx"));
                 wb.write(fileOutputStream);
                 wb.close();
 

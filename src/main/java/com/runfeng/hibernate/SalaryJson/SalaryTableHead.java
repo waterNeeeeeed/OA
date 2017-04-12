@@ -1,4 +1,4 @@
-package com.runfeng.hibernate.SalaryEntity;
+package com.runfeng.hibernate.SalaryJson;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
