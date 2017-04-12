@@ -1,22 +1,12 @@
 package com.runfeng.utils.excel.StandardExcelParse;
 
 import com.runfeng.utils.excel.SSBasicCalculate.FullCompanySalaryExcelUtil;
-import com.runfeng.utils.excel.SSBasicCalculate.PersonalSalary;
-import org.apache.poi.hssf.util.HSSFColor;
 import org.apache.poi.ss.usermodel.*;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.File;
-import java.io.FileOutputStream;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import java.text.DecimalFormat;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
-import java.util.Map;
 
 import static org.apache.poi.ss.usermodel.Cell.CELL_TYPE_NUMERIC;
 
@@ -27,7 +17,7 @@ public class StandardExcelParse {
     private static final Logger LOGGER = LoggerFactory.getLogger(FullCompanySalaryExcelUtil.class);
     private static int YEAR;
 
-    public static boolean isCellNullAndBlank(Cell cell){
+    public static boolean isCellNullOrBlank(Cell cell){
         if (cell == null || cell.getCellTypeEnum() == CellType.BLANK){
             return true;
         }
@@ -64,7 +54,7 @@ public class StandardExcelParse {
     public static Object readCellValue(Workbook workbook, Row row, ColumnNumType columnNumType){
         Cell cell = row.getCell(columnNumType.getColumnNum());
         //如果为空直接返回空
-        if (isCellNullAndBlank(cell)){
+        if (isCellNullOrBlank(cell)){
             return null;
         }
         switch (columnNumType.getColumnType()){

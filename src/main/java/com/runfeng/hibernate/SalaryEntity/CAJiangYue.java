@@ -13,8 +13,7 @@ public class CAJiangYue {
     private int holiday;
     private int attendenceEstimated;
     private int attendenceActual;
-    private int maritalLeave;
-    private int funeralLeave;
+    private int maritalOrFuneralLeave;
     private int affairLeave;
     private int sickLeave;
     private int maternityLeave;
@@ -91,20 +90,12 @@ public class CAJiangYue {
         this.attendenceActual = attendenceActual;
     }
 
-    public int getMaritalLeave() {
-        return maritalLeave;
+    public int getMaritalOrFuneralLeave() {
+        return maritalOrFuneralLeave;
     }
 
-    public void setMaritalLeave(int maritalLeave) {
-        this.maritalLeave = maritalLeave;
-    }
-
-    public int getFuneralLeave() {
-        return funeralLeave;
-    }
-
-    public void setFuneralLeave(int funeralLeave) {
-        this.funeralLeave = funeralLeave;
+    public void setMaritalOrFuneralLeave(int maritalOrFuneralLeave) {
+        this.maritalOrFuneralLeave = maritalOrFuneralLeave;
     }
 
     public int getAffairLeave() {
