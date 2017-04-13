@@ -1,27 +1,18 @@
 package com.runfeng.utils.excel;
 
-import com.microsoft.schemas.office.visio.x2012.main.CellType;
 import com.runfeng.hibernate.HqlUtil;
-import com.runfeng.hibernate.InformationEntity.PersonalInfo;
 import com.runfeng.utils.JsonUtil;
 import com.runfeng.utils.excel.StandardExcelParse.CellTypeOA;
 import com.runfeng.utils.excel.StandardExcelParse.ColumnNumType;
 import com.runfeng.utils.excel.StandardExcelParse.StandardExcelParse;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.poi.ss.usermodel.WorkbookFactory;
+import org.apache.poi.ss.usermodel.*;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.junit.Test;
 
 import java.io.File;
 import java.io.FileOutputStream;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-
-import static org.junit.Assert.*;
+import java.util.*;
 
 /**
  * Created by lenovo on 2017/4/6.
@@ -48,7 +39,7 @@ public class outputExcelUtilTest {
         outputExcelUtil.outputExcelUtil("qcd", "basic");
         outputExcelUtil.outputExcelUtil("workshop", "basic");*/
         //整合公积金基数
-        Session session = HqlUtil.currentSession();
+        /*Session session = HqlUtil.currentSession();
         Transaction tx = session.beginTransaction();
         List infoList;
         StringBuffer hql = new StringBuffer();
@@ -58,42 +49,50 @@ public class outputExcelUtilTest {
         infoList = session.createQuery(hql.toString()).setParameter(i+"", "江岳").list();
         System.out.println(JsonUtil.toJson(infoList));
         tx.commit();
-        HqlUtil.closeSession();
+        HqlUtil.closeSession();*/
 
 
 
-        Workbook workbook = WorkbookFactory.create(new File("工资奖金/单位职工月应发工资统计表__测试.xls"));
-        Sheet sheetSrc = workbook.getSheet("公积金基数");
-        Sheet sheetObj = workbook.getSheet("Sheet2");
+        Workbook workbookSrc = WorkbookFactory.create(new File("江岳OA/社保/2017社保基数_最终.xls"));
+        Sheet sheetSrc = workbookSrc.getSheet("2017社保基数最终稿");
+        Workbook workbookObj = WorkbookFactory.create(new File("江岳OA/社保/[0700127149]_基数申报_1492073753367_.xls"));
+        Sheet sheetObj = workbookObj.getSheet("assets");
 
 
-        List<ssBasic> list = new ArrayList<ssBasic>();
+        List<SSBasic> ssBasicList = new ArrayList<SSBasic>();
         ColumnNumType[] columnNumType = new ColumnNumType[2];
         columnNumType[0] = new ColumnNumType(0, CellTypeOA.STRING);
-        columnNumType[1] = new ColumnNumType(1, CellTypeOA.DOUBLE);
+        columnNumType[1] = new ColumnNumType(2, CellTypeOA.DOUBLE);
 
-        for(int rowIndex=1; rowIndex<178; rowIndex++){
+        for(int rowIndex=1; rowIndex<=93; rowIndex++){
             Row row = sheetSrc.getRow(rowIndex);
-            if (!StandardExcelParse.isCellNullOrBlank(row.getCell(1))){
-                list.add(StandardExcelParse.readRowToEntity(ssBasic.class, workbook, row, columnNumType));
+            Cell temp = row.getCell(0);
+            if (!StandardExcelParse.isCellNullOrBlank(temp)){
+                ssBasicList.add(StandardExcelParse.readRowToEntity(SSBasic.class, workbookSrc, row, columnNumType));
             }
 
+        }
+
+        Map<String, SSBasic> ssBasicMap = new LinkedHashMap<>();
+        for(Iterator it=ssBasicList.iterator();it.hasNext();){
+            SSBasic temp = (SSBasic)it.next();
+            ssBasicMap.put(temp.getName(), temp);
         }
 
         int rowIndex = 1;
-        for(Iterator it=list.iterator();it.hasNext();){
-            ssBasic basic = (ssBasic)it.next();
-            if (infoList.contains(basic.getName())){
-                Row row = sheetObj.createRow(rowIndex++);
-                row.createCell(0).setCellValue(basic.getName());
-                row.createCell(1).setCellValue(basic.getBasic());
+        for (int i=1; i<=93; i++)
+        {
+            Row rowObj = sheetObj.getRow(i);
+            if (!StandardExcelParse.isCellNullOrBlank(rowObj.getCell(1))){
+                String name = (String)StandardExcelParse.readCellValue(workbookObj, rowObj, new ColumnNumType(1, CellTypeOA.STRING));
+                rowObj.createCell(3).setCellValue(ssBasicMap.get(name).getBasic());
             }
 
-
         }
-        FileOutputStream fileOutputStream = new FileOutputStream(new File("工资奖金/单位职工月应发工资统计表__测试_result.xls"));
-        workbook.write(fileOutputStream);
-        workbook.close();
+        FileOutputStream fileOutputStream = new FileOutputStream(new File("江岳OA/社保/[0700127149]_基数申报_1492073753367_RESULT.xls"));
+        workbookObj.write(fileOutputStream);
+        workbookSrc.close();
+        workbookObj.close();
     }
 
 }

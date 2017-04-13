@@ -3,7 +3,7 @@ package com.runfeng.utils.excel;
 /**
  * Created by lenovo on 2017/4/13.
  */
-public class ssBasic{
+public class SSBasic {
     String name;
     double basic;
 
