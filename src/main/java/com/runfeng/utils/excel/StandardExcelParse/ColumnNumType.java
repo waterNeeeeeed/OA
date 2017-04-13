@@ -7,16 +7,7 @@ import org.apache.poi.util.Internal;
 /**
  * Created by lenovo on 2017/4/12.
  */
-enum CellTypeOA{
-    NONE,
-    NUMBER,
-    DATE,
-    STRING,
-    FORMULA,
-    BLANK,
-    BOOLEAN,
-    ERROR;
-}
+
 public class ColumnNumType {
     private int columnNum;
     private CellTypeOA columnType;

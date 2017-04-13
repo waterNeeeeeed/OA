@@ -32,21 +32,24 @@ public class StandardExcelParseTest {
                 CellTypeOA.NUMBER,CellTypeOA.NUMBER,CellTypeOA.NUMBER,CellTypeOA.NUMBER,
                 CellTypeOA.NUMBER,CellTypeOA.NUMBER};
         ColumnNumType[] columnNumType = new ColumnNumType[nums.length];
+        for (int i=0; i<cellTypeOAS.length; i++){
+            columnNumType[i] = new ColumnNumType(nums[i], cellTypeOAS[i]);
+        }
 
         for(int m=0; m<SheetName.length; m++){
             int rowStart = 4;
             int rowStop = rowStops[m];
             Sheet sheet = workbook.getSheet(SheetName[m]);
-
-            for (int i=0; i<cellTypeOAS.length; i++){
-                columnNumType[i] = new ColumnNumType(nums[i], cellTypeOAS[i]);
-            }
-
+            int nameCellIndex = 1;
             for (int n=rowStart; n <= rowStop; n++){
-                caJiangYue.add(StandardExcelParse.readRowToEntity(CAJiangYue.class, workbook, sheet.getRow(n), columnNumType));
+                if(!StandardExcelParse.isCellNullOrBlank(sheet.getRow(n).getCell(nameCellIndex))){
+                    caJiangYue.add(StandardExcelParse.readRowToEntity(CAJiangYue.class, workbook, sheet.getRow(n), columnNumType));
+                }
             }
 
         }
+
+        //将数据写入
         Map<String, CAJiangYue> caJiangYueMap = new LinkedHashMap<>();
         for (Iterator it=caJiangYue.iterator(); it.hasNext();){
             CAJiangYue caJiangYue1 = (CAJiangYue)it.next();

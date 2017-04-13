@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
+import java.text.DecimalFormat;
 
 import static org.apache.poi.ss.usermodel.Cell.CELL_TYPE_NUMERIC;
 
@@ -75,6 +76,11 @@ public class StandardExcelParse {
                     return cell.getNumericCellValue();
                 }
             }
+            case DOUBLE:{
+                if(isCellNumber(cell)){
+                    return cell.getNumericCellValue();
+                }
+            }
             case DATE:{
                 if (isCellDate(cell)){
                     return cell.getDateCellValue();
@@ -98,23 +104,37 @@ public class StandardExcelParse {
             switch (columnTypeTemp){
                 case STRING:{
                     String temp = (String)readCellValue(workbook, row, columnNumType[i]);
+                    if (temp == null){
+                        temp = "";
+                    }
+                    method_name = "set" + fields[i].getName().substring(0,1).toUpperCase() + fields[i].getName().substring(1);
+                    clz.getMethod(method_name, String.class)
+                            .invoke(obj, temp);
+                }
+                break;
+                //int 型
+                case NUMBER:{
+                    Object tempDouble = readCellValue(workbook, row, columnNumType[i]);
+                    if (tempDouble == null){
+                        tempDouble = 0;
+                    }
+                    Integer temp = new Double((double)tempDouble).intValue();
                     if (temp != null){
                         method_name = "set" + fields[i].getName().substring(0,1).toUpperCase() + fields[i].getName().substring(1);
-                        clz.getMethod(method_name, String.class)
+                        clz.getMethod(method_name, int.class)
                                 .invoke(obj, temp);
                     }
                 }
                 break;
-                case NUMBER:{
+                case DOUBLE:{
                     Object tempDouble = readCellValue(workbook, row, columnNumType[i]);
-                    if (tempDouble != null){
-                        Integer temp = new Double((double)tempDouble).intValue();
-                        if (temp != null){
-                            method_name = "set" + fields[i].getName().substring(0,1).toUpperCase() + fields[i].getName().substring(1);
-                            clz.getMethod(method_name, int.class)
-                                    .invoke(obj, temp.intValue());
-                        }
+                    if (tempDouble == null){
+                        tempDouble = 0;
                     }
+                    DecimalFormat decimalFormat = new DecimalFormat("########0.00");
+                    method_name = "set" + fields[i].getName().substring(0,1).toUpperCase() + fields[i].getName().substring(1);
+                    clz.getMethod(method_name, double.class)
+                            .invoke(obj, Double.parseDouble(decimalFormat.format((double)tempDouble)));
                 }
                 break;
             }
