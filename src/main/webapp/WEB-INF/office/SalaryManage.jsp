@@ -16,6 +16,14 @@
     <link rel="stylesheet" type="text/css" href="css/InfoSalaManage.css"/>
     <script src="js/createTable.js" type="text/javascript">
     </script>
+    <script type="text/javascript" src="bootstrap-datetimepicker-master/js/bootstrap-datetimepicker.js">
+    </script>
+    <%--<script type="text/javascript" src="bootstrap-datetimepicker-master/js/bootstrap-datetimepicker.zh-CN.js">
+    </script>--%>
+    <link rel="stylesheet" type="text/css" href="bootstrap-datetimepicker-master/css/bootstrap-datetimepicker.css"/>
+
+
+    <%--<link rel="stylesheet" type="text/css" href="bootstrap-datetimepicker-master/build/build.less"/>--%>
     <style type="text/css">
         /*//添加后不自动换行*/
         td{
@@ -169,10 +177,16 @@
                     <div id="captionTypeDiv" style="text-align: right"></div>
                 </div>
                 <div class="panel-body">
-                    <div>
-                        <div style="margin: 10px;">
-                            <input id="enquiryDateInput" class="form-control" type="month" style="text-align: center"></input>
+                    <div class="row">
+                        <div class="container-fluid" style="margin: 10px;">
+
+                            <div class="col-md-6">
+                                <input size="16" type="text" placeholder="请输入查询日期" value="" readonly class="form_datetime form-control">
+                            </div>
                             <%-- <div><button id="testBtn">test</button></div>--%>
+                            <div class="col-md-6">
+                                <input id="enquiryDateInput" class="form-control" type="month" style="text-align: center"></input>
+                            </div>
 
                         </div>
                     </div>
@@ -235,6 +249,13 @@
     </div>
 </div>
 <script type="text/javascript">
+    $(".form_datetime").datetimepicker(
+        {format: 'yyyy-mm',
+            startDate:'2016-03',
+            startView:3,
+            autoclose:true,
+            minView:3,
+            todayBtn:true});
     $("#testBtn").click(function () {
         var uri = "SalaryTableAction.action";
         $.post(uri, {department:"all", salaryType:"component"},

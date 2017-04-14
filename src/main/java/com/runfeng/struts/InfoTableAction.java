@@ -118,6 +118,9 @@ public class InfoTableAction extends ActionSupport {
         actx.getSession().put("department_zh_CN", DepartmentParseUtil.departmentParse(department));*/
         department_zh_CN = DepartmentParseUtil.departmentParse(department);
 
+        if (getInfoType().equals("numberOfEmployees")){
+
+        }
         if (getInfoType().equals("basic")){
             informationTableHead = TableHeadParseUtil.convertTableHeadToJson("tablehead/employeesinfo_tablehead",
                     "com.runfeng.hibernate.InformationEntity.EmployeesInfoHead");
