@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:activiti="http://activiti.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" typeLanguage="http://www.w3.org/2001/XMLSchema" expressionLanguage="http://www.w3.org/1999/XPath" targetNamespace="http://www.activiti.org/processdef">
+  <process id="process" isExecutable="true">
+    <startEvent id="Kaishi"></startEvent>
+    <userTask id="ShenQingTask" name="ShenQing
+"></userTask>
+    <sequenceFlow id="sid-EDA070C2-A088-4158-ABB9-D85C38D7618A" sourceRef="Kaishi" targetRef="ShenQingTask"></sequenceFlow>
+    <userTask id="PiZhunTask" name="PiZhun"></userTask>
+    <sequenceFlow id="sid-386C0AF4-AEA4-4C0E-A25A-D7FEB1457D44" sourceRef="ShenQingTask" targetRef="PiZhunTask"></sequenceFlow>
+    <userTask id="XiaoJiaTask" name="XiaoJia
+"></userTask>
+    <sequenceFlow id="sid-49B1922A-3CF0-42D3-A279-57D405F2D5F9" sourceRef="PiZhunTask" targetRef="XiaoJiaTask"></sequenceFlow>
+    <endEvent id="END"></endEvent>
+    <sequenceFlow id="sid-D055C265-8935-41A4-9F3A-4A198AC71BB7" sourceRef="XiaoJiaTask" targetRef="END"></sequenceFlow>
+  </process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_process">
+    <bpmndi:BPMNPlane bpmnElement="process" id="BPMNPlane_process">
+      <bpmndi:BPMNShape bpmnElement="Kaishi" id="BPMNShape_Kaishi">
+        <omgdc:Bounds height="30.0" width="30.0" x="130.5" y="149.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="ShenQingTask" id="BPMNShape_ShenQingTask">
+        <omgdc:Bounds height="80.0" width="100.0" x="205.5" y="124.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="PiZhunTask" id="BPMNShape_PiZhunTask">
+        <omgdc:Bounds height="80.0" width="100.0" x="350.5" y="124.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="XiaoJiaTask" id="BPMNShape_XiaoJiaTask">
+        <omgdc:Bounds height="80.0" width="100.0" x="495.5" y="124.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="END" id="BPMNShape_END">
+        <omgdc:Bounds height="28.0" width="28.0" x="640.5" y="150.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="sid-EDA070C2-A088-4158-ABB9-D85C38D7618A" id="BPMNEdge_sid-EDA070C2-A088-4158-ABB9-D85C38D7618A">
+        <omgdi:waypoint x="160.5" y="164.0"></omgdi:waypoint>
+        <omgdi:waypoint x="205.5" y="164.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-386C0AF4-AEA4-4C0E-A25A-D7FEB1457D44" id="BPMNEdge_sid-386C0AF4-AEA4-4C0E-A25A-D7FEB1457D44">
+        <omgdi:waypoint x="305.5" y="164.0"></omgdi:waypoint>
+        <omgdi:waypoint x="350.5" y="164.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-49B1922A-3CF0-42D3-A279-57D405F2D5F9" id="BPMNEdge_sid-49B1922A-3CF0-42D3-A279-57D405F2D5F9">
+        <omgdi:waypoint x="450.5" y="164.0"></omgdi:waypoint>
+        <omgdi:waypoint x="495.5" y="164.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-D055C265-8935-41A4-9F3A-4A198AC71BB7" id="BPMNEdge_sid-D055C265-8935-41A4-9F3A-4A198AC71BB7">
+        <omgdi:waypoint x="595.5" y="164.0"></omgdi:waypoint>
+        <omgdi:waypoint x="640.5" y="164.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>

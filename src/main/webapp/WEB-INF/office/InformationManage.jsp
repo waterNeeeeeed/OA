@@ -44,7 +44,7 @@
                                 员工信息管理<b class="caret"></b>
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a href="InformationManageAction.action?infoType=numberOfEmployees">概况</a></li>
+                                <li><a href="InformationManageAction.action?department=nothing&infoType=numberOfEmployees">概况</a></li>
                                 <li class="divider"></li>
                                 <li><a href="InformationManageAction.action?department=all&infoType=basicInfo">基本信息</a> </li>
                                 <li><a href="InformationManageAction.action?department=all&infoType=basic">综合信息</a></li>
@@ -151,10 +151,21 @@
 
     <div class="row">
             <div class="col-md-1 leftside-bar btn-group-vertical" role="group" aria-label="...">
+                <div class="box">
+                    <ul class="menu">
+                        <li class="level1">
+                            <a href="#">车间</a>
+                            <ul class="level2">
+                                <li><a href="#">三车间</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
                 <button id="all" type="button"
                         class="btn btn-primary btn-lg btn-block"
                         onclick="selectDepartmentToCreateTable('all', '${sessionScope.infoType}');">
                     <span class="glyphicon glyphicon-home" aria-hidden="true"></span>&nbsp;&nbsp;总览</button>
+
                 <button id="office" type="button" class="btn btn-primary"
                         onclick="selectDepartmentToCreateTable('office', '${sessionScope.infoType}');">经理办</button>
                 <button id="fd" type="button" class="btn btn-primary"
@@ -182,9 +193,26 @@
                         <%--<hr/>--%>
                         <table id="infoTable" class="table table-bordered">
                             <caption id="infoTableCaption">你好，${sessionScope.department_zh_CN}</caption>
-                            <thead>
+                            <thead  style="text-align: center">
+                                <tr>
+                                    <th>序号</th>
+                                    <th>员工类型</th>
+                                    <th>人数</th>
+                                </tr>
                             </thead>
                             <tbody>
+                                <tr>
+                                    <td>1</td><td>江岳</td><td>93</td>
+                                </tr>
+                                <tr>
+                                    <td>2</td><td>公泉</td><td>8</td>
+                                </tr>
+                                <tr>
+                                    <td>3</td><td>返聘</td><td>8</td>
+                                </tr>
+                                <tr>
+                                    <td>4</td><td>临时工</td><td>80</td>
+                                </tr>
                             </tbody>
                         </table>
                         <ul class="pagination">

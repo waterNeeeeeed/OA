@@ -18,7 +18,7 @@ public class ActivitiTestTest {
             RuntimeService runtimeService = processEngine.getRuntimeService();
 
             TaskService taskService = processEngine.getTaskService();
-            repositoryService.createDeployment().addClasspathResource("process.bpmn20.xml").deploy();
+            repositoryService.createDeployment().addClasspathResource("activiti/process.bpmn20.xml").deploy();
 
             runtimeService.startProcessInstanceByKey("process");
 
@@ -29,7 +29,10 @@ public class ActivitiTestTest {
             System.out.println("第二个任务完成前，当前任务名称:" + task.getName());
             taskService.complete(task.getId());
             task = taskService.createTaskQuery().singleResult();
+            System.out.println("第三个任务完成前，当前任务名称:" + task.getName());
+            taskService.complete(task.getId());
 
+            task = taskService.createTaskQuery().singleResult();
             System.out.println("当前任务:" + task);
 
 
