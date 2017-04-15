@@ -7,6 +7,9 @@ import javax.persistence.Table;
 /**
  * Created by hasee-pc on 2017/4/8.
  */
+enum state{
+
+}
 @Entity
 @Table(name = "casualworker_table")
 public class CasualWorker {
@@ -17,6 +20,7 @@ public class CasualWorker {
     private String identification;
     private String telephone;
     private String address;
+
 
     public CasualWorker() {
     }
