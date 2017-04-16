@@ -23,6 +23,11 @@
             text-align: center;
         }
     </style>
+    <link rel="stylesheet" type="text/css" href="jquery-3d-menu-with-search\css\jquery-accordion-menu.css"/>
+    <link rel="stylesheet" type="text/css" href="jquery-3d-menu-with-search\css\font-awesome.css"/>
+    <script type="text/javascript" src="jquery-3d-menu-with-search\js\jquery-accordion-menu.js">
+
+    </script>
 
 
 </head>
@@ -152,9 +157,9 @@
     </div>
 
     <div class="row">
-            <div class="col-md-1 leftside-bar btn-group-vertical" role="group" aria-label="...">
+        <div class="col-md-4 leftside-bar btn-group-vertical" role="group" aria-label="...">
 
-                <div class="box">
+        <%--        <div class="box">
                     <ul class="menu">
                         <li class="level1">
                             <a href="#">车间</a>
@@ -184,9 +189,9 @@
                 <button id="workshop" type="button" class="btn btn-primary"
                         onclick="selectDepartmentToCreateTable('workshop', '${sessionScope.infoType}');">车间</button>
                 <button id="temp" type="button" class="btn btn-primary"
-                        onclick="selectDepartmentToCreateTable('temp', '${sessionScope.infoType}');">临时用工</button>
-            </div>
-        <div class="col-md-11">
+                        onclick="selectDepartmentToCreateTable('temp', '${sessionScope.infoType}');">临时用工</button>--%>
+        </div>
+        <div class="col-md-8">
             <div class="panel panel-success">
                 <div class="panel-heading">
                     <div id="captionTypeDiv" style="text-align: right;">你好，${sessionScope.user}</div>

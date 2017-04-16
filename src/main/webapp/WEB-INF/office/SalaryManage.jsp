@@ -88,9 +88,11 @@
                                 工作流管理<b class="caret"></b>
                             </a>
                             <ul class="dropdown-menu">
+                                <li><a href="WorkFlowManageAction.action">工作流管理</a></li>
+                                <%--<li class="divider"/>
                                 <li><a href="#">用车流程</a></li>
                                 <li><a href="#">报销流程</a></li>
-                                <li><a href="#">请假流程</a></li>
+                                <li><a href="#">请假流程</a></li>--%>
 
                             </ul>
                         </li>

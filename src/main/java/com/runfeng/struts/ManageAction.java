@@ -49,6 +49,11 @@ public class ManageAction extends ActionSupport {
         return "InformationManage";
     }
 
+    public String WorkFlowManage(){
+
+        return "WorkFlowManage";
+    }
+
     public String ExitAction(){
         ActionContext ctx = ActionContext.getContext();
         ctx.getSession().put("user", null);
