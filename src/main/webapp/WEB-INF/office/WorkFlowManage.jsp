@@ -28,7 +28,31 @@
     <script type="text/javascript" src="jquery-3d-menu-with-search\js\jquery-accordion-menu.js">
 
     </script>
+    <link href="css/jquery-accordion-menu.css" rel="stylesheet" type="text/css" />
+    <link href="css/font-awesome.css" rel="stylesheet" type="text/css" />
 
+    <style type="text/css">
+        *{box-sizing:border-box;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;}
+        body{background:#f0f0f0;}
+        .content{width:260px;margin:20px auto;}
+        .filterinput{
+            background-color:rgba(249, 244, 244, 0);
+            border-radius:15px;
+            width:90%;
+            height:30px;
+            border:thin solid #FFF;
+            text-indent:0.5em;
+            font-weight:bold;
+            color:#FFF;
+        }
+        #demo-list a{
+            overflow:hidden;
+            text-overflow:ellipsis;
+            -o-text-overflow:ellipsis;
+            white-space:nowrap;
+            width:100%;
+        }
+    </style>
 
 </head>
 
@@ -158,6 +182,51 @@
 
     <div class="row">
         <div class="col-md-4 leftside-bar btn-group-vertical" role="group" aria-label="...">
+            //侧边栏
+            <div class="content">
+
+                <div id="jquery-accordion-menu" class="jquery-accordion-menu blue">
+                    <div class="jquery-accordion-menu-header" id="form"></div>
+                    <ul id="demo-list">
+
+                        <li class="active"><a href="#"><i class="fa fa-home"></i>Home </a></li>
+                        <li><a href="#"><i class="fa fa-glass"></i>Events </a></li>
+                        <li><a href="#"><i class="fa fa-file-image-o"></i>Gallery </a><span class="jquery-accordion-menu-label">
+				12 </span></li>
+                        <li><a href="#"><i class="fa fa-cog"></i>Services </a>
+                            <ul class="submenu">
+                                <li><a href="#">Web Design </a></li>
+                                <li><a href="#">Hosting </a></li>
+                                <li><a href="#">Design </a>
+                                    <ul class="submenu">
+                                        <li><a href="#">Graphics </a></li>
+                                        <li><a href="#">Vectors </a></li>
+                                        <li><a href="#">Photoshop </a></li>
+                                        <li><a href="#">Fonts </a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="#">Consulting </a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#"><i class="fa fa-home"></i>系统管理 </a></li>
+                        <li><a href="#"><i class="fa fa-suitcase"></i>Portfolio </a>
+                            <ul class="submenu">
+                                <li><a href="#">Web Design </a></li>
+                                <li><a href="#">Graphics </a><span class="jquery-accordion-menu-label">10 </span>
+                                </li>
+                                <li><a href="#">Photoshop </a></li>
+                                <li><a href="#">Programming </a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#"><i class="fa fa-user"></i>About </a></li>
+                        <li><a href="#"><i class="fa fa-envelope"></i>Contact </a></li>
+
+                    </ul>
+                    <div class="jquery-accordion-menu-footer">
+                        Footer
+                    </div>
+                </div>
+            </div>
 
         <%--        <div class="box">
                     <ul class="menu">
