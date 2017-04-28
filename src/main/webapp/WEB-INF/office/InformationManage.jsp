@@ -154,7 +154,7 @@
     <div class="row">
             <div class="col-md-1 leftside-bar btn-group-vertical" role="group" aria-label="...">
 
-                <div class="box">
+                <%--<div class="box">
                     <ul class="menu">
                         <li class="level1">
                             <a href="#">车间</a>
@@ -163,7 +163,7 @@
                             </ul>
                         </li>
                     </ul>
-                </div>
+                </div>--%>
                 <button id="all" type="button"
                         class="btn btn-primary btn-lg btn-block"
                         onclick="selectDepartmentToCreateTable('all', '${sessionScope.infoType}');">
@@ -218,15 +218,7 @@
                                 </tr>
                             </tbody>
                         </table>
-                        <ul class="pagination">
-                            <li><a href="#">&laquo;</a></li>
-                            <li><a href="#">1</a></li>
-                            <li><a href="#">2</a></li>
-                            <li><a href="#">3</a></li>
-                            <li><a href="#">4</a></li>
-                            <li><a href="#">5</a></li>
-                            <li><a href="#">&raquo;</a></li>
-                        </ul>
+
                     </div>
                 </div>
             </div>
@@ -295,6 +287,7 @@
                 /*alert("test_post");*/
                 setCaption(document, tableCaption);
                 $("#infoTableCaption").text(data["department_zh_CN"]);
+                informationTableHead = JSON.parse(data[tableHeadString]);
                 createTable(document, 'infoTable', JSON.parse(data[tableHeadString]), eval(data[tableContentString]),'informationTableHead');
             },
             "json");

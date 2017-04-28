@@ -13,7 +13,7 @@
     <link rel="stylesheet" type="text/css" href="bootstrap-3.3.7-dist/css/bootstrap.min.css"/>
     <link rel="stylesheet" type="text/css" href="bootstrap-3.3.7-dist/css/bootstrap.css"/>
     <script type="text/javascript" src="bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="css/InfoSalaManage.css"/>
+    <%--<link rel="stylesheet" type="text/css" href="css/InfoSalaManage.css"/>--%>
     <script src="js/createTable.js" type="text/javascript">
     </script>
     <style type="text/css">
@@ -23,28 +23,18 @@
             text-align: center;
         }
     </style>
-    <link rel="stylesheet" type="text/css" href="jquery-3d-menu-with-search\css\jquery-accordion-menu.css"/>
-    <link rel="stylesheet" type="text/css" href="jquery-3d-menu-with-search\css\font-awesome.css"/>
-    <script type="text/javascript" src="jquery-3d-menu-with-search\js\jquery-accordion-menu.js">
+
+    <script type="text/javascript" src="jquery-3d-menu-with-search/js/jquery-accordion-menu.js">
 
     </script>
-    <link href="css/jquery-accordion-menu.css" rel="stylesheet" type="text/css" />
-    <link href="css/font-awesome.css" rel="stylesheet" type="text/css" />
+    <link href="jquery-3d-menu-with-search/css/jquery-accordion-menu.css" rel="stylesheet" type="text/css" />
+    <link href="jquery-3d-menu-with-search/css/font-awesome.css" rel="stylesheet" type="text/css" />
 
     <style type="text/css">
-        *{box-sizing:border-box;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;}
+        /**{box-sizing:border-box;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;}*/
         body{background:#f0f0f0;}
-        .content{width:260px;margin:20px auto;}
-        .filterinput{
-            background-color:rgba(249, 244, 244, 0);
-            border-radius:15px;
-            width:90%;
-            height:30px;
-            border:thin solid #FFF;
-            text-indent:0.5em;
-            font-weight:bold;
-            color:#FFF;
-        }
+        .content{width:auto;margin:0px;}
+
         #demo-list a{
             overflow:hidden;
             text-overflow:ellipsis;
@@ -53,7 +43,16 @@
             width:100%;
         }
     </style>
+    <script type="text/javascript">
 
+        $(function(){
+            //顶部导航切换
+            $("#demo-list li").click(function(){
+                $("#demo-list li.active").removeClass("active")
+                $(this).addClass("active");
+            })
+        })
+    </script>
 </head>
 
 <body>
@@ -181,19 +180,59 @@
     </div>
 
     <div class="row">
-        <div class="col-md-4 leftside-bar btn-group-vertical" role="group" aria-label="...">
-            //侧边栏
+        <div class="col-md-2 sidebar" >
+            <ul class="nav nav-sidebar">
+                <li class="active">
+                    <a href="#"><span class="glyphicon glyphicon-home" aria-hidden="true"></span> 总览 </a>
+                </li>
+                <li>
+                    <a href="#"><span class="glyphicon glyphicon-usd" aria-hidden="true"></span> 财务部 </a></span>
+                </li>
+                <li>
+                    <a href="#"><i class="fa fa-cog"></i> 设备工程部 </a>
+                </li>
+                <li>
+                    <a href="#"><i class="fa fa-file-image-o"></i> 公用工程部 </a>
+                </li>
+                <li>
+                    <a href="#"><i class="fa fa-glass"></i> 生产部 </a>
+                </li>
+                <li>
+                    <a href="#"><i class="fa fa-envelope"></i> 质检部 </a>
+                </li>
+                <li>
+                    <a href="#"><span class="glyphicon glyphicon-th" aria-hidden="true"></span> 车间 </a>
+                </li>
+            </ul>
+
             <div class="content">
 
                 <div id="jquery-accordion-menu" class="jquery-accordion-menu blue">
-                    <div class="jquery-accordion-menu-header" id="form"></div>
+                    <%--<div class="jquery-accordion-menu-header" id="form"></div>--%>
                     <ul id="demo-list">
-
-                        <li class="active"><a href="#"><i class="fa fa-home"></i>Home </a></li>
-                        <li><a href="#"><i class="fa fa-glass"></i>Events </a></li>
-                        <li><a href="#"><i class="fa fa-file-image-o"></i>Gallery </a><span class="jquery-accordion-menu-label">
-				12 </span></li>
-                        <li><a href="#"><i class="fa fa-cog"></i>Services </a>
+                        <li class="active"><a href="#"><i class="fa fa-home"></i>总览 </a></li>
+                        <li><a href="#"><i class="fa fa-user"></i>经理办 </a></li>
+                        <li>
+                            <a href="#"><i class="fa fa-suitcase"></i>财务部 </a>
+                            <span class="jquery-accordion-menu-label"> 12 </span>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-cog"></i>设备工程部 </a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-file-image-o"></i>公用工程部 </a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-glass"></i>生产部 </a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-envelope"></i>质检部 </a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-glass"></i>车间 </a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-cog"></i>Services </a>
                             <ul class="submenu">
                                 <li><a href="#">Web Design </a></li>
                                 <li><a href="#">Hosting </a></li>
@@ -203,64 +242,25 @@
                                         <li><a href="#">Vectors </a></li>
                                         <li><a href="#">Photoshop </a></li>
                                         <li><a href="#">Fonts </a></li>
+                                        <li>
+                                            <a href="#">Graphics </a>
+                                            <span class="jquery-accordion-menu-label">10 </span>
+                                        </li>
                                     </ul>
                                 </li>
                                 <li><a href="#">Consulting </a></li>
                             </ul>
                         </li>
-                        <li><a href="#"><i class="fa fa-home"></i>系统管理 </a></li>
-                        <li><a href="#"><i class="fa fa-suitcase"></i>Portfolio </a>
-                            <ul class="submenu">
-                                <li><a href="#">Web Design </a></li>
-                                <li><a href="#">Graphics </a><span class="jquery-accordion-menu-label">10 </span>
-                                </li>
-                                <li><a href="#">Photoshop </a></li>
-                                <li><a href="#">Programming </a></li>
-                            </ul>
-                        </li>
-                        <li><a href="#"><i class="fa fa-user"></i>About </a></li>
-                        <li><a href="#"><i class="fa fa-envelope"></i>Contact </a></li>
 
                     </ul>
                     <div class="jquery-accordion-menu-footer">
-                        Footer
+
                     </div>
                 </div>
             </div>
-
-        <%--        <div class="box">
-                    <ul class="menu">
-                        <li class="level1">
-                            <a href="#">车间</a>
-                            <ul class="level2">
-                                <li><a href="#">三车间</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
-                <button id="all" type="button"
-                        class="btn btn-primary btn-lg btn-block"
-                        onclick="selectDepartmentToCreateTable('all', '${sessionScope.infoType}');">
-                    <span class="glyphicon glyphicon-home" aria-hidden="true"></span>&nbsp;&nbsp;总览</button>
-
-                <button id="office" type="button" class="btn btn-primary"
-                        onclick="selectDepartmentToCreateTable('office', '${sessionScope.infoType}');">经理办</button>
-                <button id="fd" type="button" class="btn btn-primary"
-                        onclick="selectDepartmentToCreateTable('fd', '${sessionScope.infoType}');">财务部</button>
-                <button id="eed" type="button" class="btn btn-primary"
-                        onclick="selectDepartmentToCreateTable('eed', '${sessionScope.infoType}');">设备工程部</button>
-                <button id="pwd" type="button" class="btn btn-primary"
-                        onclick="selectDepartmentToCreateTable('pwd', '${sessionScope.infoType}');">公用工程部</button>
-                <button id="pd" type="button" class="btn btn-primary"
-                        onclick="selectDepartmentToCreateTable('pd', '${sessionScope.infoType}');">生产部</button>
-                <button id="qcd" type="button" class="btn btn-primary"
-                        onclick="selectDepartmentToCreateTable('qcd', '${sessionScope.infoType}');">质检部</button>
-                <button id="workshop" type="button" class="btn btn-primary"
-                        onclick="selectDepartmentToCreateTable('workshop', '${sessionScope.infoType}');">车间</button>
-                <button id="temp" type="button" class="btn btn-primary"
-                        onclick="selectDepartmentToCreateTable('temp', '${sessionScope.infoType}');">临时用工</button>--%>
         </div>
-        <div class="col-md-8">
+
+        <div class="col-md-10">
             <div class="panel panel-success">
                 <div class="panel-heading">
                     <div id="captionTypeDiv" style="text-align: right;">你好，${sessionScope.user}</div>
@@ -373,6 +373,11 @@
             },
             "json");
     }
+</script>
+<script type="text/javascript">
+
+    jQuery("#jquery-accordion-menu").jqueryAccordionMenu();
+
 </script>
 </body>
 

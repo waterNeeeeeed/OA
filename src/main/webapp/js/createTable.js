@@ -1,7 +1,7 @@
 /**
  * Created by lenovo on 2017/3/24.
  */
-var salaryTableHead ={
+/*var salaryTableHead ={
     eid:"EID", name:"姓名", department:"部门", date:"日期",
     salary:"应发工资", basicSalary:"基本工资", checkSalary:"考核工资", floatingSalary:"浮动工资",
     festivalSalary:"节日", holidaySalary:"假日", nightSalary:"夜班费", subsidySalary:"保健、补助",
@@ -99,7 +99,9 @@ var employeesInfo = [
     {eid:"002", name:"张百城", sex:"男", department:"车间", post:"三车间后段二班", position:"操作工", telephone:"", identification :"370783199408256132", nativeplace:"山东潍坊", educationalbackground:"高级技工", school:"潍柴", major:"汽车维修", schoolform:"全日制", contractid:"JY0002", contractstartdate:"2015-08", contractenddate:"2018-08", contractstate:"江岳签约", positionstate:"外派"}];
 var employeesInfoOffice = [
     {eid:"001", name:"巩涛", sex:"男", department:"经理办", post:"劳资科", position:"班长", telephone:"15953680098", identification :"370783198708256132", nativeplace:"山东潍坊", educationalbackground:"本科", school:"青岛大学", schoolform:"全日制", major:"电子信息工程", contractid:"JY0001", contractstartdate:"2013-08", contractenddate:"2016-08", contractstate:"江岳续签", positionstate:"在岗"}
-];
+];*/
+var informationTableHead;
+
 function createTable(document, tableID, tableHead, tableContent, tableHeadName) {
     var table = document.getElementById(tableID);
     var old_length = table.rows.length;
