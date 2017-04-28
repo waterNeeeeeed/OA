@@ -120,5 +120,8 @@ public class PersonalInfoServiceImpl implements PersonalInfoService {
         return JsonUtil.toJson(objList);
     }
 
-
+    @Override
+    public String findNumberOfEmployees() {
+        return null;
+    }
 }

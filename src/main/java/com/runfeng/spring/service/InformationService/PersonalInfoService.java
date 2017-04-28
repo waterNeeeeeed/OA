@@ -17,5 +17,5 @@ public interface PersonalInfoService {
     String findEmployeeInfo(String department);
     String findEducationInfo(String department);
     String findContractInfo(String department);
-
+    String findNumberOfEmployees();
 }

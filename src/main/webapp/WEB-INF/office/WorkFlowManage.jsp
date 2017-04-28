@@ -189,7 +189,7 @@
                     <a href="#"><span class="glyphicon glyphicon-usd" aria-hidden="true"></span> 财务部 </a></span>
                 </li>
                 <li>
-                    <a href="#"><i class="fa fa-cog"></i> 设备工程部 </a>
+                    <a href="#"><i class="fa fa-cog"></i> 设备工程部 <span class="badge">3</span></a>
                 </li>
                 <li>
                     <a href="#"><i class="fa fa-file-image-o"></i> 公用工程部 </a>
@@ -292,7 +292,7 @@
                                 </tr>
                             </tbody>
                         </table>
-                        <ul class="pagination">
+                        <%--<ul class="pagination">
                             <li><a href="#">&laquo;</a></li>
                             <li><a href="#">1</a></li>
                             <li><a href="#">2</a></li>
@@ -300,7 +300,7 @@
                             <li><a href="#">4</a></li>
                             <li><a href="#">5</a></li>
                             <li><a href="#">&raquo;</a></li>
-                        </ul>
+                        </ul>--%>
                     </div>
                 </div>
             </div>
@@ -338,7 +338,7 @@
 </div>
 <script type="text/javascript">
 
-    selectDepartmentToCreateTable("${sessionScope.department}", "${sessionScope.infoType}");
+    <%--selectDepartmentToCreateTable("${sessionScope.department}", "${sessionScope.infoType}");
     function selectDepartmentToCreateTable(department, infoType) {
         var tableCaption;
         //总览按钮basic basicInfo position education contract
@@ -373,7 +373,7 @@
             },
             "json");
     }
-</script>
+</script>--%>
 <script type="text/javascript">
 
     jQuery("#jquery-accordion-menu").jqueryAccordionMenu();

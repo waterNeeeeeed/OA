@@ -77,4 +77,11 @@ public class PersonalInfoDAOImpl extends BaseDAOImpl<PersonalInfo>
                 .append(" ").append("where pi.positionInfo.department = ?0");
         return find(hql.toString(), department);
     }
+
+    @Override
+    public List findNumberOfEmployees() {
+        String hql = "select distinct pi.contract.contractstate from PersonalInfo pi";
+        //未完
+        return find(hql);
+    }
 }

@@ -32,4 +32,6 @@ public interface PersonalInfoDAO extends BaseDAO<PersonalInfo> {
 
     List findAllEmployeeInfo();
     List findEmployeeInfoByDepartment(String department);
+
+    List findNumberOfEmployees();
 }
