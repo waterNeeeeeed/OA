@@ -50,7 +50,7 @@
                                 <li><a href="InformationManageAction.action?department=all&infoType=basic">综合信息</a></li>
                                 <li><a href="InformationManageAction.action?department=all&infoType=position">岗位信息</a></li>
                                 <li><a href="InformationManageAction.action?department=all&infoType=contract">合同信息</a></li>
-                                <li><a href="InformationManageAction.action?department=all&infoType=education">学历信息</a></li>
+                                <li><a href="InformationManageAction.action?department=all&infoType=education">教育信息</a></li>
                                 <li class="divider"></li>
                                 <li><a href="#">员工管理</a></li>
                                 <li class="divider"></li>
@@ -231,7 +231,7 @@
 
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                            <h4 class="modal-title" id="exampleModalLabel">New message</h4>
+                            <h4 class="modal-title" id="EmployeeInfoFormCaption">New message</h4>
                         </div>
 
                         <div class="modal-body">
@@ -276,7 +276,7 @@
             tableCaption = "合同信息";
         }
         getInfoTableAjax(department, infoType, tableCaption, 'informationTableHead', 'employeesInfo');
-
+        $("#EmployeeInfoFormCaption").html(tableCaption);
     }
     function getInfoTableAjax(department, infoType, tableCaption, tableHeadString, tableContentString) {
         var uri = "InfoTableAction.action";
