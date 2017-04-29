@@ -23,6 +23,7 @@ public class InfoTableAction extends ActionSupport {
     private String department;
     private String department_zh_CN;
     private String infoType;
+    private String numberOfEmployees;
 
     //????????????????????????????????
     //可以有set但不能有get，应为使用strust2 json插件，会把这个也转化，造成问题。
@@ -35,6 +36,18 @@ public class InfoTableAction extends ActionSupport {
 
     public void setPersonalInfoService(PersonalInfoService personalInfoService) {
         this.personalInfoService = personalInfoService;
+    }
+
+    public String getNumberOfEmployees() {
+        return numberOfEmployees;
+    }
+
+    public void setNumberOfEmployees(String numberOfEmployees) {
+        this.numberOfEmployees = numberOfEmployees;
+    }
+
+    public PersonalInfoService getPersonalInfoService() {
+        return personalInfoService;
     }
 
     public String getDepartment_zh_CN() {
@@ -119,7 +132,7 @@ public class InfoTableAction extends ActionSupport {
         department_zh_CN = DepartmentParseUtil.departmentParse(department);
 
         if (getInfoType().equals("numberOfEmployees")){
-
+            numberOfEmployees = personalInfoService.findNumberOfEmployees();
         }
         if (getInfoType().equals("basic")){
             informationTableHead = TableHeadParseUtil.convertTableHeadToJson("tablehead/employeesinfo_tablehead",

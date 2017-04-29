@@ -48,4 +48,5 @@ public class PersonalInfoJsonFactory {
     public<T> List<T> createInfoJsonList(){
         return new ArrayList<T>();
     }
+
 }

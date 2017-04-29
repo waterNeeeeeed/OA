@@ -122,6 +122,15 @@ public class PersonalInfoServiceImpl implements PersonalInfoService {
 
     @Override
     public String findNumberOfEmployees() {
-        return null;
+        List<NumberOfEmployees> list = personalInfoJsonFactory.createInfoJsonList();
+        List<String> ContractstateList = (List<String>)personalInfoDAO.findAllContractstate();
+        int n = 0;
+        for(Iterator it=ContractstateList.iterator(); it.hasNext();){
+            String state = (String)it.next();
+            long num = personalInfoDAO.findContractstateCount(state);
+            NumberOfEmployees numberOfEmployees = new NumberOfEmployees(n++, state, (int)num);
+            list.add(numberOfEmployees);
+        }
+        return JsonUtil.toJson(list);
     }
 }

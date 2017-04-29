@@ -196,12 +196,12 @@
                     <div class="table-responsive">
                         <%--<hr/>--%>
                         <table id="infoTable" class="table table-bordered">
-                            <caption id="infoTableCaption">你好，${sessionScope.department_zh_CN}</caption>
-                            <thead  style="text-align: center">
+                            <caption id="infoTableCaption"><%--你好，${sessionScope.department_zh_CN}--%></caption>
+                            <thead  style="font-weight: bolder">
                                 <tr>
-                                    <th>序号</th>
-                                    <th>员工类型</th>
-                                    <th>人数</th>
+                                    <td>序号</td>
+                                    <td>员工类型</td>
+                                    <td>人数</td>
                                 </tr>
                             </thead>
                             <tbody>
@@ -257,7 +257,10 @@
 </div>
 <script type="text/javascript">
 
-    selectDepartmentToCreateTable("${sessionScope.department}", "${sessionScope.infoType}");
+    if ("${sessionScope.department}" != "nothing"){
+        selectDepartmentToCreateTable("${sessionScope.department}", "${sessionScope.infoType}");
+    }
+
     function selectDepartmentToCreateTable(department, infoType) {
         var tableCaption;
         //总览按钮basic basicInfo position education contract
@@ -277,8 +280,11 @@
             tableCaption = "合同信息";
         }
 
-        getInfoTableAjax(department, infoType, tableCaption, 'informationTableHead', 'employeesInfo');
-        $("#EmployeeInfoFormCaption").html(tableCaption);
+        if ("${sessionScope.department}" !=  "nothing") {
+            getInfoTableAjax(department, infoType, tableCaption, 'informationTableHead', 'employeesInfo');
+            $("#EmployeeInfoFormCaption").html(tableCaption);
+        }
+
     }
     function getInfoTableAjax(department, infoType, tableCaption, tableHeadString, tableContentString) {
         var uri = "InfoTableAction.action";
@@ -294,6 +300,7 @@
             },
             "json");
     }
+
 </script>
 </body>
 

@@ -16,7 +16,7 @@ import java.util.*;
  * 期初建立信息
  */
 public class EmployeeInfoExcelTableParseUtil {
-    private static int EMPLOYEE_NUMBER = 109;
+    private static int EMPLOYEE_NUMBER = 110;
     public static Map<String, EmployeeInfo> inputEmployeeInfo(String filePath){
 
         Map<String, EmployeeInfo> employeeInfoMap = new HashMap<>();
@@ -128,7 +128,7 @@ public class EmployeeInfoExcelTableParseUtil {
                             if (row.getCell(2) != null){
                                 employeeInfoMap.get(name).setTelephone(telephone.format(row.getCell(2).getNumericCellValue()));
                             }else {
-                                employeeInfoMap.get(name).setTelephone("无");
+                                employeeInfoMap.get(name).setTelephone("-");
                             }
                         }
                     }

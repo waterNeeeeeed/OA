@@ -79,9 +79,20 @@ public class PersonalInfoDAOImpl extends BaseDAOImpl<PersonalInfo>
     }
 
     @Override
-    public List findNumberOfEmployees() {
+    public List findAllContractstate() {
         String hql = "select distinct pi.contract.contractstate from PersonalInfo pi";
         //未完
         return find(hql);
+    }
+
+    @Override
+    public long findContractstateCount(String Contractstate) {
+        StringBuffer hql = new StringBuffer()
+                .append("select count(*) pi.contract.contractstate from PersonalInfo pi")
+                .append(" ")
+                .append("where pi.contract.contractstate = ?0");
+        List list = find(hql.toString(), Contractstate);
+
+        return (long)list.get(0);
     }
 }
