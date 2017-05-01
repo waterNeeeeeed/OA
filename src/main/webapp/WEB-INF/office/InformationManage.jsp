@@ -155,16 +155,6 @@
     <div class="row">
             <div class="col-md-1 leftside-bar btn-group-vertical" role="group" aria-label="...">
 
-                <%--<div class="box">
-                    <ul class="menu">
-                        <li class="level1">
-                            <a href="#">车间</a>
-                            <ul class="level2">
-                                <li><a href="#">三车间</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div>--%>
                 <button id="all" type="button"
                         class="btn btn-primary btn-lg btn-block"
                         onclick="selectDepartmentToCreateTable('all', '${sessionScope.infoType}');">
@@ -243,7 +233,8 @@
                         </div>
 
                         <div class="modal-footer">
-                            <button id="saveModificationBtn" onclick="saveModification()" type="button" class="btn btn-primary" data-dismiss="modal">保存</button>
+                            <button id="saveModificationBtn"
+                                    onclick="saveModification(document, 'infoTable', 'EmployeeInfoFormDiv', 'saveModificationBtn')" type="button" class="btn btn-primary" data-dismiss="modal">保存</button>
                             <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
                         </div>
 
@@ -280,12 +271,10 @@
             tableCaption = "合同信息";
         }
 
-        if ("${sessionScope.department}" !=  "nothing") {
-            getInfoTableAjax(department, infoType, tableCaption, 'informationTableHead', 'employeesInfo');
-            $("#EmployeeInfoFormCaption").html(tableCaption);
-        }
-
+        getInfoTableAjax(department, infoType, tableCaption, 'informationTableHead', 'employeesInfo');
+        $("#EmployeeInfoFormCaption").html(tableCaption);
     }
+
     function getInfoTableAjax(department, infoType, tableCaption, tableHeadString, tableContentString) {
         var uri = "InfoTableAction.action";
         /*alert("getInfoTableAjax");*/

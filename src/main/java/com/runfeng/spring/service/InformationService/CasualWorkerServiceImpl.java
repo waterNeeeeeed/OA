@@ -2,7 +2,6 @@ package com.runfeng.spring.service.InformationService;
 
 import com.runfeng.hibernate.InformationDAO.CasualWorkerDAO;
 import com.runfeng.hibernate.InformationEntity.CasualWorker;
-import com.runfeng.hibernate.Page;
 
 import java.util.List;
 
@@ -41,10 +40,10 @@ public class CasualWorkerServiceImpl implements CasualWorkerService {
         return casualWorkerDAO.get(CasualWorker.class, identification);
     }
 
-    @Override
+    /*@Override
     public List<CasualWorker> queryCasualWorkerList(Page page) {
         return casualWorkerDAO.findCasualWorkerByPage(page.getPageNum(), page.getPageSize());
-    }
+    }*/
 
     @Override
     public List<CasualWorker> queryCasualWorkerByName(String Name) {

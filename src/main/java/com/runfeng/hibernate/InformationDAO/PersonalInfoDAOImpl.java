@@ -95,4 +95,9 @@ public class PersonalInfoDAOImpl extends BaseDAOImpl<PersonalInfo>
 
         return (long)list.get(0);
     }
+
+    @Override
+    public PersonalInfo findPersonalInfo(int eid) {
+        return get(PersonalInfo.class, eid);
+    }
 }

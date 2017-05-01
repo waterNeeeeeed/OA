@@ -46,9 +46,6 @@ public class InfoTableAction extends ActionSupport {
         this.numberOfEmployees = numberOfEmployees;
     }
 
-    public PersonalInfoService getPersonalInfoService() {
-        return personalInfoService;
-    }
 
     public String getDepartment_zh_CN() {
         return department_zh_CN;
@@ -132,7 +129,7 @@ public class InfoTableAction extends ActionSupport {
         department_zh_CN = DepartmentParseUtil.departmentParse(department);
 
         if (getInfoType().equals("numberOfEmployees")){
-            numberOfEmployees = personalInfoService.findNumberOfEmployees();
+            /*numberOfEmployees = personalInfoService.findNumberOfEmployees();*/
         }
         if (getInfoType().equals("basic")){
             informationTableHead = TableHeadParseUtil.convertTableHeadToJson("tablehead/employeesinfo_tablehead",

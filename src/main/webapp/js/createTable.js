@@ -171,7 +171,7 @@ function createEmployeeInfoForm(document, target, tableId, formId, saveBtnId, ta
         cellsIndex++;
     }
 }
-//保存修改
+//保存修改 此保存按钮的button value已被修改为行号
 function saveModification(document, tableId, formId, saveBtnId) {
     var table = document.getElementById(tableId);
     var formContent = document.getElementById(formId);

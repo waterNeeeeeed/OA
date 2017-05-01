@@ -35,4 +35,6 @@ public interface PersonalInfoDAO extends BaseDAO<PersonalInfo> {
 
     List findAllContractstate();
     long findContractstateCount(String Contractstate);
+
+    PersonalInfo findPersonalInfo(int eid);
 }

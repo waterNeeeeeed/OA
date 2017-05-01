@@ -133,4 +133,9 @@ public class PersonalInfoServiceImpl implements PersonalInfoService {
         }
         return JsonUtil.toJson(list);
     }
+
+    @Override
+    public String updatePersonalInfo() {
+        return null;
+    }
 }

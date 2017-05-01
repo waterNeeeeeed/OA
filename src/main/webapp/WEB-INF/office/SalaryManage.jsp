@@ -230,7 +230,7 @@
 
                         <div class="modal-footer">
                             <button id="saveModificationBtn"
-                                    onclick="saveModification(document, 'salaryTable', 'EmployeeInfoFormDiv', 'saveModificationBtn')"
+                                    onclick="saveModification(document, 'salaryTable', 'EmployeeInfoFormDiv', 'saveModificationBtn', '')"
                                     type="button" class="btn btn-primary" data-dismiss="modal">保存</button>
                             <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
                         </div>
@@ -316,7 +316,20 @@
     function getData(){
 
     }
+    function saveModification(document, tableId, formId, saveBtnId, name) {
+        /*var table = document.getElementById(tableId);
+        var formContent = document.getElementById(formId);
+        var saveBtn = document.getElementById(saveBtnId);
+        var content = formContent.getElementsByTagName("input");
+        var rowsIndex = saveBtn.value;
+        var n = 0;
+        for (var a in content){
+            table.rows[rowsIndex].cells[n].innerHTML = content[n].value;
+            n++;
+        }*/
+        saveModification(document, tableId, formId, saveBtnId);
 
+    }
 </script>
 </body>
 </html>
