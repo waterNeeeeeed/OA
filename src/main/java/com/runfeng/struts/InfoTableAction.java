@@ -23,6 +23,7 @@ public class InfoTableAction extends ActionSupport {
     private String department;
     private String department_zh_CN;
     private String infoType;
+    private String modifyType;
     private String numberOfEmployees;
 
     //????????????????????????????????
@@ -36,6 +37,14 @@ public class InfoTableAction extends ActionSupport {
 
     public void setPersonalInfoService(PersonalInfoService personalInfoService) {
         this.personalInfoService = personalInfoService;
+    }
+
+    public String getModifyType() {
+        return modifyType;
+    }
+
+    public void setModifyType(String modifyType) {
+        this.modifyType = modifyType;
     }
 
     public String getNumberOfEmployees() {
@@ -122,6 +131,12 @@ public class InfoTableAction extends ActionSupport {
         return JsonUtil.toJson(contractHead);
     }
 
+    public String modify(){
+        if (getModifyType().equals("basicInfo")){
+
+        }
+        return Action.SUCCESS;
+    }
     //basic basicInfo position education contract
     public String execute(){
         /*ActionContext actx = ActionContext.getContext();

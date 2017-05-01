@@ -1,6 +1,7 @@
 package com.runfeng.hibernate.InformationDAO;
 
 import com.runfeng.hibernate.BaseDAOImpl;
+import com.runfeng.hibernate.InformationEntity.BasicInfo;
 import com.runfeng.hibernate.InformationEntity.PersonalInfo;
 
 import java.util.List;
@@ -98,6 +99,19 @@ public class PersonalInfoDAOImpl extends BaseDAOImpl<PersonalInfo>
 
     @Override
     public PersonalInfo findPersonalInfo(int eid) {
-        return get(PersonalInfo.class, eid);
+        StringBuffer hql = new StringBuffer()
+                .append("select pi from PersonalInfo pi")
+                .append("where pi.mainID.eid = ?0");
+        List list = find(hql.toString(), eid);
+        return (PersonalInfo)list.get(0);
+    }
+
+    @Override
+    public void updatePersonInfoBasicInfo(int eid, BasicInfo basicInfo) {
+        StringBuffer hql = new StringBuffer()
+                .append("update PersonalInfo pi ")
+                .append("set pi.basicInfo = ?0 ")
+                .append("where pi.mainID.eid = ?1");
+        update(hql.toString(), basicInfo, eid);
     }
 }

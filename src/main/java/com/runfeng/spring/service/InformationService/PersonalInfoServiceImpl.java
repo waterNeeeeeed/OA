@@ -135,7 +135,11 @@ public class PersonalInfoServiceImpl implements PersonalInfoService {
     }
 
     @Override
-    public String updatePersonalInfo() {
-        return null;
+    public void updatePersonalInfo(int eid, MainID mainID, BasicInfo basicInfo) {
+        if (basicInfo != null){
+            personalInfoDAO.updatePersonInfoBasicInfo(eid, basicInfo);
+        }
+
+        /*return null;*/
     }
 }

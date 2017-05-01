@@ -1,5 +1,7 @@
 package com.runfeng.spring.service.InformationService;
 
+import com.runfeng.hibernate.InformationEntity.BasicInfo;
+import com.runfeng.hibernate.InformationEntity.MainID;
 import com.runfeng.hibernate.InformationJson.BasicInfoJson;
 
 import java.io.Serializable;
@@ -18,5 +20,5 @@ public interface PersonalInfoService {
     String findEducationInfo(String department);
     String findContractInfo(String department);
     String findNumberOfEmployees();
-    String updatePersonalInfo();
+    void updatePersonalInfo(int eid, MainID mainID, BasicInfo basicInfo);
 }

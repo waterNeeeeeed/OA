@@ -76,6 +76,14 @@ public class BaseDAOImpl<T> implements BaseDAO<T>{
         return query.list();
     }
 
+    protected void update(String hql, Object... params){
+        Query query = getSessionFactory().getCurrentSession().createQuery(hql);
+        for (int i=0; i<params.length; i++){
+            query.setParameter(i + "", params[i]);
+        }
+        query.executeUpdate();
+    }
+
     protected List findByPage(String hql, int pageNum, int pageSize){
         return getSessionFactory().getCurrentSession().createQuery(hql)
                 .setFirstResult((pageNum-1) * pageSize)
