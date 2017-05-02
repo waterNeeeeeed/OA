@@ -14,6 +14,9 @@ public class BasicInfoJson {
     private String telephone;
     private String nativeplace;
 
+    public BasicInfoJson() {
+    }
+
     public BasicInfoJson(MainID mainID, BasicInfo basicInfo) {
         if (mainID != null){
             this.eid = mainID.getEid();

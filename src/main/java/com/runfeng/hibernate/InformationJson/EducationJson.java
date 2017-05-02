@@ -14,6 +14,9 @@ public class EducationJson {
     private String schoolform;
     private String major;
 
+    public EducationJson() {
+    }
+
     public EducationJson(MainID mainID, Education education) {
         if (mainID != null){
             this.eid = mainID.getEid();

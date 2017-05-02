@@ -5,10 +5,7 @@ import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.runfeng.hibernate.HqlQuery;
 import com.runfeng.hibernate.InformationEntity.*;
-import com.runfeng.hibernate.InformationJson.BasicInfoHead;
-import com.runfeng.hibernate.InformationJson.ContractHead;
-import com.runfeng.hibernate.InformationJson.EducationHead;
-import com.runfeng.hibernate.InformationJson.PositionInfoHead;
+import com.runfeng.hibernate.InformationJson.*;
 import com.runfeng.spring.service.InformationService.PersonalInfoService;
 import com.runfeng.utils.DepartmentParseUtil;
 import com.runfeng.utils.JsonUtil;
@@ -23,7 +20,13 @@ public class InfoTableAction extends ActionSupport {
     private String department;
     private String department_zh_CN;
     private String infoType;
+
     private String modifyType;
+    private String modifyEid;
+    private String modifyContent;
+    private String modifyResult;
+    private final String MODIFY_SUCCESS = "modify_success";
+
     private String numberOfEmployees;
 
     //????????????????????????????????
@@ -37,6 +40,30 @@ public class InfoTableAction extends ActionSupport {
 
     public void setPersonalInfoService(PersonalInfoService personalInfoService) {
         this.personalInfoService = personalInfoService;
+    }
+
+    public String getModifyResult() {
+        return modifyResult;
+    }
+
+    public void setModifyResult(String modifyResult) {
+        this.modifyResult = modifyResult;
+    }
+
+    public String getModifyContent() {
+        return modifyContent;
+    }
+
+    public void setModifyContent(String modifyContent) {
+        this.modifyContent = modifyContent;
+    }
+
+    public String getModifyEid() {
+        return modifyEid;
+    }
+
+    public void setModifyEid(String modifyEid) {
+        this.modifyEid = modifyEid;
     }
 
     public String getModifyType() {
@@ -96,15 +123,7 @@ public class InfoTableAction extends ActionSupport {
         this.infoType = infoType;
     }
 
-    /*//基本信息表头
-    public String convertEmployeesInfoHeadToJson(){
-        EmployeesInfoHead sth = new EmployeesInfoHead("EID", "姓名", "性别", "身份证号",
-                "手机号码", "籍贯", "工号", "部门",
-                "岗位", "职务", "职务状态",
-                "学历", "学校", "办学形式", "主修",
-                "合同编号", "第一次签合同","合同起始", "合同终止", "合同状态");
-        return JsonUtil.toJson(sth);
-    }*/
+
     //个人信息表头
     public String convertBasicInfoHeadToJson(){
         BasicInfoHead basicInfoHead = new BasicInfoHead("EID", "姓名", "性别",
@@ -133,14 +152,16 @@ public class InfoTableAction extends ActionSupport {
 
     public String modify(){
         if (getModifyType().equals("basicInfo")){
+            personalInfoService.updatePersonalInfo(Integer.parseInt(getModifyEid()),
+                    JsonUtil.fromJson(getModifyContent(), BasicInfoJson.class));
 
         }
+
+        setModifyResult(MODIFY_SUCCESS);
         return Action.SUCCESS;
     }
-    //basic basicInfo position education contract
+
     public String execute(){
-        /*ActionContext actx = ActionContext.getContext();
-        actx.getSession().put("department_zh_CN", DepartmentParseUtil.departmentParse(department));*/
         department_zh_CN = DepartmentParseUtil.departmentParse(department);
 
         if (getInfoType().equals("numberOfEmployees")){
@@ -153,9 +174,7 @@ public class InfoTableAction extends ActionSupport {
         }
         if (infoType.equals("basicInfo")){
             informationTableHead = convertBasicInfoHeadToJson();
-            /*employeesInfo = HqlQuery.findBasicInfo(getDepartment());*/
             employeesInfo = personalInfoService.findBasicInfo(getDepartment());
-            //System.out.print(employeesInfo);
         }
         if (infoType.equals("position")){
             informationTableHead = convertPositionHeadToJson();
@@ -170,8 +189,8 @@ public class InfoTableAction extends ActionSupport {
             informationTableHead = convertContractHeadToJson();
             employeesInfo = personalInfoService.findContractInfo(getDepartment());
         }
-        //JsonUtil.toJson(EmployeeInfoExcelTableParseUtil.inputEmployeeInfo(null).values());
-        //System.out.println(employeesInfo);
+
+
         return Action.SUCCESS;
     }
 }

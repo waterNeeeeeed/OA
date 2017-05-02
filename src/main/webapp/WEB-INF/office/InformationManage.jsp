@@ -234,7 +234,7 @@
 
                         <div class="modal-footer">
                             <button id="saveModificationBtn"
-                                    onclick="saveModification(document, 'infoTable', 'EmployeeInfoFormDiv', 'saveModificationBtn')" type="button" class="btn btn-primary" data-dismiss="modal">保存</button>
+                                    onclick="saveModificationInfo(document, 'infoTable', 'EmployeeInfoFormDiv', 'saveModificationBtn', 'EmployeeInfoFormDiv')" type="button" class="btn btn-primary" data-dismiss="modal">保存</button>
                             <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
                         </div>
 
@@ -290,6 +290,39 @@
             "json");
     }
 
+    function saveModificationInfo(document, tableId, formId, saveBtnId, formDivId) {
+        var modifyType = "${sessionScope.infoType}";
+        var uri = "InfoTableModifyAction.action";
+        var modifyContent;
+        if (modifyType == "basicInfo"){
+            var tempInputs = "#" + formId + " " + ":input";
+            var modifyContent = "{";
+            var tempContent = [];
+            $(tempInputs).each(function (index) {
+                tempContent[index] = $(this).val();
+            })
+
+            var n = 0;
+            for (var index in informationTableHead){
+                modifyContent += "\"" + index + "\":\"" + tempContent[n++] + "\",";
+            }
+            modifyContent = modifyContent.substr(0, modifyContent.length-1) + "}";
+            var modifyEid = tempContent[0];
+
+            $.post(uri,
+                {modifyType:modifyType, modifyEid:modifyEid, modifyContent:modifyContent},
+                function (data) {
+                    /*alert(data["modifyResult"]);*/
+                    if (data["modifyResult"] == "modify_success")
+                    {
+                        saveModification(document, tableId, formId, saveBtnId);
+                    }
+
+                },
+                "json");
+        }
+
+    }
 </script>
 </body>
 

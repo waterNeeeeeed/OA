@@ -4,6 +4,7 @@ import com.runfeng.hibernate.BaseDAO;
 import com.runfeng.hibernate.InformationEntity.BasicInfo;
 import com.runfeng.hibernate.InformationEntity.MainID;
 import com.runfeng.hibernate.InformationEntity.PersonalInfo;
+import com.runfeng.hibernate.InformationJson.BasicInfoJson;
 
 import java.util.List;
 
@@ -37,5 +38,6 @@ public interface PersonalInfoDAO extends BaseDAO<PersonalInfo> {
     long findContractstateCount(String Contractstate);
 
     PersonalInfo findPersonalInfo(int eid);
-    void updatePersonInfoBasicInfo(int eid, BasicInfo basicInfo);
+    void updatePersonInfoBasicInfo(int eid, BasicInfoJson basicInfoJson);
+    void updatePersonInfo(int eid, Object object);
 }

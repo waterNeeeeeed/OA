@@ -3,6 +3,7 @@ package com.runfeng.hibernate.InformationDAO;
 import com.runfeng.hibernate.BaseDAOImpl;
 import com.runfeng.hibernate.InformationEntity.BasicInfo;
 import com.runfeng.hibernate.InformationEntity.PersonalInfo;
+import com.runfeng.hibernate.InformationJson.BasicInfoJson;
 
 import java.util.List;
 
@@ -107,11 +108,24 @@ public class PersonalInfoDAOImpl extends BaseDAOImpl<PersonalInfo>
     }
 
     @Override
-    public void updatePersonInfoBasicInfo(int eid, BasicInfo basicInfo) {
+    public void updatePersonInfoBasicInfo(int eid, BasicInfoJson basicInfoJson) {
         StringBuffer hql = new StringBuffer()
                 .append("update PersonalInfo pi ")
-                .append("set pi.basicInfo = ?0 ")
-                .append("where pi.mainID.eid = ?1");
-        update(hql.toString(), basicInfo, eid);
+                .append("set pi.basicInfo.sex = ?0,")
+                .append("pi.basicInfo.identification = ?1,")
+                .append("pi.basicInfo.telephone = ?2,")
+                .append("pi.basicInfo.nativeplace = ?3 ")
+                .append("where pi.mainID.eid = ?4");
+        update(hql.toString(),
+                basicInfoJson.getSex(),
+                basicInfoJson.getIdentification(),
+                basicInfoJson.getTelephone(),
+                basicInfoJson.getNativeplace(),
+                eid);
+    }
+
+    @Override
+    public void updatePersonInfo(int eid, Object object) {
+
     }
 }

@@ -26,6 +26,9 @@ public class ContractJson{
     private Date contractenddate;
     private String contractstate;
 
+    public ContractJson() {
+    }
+
     public ContractJson(MainID mainID, Contract contract) {
         if (mainID != null){
             this.eid = mainID.getEid();
