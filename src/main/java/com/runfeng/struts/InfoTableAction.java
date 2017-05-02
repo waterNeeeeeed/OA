@@ -123,73 +123,20 @@ public class InfoTableAction extends ActionSupport {
         this.infoType = infoType;
     }
 
-
-    //个人信息表头
-    public String convertBasicInfoHeadToJson(){
-        BasicInfoHead basicInfoHead = new BasicInfoHead("EID", "姓名", "性别",
-                "身份证号码", "手机", "籍贯");
-        return JsonUtil.toJson(basicInfoHead);
-    }
-
-    //岗位信息表头
-    public String convertPositionHeadToJson(){
-        PositionInfoHead positionInfoHead = new PositionInfoHead("EID", "姓名","工号", "部门",
-                "岗位", "职务","岗位状态");
-        return JsonUtil.toJson(positionInfoHead);
-    }
-    //教育信息表头
-    public String convertEducationHeadToJson(){
-        EducationHead educationHead = new EducationHead("EID", "姓名",
-                "学历", "学校", "学习形式","主修");
-        return JsonUtil.toJson(educationHead);
-    }
-    //合同信息表头
-    public String convertContractHeadToJson(){
-        ContractHead contractHead = new ContractHead("EID", "姓名",
-                "合同编号",  "第一次签合同","合同起始", "合同终止","合同状态");
-        return JsonUtil.toJson(contractHead);
-    }
-
     public String modify(){
-        if (getModifyType().equals("basicInfo")){
-            personalInfoService.updatePersonalInfo(Integer.parseInt(getModifyEid()),
-                    JsonUtil.fromJson(getModifyContent(), BasicInfoJson.class));
-
-        }
+        personalInfoService.updatePersonalInfo(getModifyType(),Integer.parseInt(getModifyEid()),getModifyContent());
 
         setModifyResult(MODIFY_SUCCESS);
         return Action.SUCCESS;
     }
 
     public String execute(){
+        /*获取部门汉语*/
         department_zh_CN = DepartmentParseUtil.departmentParse(department);
-
-        if (getInfoType().equals("numberOfEmployees")){
-            /*numberOfEmployees = personalInfoService.findNumberOfEmployees();*/
-        }
-        if (getInfoType().equals("basic")){
-            informationTableHead = TableHeadParseUtil.convertTableHeadToJson("tablehead/employeesinfo_tablehead",
-                    "com.runfeng.hibernate.InformationEntity.EmployeesInfoHead");
-            employeesInfo = personalInfoService.findEmployeeInfo(getDepartment());
-        }
-        if (infoType.equals("basicInfo")){
-            informationTableHead = convertBasicInfoHeadToJson();
-            employeesInfo = personalInfoService.findBasicInfo(getDepartment());
-        }
-        if (infoType.equals("position")){
-            informationTableHead = convertPositionHeadToJson();
-            employeesInfo = personalInfoService.findPositionInfo(getDepartment());
-        }
-        if (infoType.equals("education")){
-            informationTableHead = convertEducationHeadToJson();
-            employeesInfo = personalInfoService.findEducationInfo(getDepartment());
-        }
-
-        if (infoType.equals("contract")){
-            informationTableHead = convertContractHeadToJson();
-            employeesInfo = personalInfoService.findContractInfo(getDepartment());
-        }
-
+        /*获取分部门分类型信息表头*/
+        informationTableHead = personalInfoService.findPersonInfoTableHead(department, getInfoType());
+        /*获取分部门分类型信息表*/
+        employeesInfo = personalInfoService.findPersonInfo(department, getInfoType());
 
         return Action.SUCCESS;
     }

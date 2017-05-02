@@ -1,10 +1,13 @@
 package com.runfeng.hibernate.InformationDAO;
 
 import com.runfeng.hibernate.BaseDAOImpl;
-import com.runfeng.hibernate.InformationEntity.BasicInfo;
-import com.runfeng.hibernate.InformationEntity.PersonalInfo;
+import com.runfeng.hibernate.InformationEntity.*;
 import com.runfeng.hibernate.InformationJson.BasicInfoJson;
+import com.runfeng.hibernate.InformationJson.ContractJson;
+import com.runfeng.hibernate.InformationJson.EducationJson;
+import com.runfeng.hibernate.InformationJson.PositionInfoJson;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 /**
@@ -125,7 +128,59 @@ public class PersonalInfoDAOImpl extends BaseDAOImpl<PersonalInfo>
     }
 
     @Override
-    public void updatePersonInfo(int eid, Object object) {
+    public void updatePersonInfoPositionInfo(int eid, PositionInfoJson positionInfoJson) {
+        StringBuffer hql = new StringBuffer()
+                .append("update PersonalInfo pi ")
+                .append("set pi.positionInfo.workid = ?0,")
+                .append("pi.positionInfo.department = ?1,")
+                .append("pi.positionInfo.post = ?2,")
+                .append("pi.positionInfo.position = ?3,")
+                .append("pi.positionInfo.positionstate = ?4 ")
+                .append("where pi.mainID.eid = ?5");
+        update(hql.toString(),
+                positionInfoJson.getWorkid(),
+                positionInfoJson.getDepartment(),
+                positionInfoJson.getPost(),
+                positionInfoJson.getPosition(),
+                positionInfoJson.getPositionstate(),
+                eid);
+    }
 
+
+    @Override
+    public void updatePersonInfoEducationInfo(int eid, EducationJson educationInfoJson) {
+        StringBuffer hql = new StringBuffer()
+                .append("update PersonalInfo pi ")
+                .append("set pi.education.educationalbackground = ?0,")
+                .append("pi.education.school = ?1,")
+                .append("pi.education.schoolform = ?2,")
+                .append("pi.education.major = ?3 ")
+                .append("where pi.mainID.eid = ?4");
+        update(hql.toString(),
+                educationInfoJson.getEducationalbackground(),
+                educationInfoJson.getSchool(),
+                educationInfoJson.getSchoolform(),
+                educationInfoJson.getMajor(),
+                eid);
+    }
+
+    @Override
+    public void updatePersonInfoContractInfo(int eid, ContractJson contractInfoJson) {
+
+        StringBuffer hql = new StringBuffer()
+                .append("update PersonalInfo pi ")
+                .append("set pi.contract.contractid = ?0,")
+                .append("pi.contract.contractfirstsigndate = ?1,")
+                .append("pi.contract.contractstartdate = ?2,")
+                .append("pi.contract.contractenddate = ?3,")
+                .append("pi.contract.contractstate = ?4 ")
+                .append("where pi.mainID.eid = ?5");
+        update(hql.toString(),
+                contractInfoJson.getContractid(),
+                contractInfoJson.getContractfirstsigndate(),
+                contractInfoJson.getContractstartdate(),
+                contractInfoJson.getContractenddate(),
+                contractInfoJson.getContractstate(),
+                eid);
     }
 }

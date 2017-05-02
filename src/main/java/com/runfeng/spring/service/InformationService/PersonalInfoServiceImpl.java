@@ -5,8 +5,11 @@ import com.runfeng.hibernate.InformationJson.*;
 import com.runfeng.hibernate.InformationDAO.PersonalInfoDAO;
 import com.runfeng.utils.DepartmentParseUtil;
 import com.runfeng.utils.JsonUtil;
+import com.runfeng.utils.TableHeadParseUtil;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
@@ -120,6 +123,76 @@ public class PersonalInfoServiceImpl implements PersonalInfoService {
         return JsonUtil.toJson(objList);
     }
 
+
+    @Override
+    public String findPersonInfo(String department, String infoType) {
+        String employeesInfo = "";
+        if (infoType.equals("basic")){
+            employeesInfo = findEmployeeInfo(department);
+        }
+        if (infoType.equals("basicInfo")){
+            employeesInfo = findBasicInfo(department);
+        }
+        if (infoType.equals("position")){
+            employeesInfo = findPositionInfo(department);
+        }
+        if (infoType.equals("education")){
+            employeesInfo = findEducationInfo(department);
+        }
+
+        if (infoType.equals("contract")){
+            employeesInfo = findContractInfo(department);
+        }
+        return employeesInfo;
+    }
+
+    //个人信息表头
+    public String convertBasicInfoHeadToJson(){
+        BasicInfoHead basicInfoHead = new BasicInfoHead("EID", "姓名", "性别",
+                "身份证号码", "手机", "籍贯");
+        return JsonUtil.toJson(basicInfoHead);
+    }
+
+    //岗位信息表头
+    public String convertPositionHeadToJson(){
+        PositionInfoHead positionInfoHead = new PositionInfoHead("EID", "姓名","工号", "部门",
+                "岗位", "职务","岗位状态");
+        return JsonUtil.toJson(positionInfoHead);
+    }
+    //教育信息表头
+    public String convertEducationHeadToJson(){
+        EducationHead educationHead = new EducationHead("EID", "姓名",
+                "学历", "学校", "学习形式","主修");
+        return JsonUtil.toJson(educationHead);
+    }
+    //合同信息表头
+    public String convertContractHeadToJson(){
+        ContractHead contractHead = new ContractHead("EID", "姓名",
+                "合同编号",  "第一次签合同","合同起始", "合同终止","合同状态");
+        return JsonUtil.toJson(contractHead);
+    }
+    @Override
+    public String findPersonInfoTableHead(String department, String infoType) {
+        String informationTableHead = "";
+        if (infoType.equals("basic")){
+            informationTableHead = TableHeadParseUtil.convertTableHeadToJson("tablehead/employeesinfo_tablehead",
+                    "com.runfeng.hibernate.InformationEntity.EmployeesInfoHead");
+        }
+        if (infoType.equals("basicInfo")){
+            informationTableHead = convertBasicInfoHeadToJson();
+        }
+        if (infoType.equals("position")){
+            informationTableHead = convertPositionHeadToJson();
+        }
+        if (infoType.equals("education")){
+            informationTableHead = convertEducationHeadToJson();
+        }
+
+        if (infoType.equals("contract")){
+            informationTableHead = convertContractHeadToJson();
+        }
+        return informationTableHead;
+    }
     @Override
     public String findNumberOfEmployees() {
         List<NumberOfEmployees> list = personalInfoJsonFactory.createInfoJsonList();
@@ -134,16 +207,26 @@ public class PersonalInfoServiceImpl implements PersonalInfoService {
         return JsonUtil.toJson(list);
     }
 
+
+
     @Override
-    public void updatePersonalInfo(int eid, BasicInfoJson basicInfoJson) {
-        if (basicInfoJson != null){
-            personalInfoDAO.updatePersonInfoBasicInfo(eid, basicInfoJson);
+    public void updatePersonalInfo(String modifyType, int eid, String entityJson) {
+        if (modifyType.equals("basicInfo")){
+            personalInfoDAO.updatePersonInfoBasicInfo(eid,
+                    JsonUtil.fromJson(entityJson, BasicInfoJson.class));
         }
-
-    }
-
-    @Override
-    public void updatePersonalInfo(String modifyType, int eid, Object entity) {
-
+        if (modifyType.equals("position")){
+            personalInfoDAO.updatePersonInfoPositionInfo(eid,
+                    JsonUtil.fromJson(entityJson, PositionInfoJson.class));
+        }
+        if (modifyType.equals("education")){
+            personalInfoDAO.updatePersonInfoEducationInfo(eid,
+                    JsonUtil.fromJson(entityJson, EducationJson.class));
+        }
+        if (modifyType.equals("contract")){
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd");
+            personalInfoDAO.updatePersonInfoContractInfo(eid,
+                    JsonUtil.fromJson(entityJson, ContractJson.class));
+        }
     }
 }

@@ -15,13 +15,13 @@ public class ContractJson{
     private int eid;
     private String name;
     private String contractid;
-    @JsonFormat(locale="zh", timezone="GMT+8", pattern="yyyy.MM.dd")
+    //@JsonFormat(locale="zh", timezone="GMT+8", pattern="yyyy.MM.dd")
     @Temporal(TemporalType.DATE)
     private Date contractfirstsigndate;
-    @JsonFormat(locale="zh", timezone="GMT+8", pattern="yyyy.MM.dd")
+    //@JsonFormat(locale="zh", timezone="GMT+8", pattern="yyyy.MM.dd")
     @Temporal(TemporalType.DATE)
     private Date contractstartdate;
-    @JsonFormat(locale="zh", timezone="GMT+8", pattern="yyyy.MM.dd")
+    //@JsonFormat(locale="zh", timezone="GMT+8", pattern="yyyy.MM.dd")
     @Temporal(TemporalType.DATE)
     private Date contractenddate;
     private String contractstate;

@@ -19,7 +19,9 @@ public interface PersonalInfoService {
     String findEmployeeInfo(String department);
     String findEducationInfo(String department);
     String findContractInfo(String department);
+    String findPersonInfo(String department, String infoType);
+    String findPersonInfoTableHead(String department, String infoType);
     String findNumberOfEmployees();
-    void updatePersonalInfo(int eid, BasicInfoJson basicInfoJson);
-    void updatePersonalInfo(String modifyType, int eid, Object entity);
+    //void updatePersonalInfo(int eid, BasicInfoJson basicInfoJson);
+    void updatePersonalInfo(String modifyType, int eid, String entityJson);
 }

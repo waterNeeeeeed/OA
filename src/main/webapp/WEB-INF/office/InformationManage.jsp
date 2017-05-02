@@ -294,7 +294,7 @@
         var modifyType = "${sessionScope.infoType}";
         var uri = "InfoTableModifyAction.action";
         var modifyContent;
-        if (modifyType == "basicInfo"){
+
             var tempInputs = "#" + formId + " " + ":input";
             var modifyContent = "{";
             var tempContent = [];
@@ -320,7 +320,7 @@
 
                 },
                 "json");
-        }
+
 
     }
 </script>
