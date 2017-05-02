@@ -124,8 +124,9 @@ public class InfoTableAction extends ActionSupport {
     }
 
     public String modify(){
+        /*根据类型和ＥＩＤ修改信息*/
         personalInfoService.updatePersonalInfo(getModifyType(),Integer.parseInt(getModifyEid()),getModifyContent());
-
+        /*修改成功*/
         setModifyResult(MODIFY_SUCCESS);
         return Action.SUCCESS;
     }
