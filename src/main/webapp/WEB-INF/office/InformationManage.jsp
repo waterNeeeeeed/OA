@@ -44,14 +44,11 @@
                                 员工信息管理<b class="caret"></b>
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a href="InformationManageAction.action?department=nothing&infoType=numberOfEmployees">概况</a></li>
-                                <li class="divider"></li>
                                 <li><a href="InformationManageAction.action?department=all&infoType=basicInfo">基本信息</a> </li>
+                                <li><a href="InformationManageAction.action?department=all&infoType=basic">综合信息</a></li>
                                 <li><a href="InformationManageAction.action?department=all&infoType=position">岗位信息</a></li>
                                 <li><a href="InformationManageAction.action?department=all&infoType=contract">合同信息</a></li>
-                                <li><a href="InformationManageAction.action?department=all&infoType=education">教育信息</a></li>
-                                <li class="divider"></li>
-                                <li><a href="InformationManageAction.action?department=all&infoType=basic">综合信息</a></li>
+                                <li><a href="InformationManageAction.action?department=all&infoType=education">学历信息</a></li>
                                 <li class="divider"></li>
                                 <li><a href="#">员工管理</a></li>
                                 <li class="divider"></li>
