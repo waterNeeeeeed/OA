@@ -81,7 +81,7 @@
                                 <li class="divider"></li>
                                 <li><a href="#">员工管理</a></li>
                                 <li class="divider"></li>
-                                <li><a href="#">档案管理</a></li>
+                                <li><a href="#">考勤管理</a></li>
                             </ul>
                         </li>
                         <li class="dropdown">
@@ -98,8 +98,7 @@
                                 <li><a href="#">公积金信息</a></li>
                                 <li class="divider"></li>
                                 <li><a href="#">所得税</a></li>
-                                <li class="divider"></li>
-                                <li><a href="#">考勤管理</a></li>
+
                             </ul>
 
                         </li>

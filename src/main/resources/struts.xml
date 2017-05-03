@@ -16,6 +16,10 @@
             <result name="error">/WEB-INF/Login.jsp</result>
         </action>
 
+        <!-- 考勤管理界面相关
+        <action name="CA">
+            <result>/WEB-INF/office/CheckAttendance.jsp</result>
+        </action>-->
         <!-- 管理界面相关 -->
         <action name="OA">
             <result>/WEB-INF/office/Welcome.jsp</result>
