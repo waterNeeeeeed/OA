@@ -49,13 +49,23 @@
             width:550,
             renderTo:Ext.getBody(),
             columns:[
-                {text:'序号', xtype:'rownumberer', width:30},
-                {text:'书名', dataIndex:'id', flex:1},
-                {text:'书名', dataIndex:'name', flex:1},
-                {text:'作者', dataIndex:'author', flex:1},
-                {text:'价格', dataIndex:'price', flex:1},
+                {text:'序号', xtype:'rownumberer', flex:1},
+                {text:'书号', dataIndex:'id', flex:1},
+                {text:'书名', dataIndex:'name', flex:1,
+                    editor:{xtype:'textfield', allowPattern:false}},
+                {text:'作者', dataIndex:'author', flex:1,
+                    editor:{xtype:'textfield', allowPattern:false}},
+                {text:'价格', dataIndex:'price', flex:1,
+                    editor:{xtype:'numberfield', allowPattern:false}},
                 {text:'出版时间', dataIndex:'publishDate',
                     xtype:'datecolumn', format:'Y-m-d', flex:1},
+            ],
+            selType:'cellmodel',
+            plugins:[
+                {
+                    ptype:'cellediting',
+                    clicksToEdit:1
+                }
             ],
             store:bookStore
         });
