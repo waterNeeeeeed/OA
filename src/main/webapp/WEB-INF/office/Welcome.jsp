@@ -42,7 +42,7 @@
                                 <li class="divider"></li>
                                 <li><a href="#">员工管理</a></li>
                                 <li class="divider"></li>
-                                <li><a href="#">考勤管理</a></li>
+                                <li><a href="CAManageAction.action">考勤管理</a></li>
                             </ul>
                         </li>
                         <li class="dropdown">
