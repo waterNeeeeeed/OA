@@ -52,7 +52,8 @@
                 {text:'序号', xtype:'rownumberer', flex:1},
                 {text:'书号', dataIndex:'id', flex:1},
                 {text:'书名', dataIndex:'name', flex:1,
-                    editor:{xtype:'textfield', allowPattern:false}},
+                        editor:{xtype:'textfield', allowPattern:false}},
+
                 {text:'作者', dataIndex:'author', flex:1,
                     editor:{xtype:'textfield', allowPattern:false}},
                 {text:'价格', dataIndex:'price', flex:1,
