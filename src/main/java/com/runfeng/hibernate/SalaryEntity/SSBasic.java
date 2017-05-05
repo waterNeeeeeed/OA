@@ -16,7 +16,7 @@ import java.util.Date;
 @Table(name = "socialsecurity_basic_table")
 public class SSBasic {
     private MainID mainID;
-    @JsonFormat(locale="zh", timezone="GMT+8", pattern="yyyy")
+    //@JsonFormat(locale="zh", timezone="GMT+8", pattern="yyyy")
     @Temporal(TemporalType.DATE)
     private Date ssYear;
     private double ssBasicData;
