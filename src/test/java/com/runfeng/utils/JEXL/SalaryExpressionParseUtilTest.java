@@ -20,7 +20,6 @@ public class SalaryExpressionParseUtilTest {
     public void ExpressionParse() throws Exception {
         String exprs = "(a*b)/5+100";
         HashMap<String, Double> args = new HashMap<>();
-        Double temp;
         args.put("a", Double.parseDouble("100"));
         args.put("b", Double.parseDouble("20"));
         double test = SalaryExpressionParseUtil.ExpressionParse(exprs, args);
