@@ -98,9 +98,6 @@ public class BaseDAOImpl<T> implements BaseDAO<T>{
         return query.list();
     }
 
-    /**
-     * Created by hasee-pc on 2017/4/9.
-     */
     public static class BasicInfoDAOImpl {
     }
 }
