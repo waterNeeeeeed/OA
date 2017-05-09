@@ -116,7 +116,7 @@ public class StandardExcelParse {
                 case NUMBER:{
                     Object tempDouble = readCellValue(workbook, row, columnNumType[i]);
                     if (tempDouble == null){
-                        tempDouble = 0;
+                        tempDouble = 0.0;
                     }
                     Integer temp = new Double((double)tempDouble).intValue();
                     if (temp != null){

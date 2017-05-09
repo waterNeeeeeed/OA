@@ -18,13 +18,13 @@ public class StandardExcelParseTest {
     @Test
     public void readRowToEntityTest() throws Exception {
         Workbook workbook = WorkbookFactory
-                .create(new File("江岳OA/考勤/2017年3月考勤表模板.xls"));
+                .create(new File("江岳OA/考勤/2017年4月考勤表模板.xls"));
 
         String[] SheetName = {"公司领导", "经理办", "财务部", "设备工程部", "公用工程部", "生产部",
-                                "质检部", "车间"};
+                                "质检部", "车间1", "车间2", "车间3"};
         List<CAJiangYue> caJiangYue = new ArrayList<>();
         //以后固定18行
-        int[] rowStops = {9, 13, 5, 12, 21, 6, 10, 57};
+        int[] rowStops = {21, 21, 21, 21, 21, 21, 21, 21, 21, 21};
         //固定不变
         int[] nums = {0, 1, 4, 5, 6, 7, 8, 19, 20, 18, 12, 11, 15};
         CellTypeOA[] cellTypeOAS = {CellTypeOA.NUMBER, CellTypeOA.STRING, CellTypeOA.NUMBER,
@@ -57,7 +57,7 @@ public class StandardExcelParseTest {
         }
         workbook.close();
         Workbook wb = WorkbookFactory.create(new File("江岳OA/考勤/2017全员考勤表.xls"));
-        Sheet sheet1 = wb.getSheet("2017-3");
+        Sheet sheet1 = wb.getSheet("2017-4");
 
         Field[] fields = CAJiangYue.class.getDeclaredFields();
         for(int i=2; i<118; i++){
@@ -98,7 +98,7 @@ public class StandardExcelParseTest {
                 }
             }
         }
-        FileOutputStream fileOutputStream = new FileOutputStream(new File("江岳OA/考勤/2017全员考勤表_test" + ".xls"));
+        FileOutputStream fileOutputStream = new FileOutputStream(new File("江岳OA/考勤/2017全员考勤表_完整" + ".xls"));
         wb.write(fileOutputStream);
         wb.close();
     }
