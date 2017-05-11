@@ -15,6 +15,7 @@ import java.util.Date;
 @Entity
 @Table(name = "socialsecurity_basic_table")
 public class SSBasic {
+    @Id
     private int eid;
     private String name;
     //@JsonFormat(locale="zh", timezone="GMT+8", pattern="yyyy")

@@ -23,5 +23,6 @@
         <property name="hibernate.format_sql">true</property>
         <mapping class="com.runfeng.hibernate.SalaryEntity.Salary"></mapping>
         <mapping class="com.runfeng.hibernate.InformationEntity.PersonalInfo"></mapping>
+        <mapping class="com.runfeng.hibernate.SalaryEntity.SSBasic"></mapping>
     </session-factory>
 </hibernate-configuration>

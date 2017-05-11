@@ -1,8 +1,15 @@
 package com.runfeng.utils.excel.StandardExcelParse;
 
+import com.runfeng.hibernate.InformationEntity.MainID;
 import com.runfeng.hibernate.SalaryEntity.CAJiangYue;
 import com.runfeng.hibernate.SalaryEntity.SSBasic;
 import org.apache.poi.ss.usermodel.*;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.hibernate.cfg.Configuration;
+import org.hibernate.service.ServiceRegistry;
+import org.hibernate.service.ServiceRegistryBuilder;
 import org.junit.Test;
 
 import java.io.File;
@@ -69,15 +76,33 @@ public class StandardExcelParseTest {
 
         }
         workbook.close();
-        Workbook wb = WorkbookFactory.create(new File("江岳OA\\社保\\2017年5月全员社会保险明细.xls"));
+
+        Configuration conf = new Configuration().configure();
+        ServiceRegistry serviceRegistry = new ServiceRegistryBuilder().applySettings(conf.getProperties()).build();
+        SessionFactory sf = conf.buildSessionFactory(serviceRegistry);
+        Session sess = sf.openSession();
+        Transaction tx = sess.beginTransaction();
+        String hql = "select distinct pi.mainID from PersonalInfo pi";
+        List<MainID> temp = sess.createQuery(hql).list();
+
+
+
+        for(Iterator<MainID> it=temp.iterator(); it.hasNext(); ){
+            MainID mainID = it.next();
+            if (ssBasicMap.containsKey(mainID.getName())) {
+                ssBasicMap.get(mainID.getName()).setEid(mainID.getEid());
+                sess.save(ssBasicMap.get(mainID.getName()));
+            }
+        }
+        tx.commit();
+        sess.close();
+        sf.close();
+        //2017年5月全员社会保险明细
+        /*Workbook wb = WorkbookFactory.create(new File("江岳OA\\社保\\2017年5月全员社会保险明细.xls"));
         Sheet sheet1 = wb.getSheet("2017-5");
         Field[] fields = SSBasic.class.getDeclaredFields();
 
-        /*int rowStart2 = 1;
-        //以后固定18行
-        int rowStops2 = {94};
-        //固定不变
-        int nums2 = {0, 1, 2, 3};*/
+
         for(int i=2; i<118; i++){
             Row row = sheet1.getRow(i);
             if (row == null){
@@ -102,8 +127,9 @@ public class StandardExcelParseTest {
 
         FileOutputStream fileOutputStream = new FileOutputStream(new File("江岳OA\\社保\\2017年5月全员社会保险明细__" + ".xls"));
         wb.write(fileOutputStream);
-        wb.close();
-        //将数据写入
+        wb.close();*/
+
+        //将数据写入2017全员考勤表
         /*Map<String, CAJiangYue> caJiangYueMap = new LinkedHashMap<>();
         for (Iterator it=ssBasics.iterator(); it.hasNext();){
             CAJiangYue caJiangYue1 = (CAJiangYue)it.next();
