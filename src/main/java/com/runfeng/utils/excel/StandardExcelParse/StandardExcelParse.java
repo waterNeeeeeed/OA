@@ -8,6 +8,8 @@ import org.slf4j.LoggerFactory;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import static org.apache.poi.ss.usermodel.Cell.CELL_TYPE_NUMERIC;
 
@@ -81,13 +83,32 @@ public class StandardExcelParse {
                     return cell.getNumericCellValue();
                 }
             }
-            case DATE:{
-                if (isCellDate(cell)){
+            case DATE_YEAR:
+            case DATE_YMD:
+            case DATE_YM:
+                {
+                /*if (isCellDate(cell)){
                     return cell.getDateCellValue();
-                }
+                }*/
+                return cell.getRichStringCellValue().getString();
             }
         }
         return null;
+    }
+
+    private static<T> void  dateParse(Class<T> clz, Object obj, Field[] fields, int i, SimpleDateFormat sdf, String tempString)
+    {
+        Date date = null;
+        try{
+            date = sdf.parse(tempString);
+            String method_name = "set" + fields[i].getName().substring(0,1).toUpperCase()
+                    + fields[i].getName().substring(1);
+            clz.getMethod(method_name, Date.class)
+                    .invoke(obj, date);
+        }catch (Exception e){
+            e.printStackTrace();
+        }finally {
+        }
     }
 
     public static <T> T readRowToEntity(Class<T> clz, Workbook workbook, Row row, ColumnNumType[] columnNumType)
@@ -131,16 +152,72 @@ public class StandardExcelParse {
                     if (tempDouble == null){
                         tempDouble = 0;
                     }
-                    DecimalFormat decimalFormat = new DecimalFormat("########0.00");
+                    DecimalFormat decimalFormat = new DecimalFormat("#########0.00");
                     method_name = "set" + fields[i].getName().substring(0,1).toUpperCase() + fields[i].getName().substring(1);
                     clz.getMethod(method_name, double.class)
                             .invoke(obj, Double.parseDouble(decimalFormat.format((double)tempDouble)));
                 }
                 break;
+                case DATE_YEAR:
+                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy");
+                    String tempString = (String)readCellValue(workbook, row, columnNumType[i]);
+                    dateParse(clz, obj, fields, i, sdf, tempString);
+                    break;
+                case DATE_YMD:
+                    sdf = new SimpleDateFormat("yyyy.MM.dd");
+                    tempString = (String)readCellValue(workbook, row, columnNumType[i]);
+                    dateParse(clz, obj, fields, i, sdf, tempString);
+                    break;
+                case DATE_YM:
+                    sdf = new SimpleDateFormat("yyyy.MM");
+                    tempString = (String)readCellValue(workbook, row, columnNumType[i]);
+                    dateParse(clz, obj, fields, i, sdf, tempString);
+                    break;
             }
         }
 
         return (T)obj;
     }
 
+
+    public static void writeValueToCell(Row row, int cellNum, int value){
+        CellStyle newCellStyle = row.getCell(cellNum).getCellStyle();
+        Cell newCell = row.createCell(cellNum);
+        newCell.setCellStyle(newCellStyle);
+        newCell.setCellValue(value);
+    }
+
+    public static void writeValueToCell(Row row, int cellNum, double value){
+        CellStyle newCellStyle = row.getCell(cellNum).getCellStyle();
+        Cell newCell = row.createCell(cellNum);
+        newCell.setCellStyle(newCellStyle);
+        newCell.setCellValue(value);
+    }
+
+    public static void writeValueToCell(Row row, int cellNum, String value){
+        CellStyle newCellStyle = row.getCell(cellNum).getCellStyle();
+        Cell newCell = row.createCell(cellNum);
+        newCell.setCellStyle(newCellStyle);
+        newCell.setCellValue(value);
+    }
+
+    public static void evaluateValueToCell(Workbook wb, Row row, int cellNum){
+        Cell tempCell = row.getCell(cellNum);
+        if (StandardExcelParse.isCellFormula(tempCell)){
+            FormulaEvaluator evaluator = wb.getCreationHelper().createFormulaEvaluator();
+            CellValue cellValue = evaluator.evaluate(tempCell);
+            double result = 0;
+            if (cellValue.getCellType() == CELL_TYPE_NUMERIC){
+                result = cellValue.getNumberValue();
+            }
+            Cell oldCell = row.getCell(cellNum);
+            CellStyle newCellStyle = oldCell.getCellStyle();
+            String newCellFormula = oldCell.getCellFormula();
+
+            Cell newCell = row.createCell(cellNum);
+            newCell.setCellStyle(newCellStyle);
+            newCell.setCellValue(result);
+            newCell.setCellFormula(newCellFormula);
+        }
+    }
 }
