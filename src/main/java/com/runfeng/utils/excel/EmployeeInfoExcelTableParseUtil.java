@@ -16,7 +16,7 @@ import java.util.*;
  * 期初建立信息
  */
 public class EmployeeInfoExcelTableParseUtil {
-    private static int EMPLOYEE_NUMBER = 110;
+    private static int EMPLOYEE_NUMBER = 112;
     public static Map<String, EmployeeInfo> inputEmployeeInfo(String filePath){
 
         Map<String, EmployeeInfo> employeeInfoMap = new HashMap<>();
@@ -81,7 +81,7 @@ public class EmployeeInfoExcelTableParseUtil {
                 DecimalFormat df2   = new DecimalFormat("######0");
                 DecimalFormat telephone = new DecimalFormat("############");
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd");
-                for (int rowIndex=4; rowIndex<=100; rowIndex++){
+                for (int rowIndex=4; rowIndex<=102; rowIndex++){
                     Row row = sheet2.getRow(rowIndex);
                     String name = row.getCell(3).getRichStringCellValue().getString();
                     //包含就读，不包含就过

@@ -25,6 +25,103 @@ import static org.apache.poi.ss.usermodel.Cell.CELL_TYPE_NUMERIC;
 public class StandardExcelParseTest {
     @Test
     public void readRowToEntityTest() throws Exception {
+        Workbook workbook = WorkbookFactory
+                .create(new File("江岳OA/考勤/2017年5月考勤表模板.xls"));
+
+        String[] SheetName = {"公司领导", "经理办", "财务部", "设备工程部", "公用工程部", "生产部",
+                                "质检部", "车间1", "车间2", "车间3", "车间4"};
+        List<CAJiangYue> caJiangYue = new ArrayList<>();
+        int rowStart = 4;
+        int nameCellIndex = 1;
+        //以后固定18行
+        int[] rowStops = {21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21};
+        //固定不变
+        int[] nums = {0, 1, 4, 5, 6, 7, 8, 19, 20, 18, 12, 11, 15};
+        CellTypeOA[] cellTypeOAS = {CellTypeOA.NUMBER, CellTypeOA.STRING, CellTypeOA.NUMBER,
+                CellTypeOA.NUMBER, CellTypeOA.NUMBER, CellTypeOA.NUMBER,CellTypeOA.NUMBER,
+                CellTypeOA.NUMBER,CellTypeOA.NUMBER,CellTypeOA.NUMBER,CellTypeOA.NUMBER,
+                CellTypeOA.NUMBER,CellTypeOA.NUMBER};
+        ColumnNumType[] columnNumType = new ColumnNumType[nums.length];
+
+        for (int i=0; i<cellTypeOAS.length; i++){
+            columnNumType[i] = new ColumnNumType(nums[i], cellTypeOAS[i]);
+        }
+
+        for(int m=0; m<SheetName.length; m++){
+
+            int rowStop = rowStops[m];
+            Sheet sheet = workbook.getSheet(SheetName[m]);
+            for (int n=rowStart; n <= rowStop; n++){
+                if (sheet.getRow(n) != null){
+                    if(!StandardExcelParse.isCellNullOrBlank(sheet.getRow(n).getCell(nameCellIndex))){
+                        caJiangYue.add(StandardExcelParse.readRowToEntity(CAJiangYue.class, workbook, sheet.getRow(n), columnNumType));
+                    }
+                }
+
+            }
+
+        }
+        workbook.close();
+
+        /*Configuration conf = new Configuration().configure();
+        ServiceRegistry serviceRegistry = new ServiceRegistryBuilder().applySettings(conf.getProperties()).build();
+        SessionFactory sf = conf.buildSessionFactory(serviceRegistry);
+        Session sess = sf.openSession();
+        Transaction tx = sess.beginTransaction();
+        String hql = "select distinct pi.mainID from PersonalInfo pi";
+        List<MainID> temp = sess.createQuery(hql).list();
+
+
+
+        for(Iterator<MainID> it=temp.iterator(); it.hasNext(); ){
+            MainID mainID = it.next();
+            if (ssBasicMap.containsKey(mainID.getName())) {
+                ssBasicMap.get(mainID.getName()).setEid(mainID.getEid());
+                sess.save(ssBasicMap.get(mainID.getName()));
+            }
+        }
+        tx.commit();
+        sess.close();
+        sf.close();*/
+
+
+        //将数据写入2017全员考勤表
+        Map<String, CAJiangYue> caJiangYueMap = new LinkedHashMap<>();
+        for (Iterator it=caJiangYue.iterator(); it.hasNext();){
+            CAJiangYue caJiangYue1 = (CAJiangYue)it.next();
+            caJiangYueMap.put(caJiangYue1.getName(), caJiangYue1);
+        }
+        workbook.close();
+        Workbook wb = WorkbookFactory.create(new File("江岳OA/考勤/2017全员考勤表_完整.xls"));
+        Sheet sheet1 = wb.getSheet("2017-5");
+        Field[] fields = CAJiangYue.class.getDeclaredFields();
+
+        for(int i=2; i<118; i++){
+            Row row = sheet1.getRow(i);
+            Cell nameCell = row.getCell(2);
+            if (StandardExcelParse.isCellNullOrBlank(nameCell) || !caJiangYueMap.containsKey(nameCell.getRichStringCellValue().getString())){
+                continue;
+            }
+            String name = nameCell.getRichStringCellValue().getString();
+            //考勤入表
+            for(int cellNum=3; cellNum<14; cellNum++){
+                String methodName = "get" + fields[cellNum-1].getName().substring(0,1).toUpperCase()
+                        + fields[cellNum-1].getName().substring(1);
+                int temp = (int)CAJiangYue.class.getMethod(methodName).invoke(caJiangYueMap.get(name));
+                StandardExcelParse.writeValueToCell(row, cellNum, temp);
+            }
+            //计算结果
+            for(int cellNum=18; cellNum<=23; cellNum++){
+                StandardExcelParse.evaluateValueToCell(wb, row, cellNum);
+            }
+        }
+
+        FileOutputStream fileOutputStream = new FileOutputStream(new File("江岳OA/考勤/2017全员考勤表_定稿" + ".xls"));
+        wb.write(fileOutputStream);
+        wb.close();
+    }
+
+    public void readRowToEntityTest2() throws Exception {
         /*Workbook workbook = WorkbookFactory
                 .create(new File("江岳OA/考勤/2017年4月考勤表模板.xls"));
 
